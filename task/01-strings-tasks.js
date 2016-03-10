@@ -203,23 +203,11 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  */
 function getRectangleString(width, height) {
-    let result = "",
-        config = [
-            {start: "┌", middle: "─", "end": "┐"},
-            {start: "│", middle: " ", "end": "│"},
-            {start: "└", middle: "─", "end": "┘"}
-        ];
+    let result = "┌" + ("─").repeat(width - 2) + "┐" + "\n";
 
-    for (let i = 0; i < height; i++) {
-        let it = i == 0 ? 0 : (i == height - 1 ? 2 : 1);
+    result += ( "│" + (" ").repeat(width - 2) + "│" + "\n" ).repeat(height - 2);
 
-        result += config[it].start;
-
-        for (let j = 0; j < width - 2; j++)
-            result += config[it].middle;
-
-        result += config[it].end + "\n";
-    }
+    result += "└" + ("─").repeat(width - 2) + "┘" + "\n";
 
     return result;
 }
