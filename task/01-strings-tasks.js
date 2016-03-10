@@ -306,8 +306,8 @@ function getCardId(value) {
 
     result += 13 * multiplier;
 
-    if (!Number.isNaN(parseInt(value))) {
-        result += parseInt(value) - 1;
+    if (!Number.isNaN(parseInt(value, 10))) {
+        result += parseInt(value, 10) - 1;
     } else if (value.charAt(0) == "J") {
         result += 10;
     } else if (value.charAt(0) == "Q") {
