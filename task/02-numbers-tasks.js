@@ -166,7 +166,13 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-    throw new Error('Not implemented');
+    a *= 100;
+    b *= 100;
+    c *= 100;
+
+    let d = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+
+    return Math.sqrt(Math.pow(d, 2) + Math.pow(c, 2)) / 100;
 }
 
 /**
@@ -184,10 +190,10 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 0  => 1678
  *   1678, 1  => 1680
  *   1678, 2  => 1700
- *   1678, 3  => 1000
+ *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+    return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
 }
 
 /**
@@ -195,7 +201,7 @@ function roundToPowerOfTen(num, pow) {
  * See: https://en.wikipedia.org/wiki/Primality_test
  *
  * @param {number} n
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   4 => false
@@ -208,7 +214,14 @@ function roundToPowerOfTen(num, pow) {
  *   17 => false
  */
 function isPrime(n) {
-    throw new Error('Not implemented');
+    let prime = true;
+
+    for (let i = 2; i < n; i++) {
+        if (n % i == 0)
+            prime = false;
+    }
+
+    return prime;
 }
 
 /**
@@ -227,7 +240,9 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    let number = Number(value);
+
+    return Number.isNaN(number) ? def : number;
 }
 
 module.exports = {
@@ -240,6 +255,7 @@ module.exports = {
     getLastDigit: getLastDigit,
     parseNumberFromString: parseNumberFromString,
     getParallelipidedDiagonal: getParallelipidedDiagonal,
+    roundToPowerOfTen: roundToPowerOfTen,
     isPrime: isPrime,
     toNumber: toNumber
 };
