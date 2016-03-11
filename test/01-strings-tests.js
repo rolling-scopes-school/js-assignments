@@ -60,7 +60,7 @@ describe('01-strings-tasks', function() {
         assert.equal('ABCDEFGHIJKLMNOPQRSTUVWXYZ', tasks.convertToUpperCase('abcdefghijklmnopqrstuvwxyz'));
     });
 
-    it.optional('extractEmails should convert all chars from specified string into upper case', function() {
+    it.optional('extractEmails should extract emails from string list delimeted by semicolons', function() {
         assert.deepEqual(
             ['angus.young@gmail.com', 'brian.johnson@hotmail.com', 'bon.scott@yahoo.com'],
             tasks.extractEmails('angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.com')
