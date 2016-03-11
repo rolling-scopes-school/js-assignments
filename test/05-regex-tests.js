@@ -83,7 +83,7 @@ describe('05-regex-tasks', function() {
             '23.24.25.26.27',
             'Set dns to 8.8.8.8'
         ].forEach((str) => {
-            assert.equal(
+            assert(
                 result.test(str) == false,
                 `regex matches '${str}'`
             );

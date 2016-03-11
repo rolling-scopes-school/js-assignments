@@ -11,7 +11,7 @@
 /**
  * Returns the regexp that matches a GUID string representation
  * '{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}',
- * where X is hexadecimal digit (0,1,2...,9,A,a,B,b,C,c,D,d,F,f)
+ * where X is hexadecimal digit (0,1,2...,9,A,a,B,b,C,c,D,d,F,f,E,e)
  *
  * See more details: https://en.wikipedia.org/wiki/Globally_unique_identifier
  *
@@ -31,7 +31,7 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
+    return /^\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}}$/i;
 }
 
 
@@ -53,7 +53,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+    return /^(s|r|pi)/i;
 }
 
 
@@ -72,7 +72,7 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   throw new Error('Not implemented');
+    return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/i;
 }
 
 
@@ -91,7 +91,7 @@ function getRegexForIPv4() {
  * @return {RegExp}
  */
 function getRegexForSSN() {
-   throw new Error('Not implemented');
+    return /^(?!000)\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/i;
 }
 
 
@@ -105,7 +105,7 @@ function getRegexForSSN() {
  *  - Valid passwords will only be alphanumeric characters.
  *
  * @param {number} minLength
- * @return {Regex}
+ * @return {RegExp}
  *
  * @example
  *   let validator = getPasswordValidator(6);
@@ -116,7 +116,7 @@ function getRegexForSSN() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+    return new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{' + minLength + ",}$");
 }
 
 
