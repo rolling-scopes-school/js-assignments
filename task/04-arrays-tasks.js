@@ -714,8 +714,8 @@ function selectMany(arr, childrenSelector) {
 /**
  * Returns an element from the multidimentional array by the specified indexes.
  *
- * @param {array} arr
- * @param {array} indexes
+ * @param {Array} arr
+ * @param {Array} indexes
  * @return {any} element from array
  *
  * @example
@@ -724,7 +724,17 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+    let result = null;
+
+    indexes.map(function (item, index) {
+        if (index != indexes.length - 1) {
+            arr = arr[item];
+        } else {
+            result = arr[item];
+        }
+    });
+
+    return result;
 }
 
 
@@ -734,20 +744,29 @@ function getElementByIndexes(arr, indexes) {
  * The middle element (if exists) leave on the same position.
  *
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *   [ 1, 2, 3, 4, 5 ]   =>  [ 4, 5, 3, 1, 2 ]
  *    \----/   \----/
  *     head     tail
- *
+ *`
  *   [ 1, 2 ]  => [ 2, 1 ]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    let length = arr.length,
+        result = [];
+
+    if (length % 2 == 0) {
+        result = result.concat(arr.slice(length / 2, length), arr.slice(0, length / 2))
+    } else {
+        result = result.concat(arr.slice(length / 2 + 1, length), arr[parseInt(length / 2, 10)], arr.slice(0, length / 2))
+    }
+
+    return result;
 }
 
 
