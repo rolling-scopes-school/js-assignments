@@ -85,24 +85,14 @@ describe('03-date-tasks', function() {
                 expected:  '05:20:10.453'
             }
         ].forEach(data => {
-            assert(
+            assert.equal(
                 data.expected,
                 tasks.timeSpanToString(data.startDate, data.endDate)
             );
         });
-
-        [
-            new Date(1900,1,1),
-            new Date(2001,1,1)
-        ].forEach(date => {
-            assert(
-                tasks.isLeapYear(date) == false,
-                `${date} is not a leap year`
-            );
-        });
     });
-    
-    
+
+
     it.optional('angleBetweenClockHands should returns the angle bettween clock hands for specified Greenwich datetime', function () {
         [
             {
@@ -137,7 +127,7 @@ describe('03-date-tasks', function() {
             assert.equal(
                 tasks.angleBetweenClockHands(new Date(data.date)),
                 data.expected,
-                `Incorrect result for angleBetweenClockHands(${new Date(data.date).toUTCString()}):`   
+                `Incorrect result for angleBetweenClockHands(${new Date(data.date).toUTCString()}):`
             );
         });
     });
