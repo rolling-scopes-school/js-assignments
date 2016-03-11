@@ -336,6 +336,13 @@ describe('06-conditions-n-loops-tasks', function() {
 
     });
 
+    it.optional('getDigitalRoot should return the digital root of integer', () => {
+        assert.equal(6, tasks.getDigitalRoot(12345));
+        assert.equal(2, tasks.getDigitalRoot(23456));
+        assert.equal(1, tasks.getDigitalRoot(10000));
+        assert.equal(8, tasks.getDigitalRoot(165536));
+    });
+
 
    it.optional('isBracketsBalanced should check the balanced brackets', () => {
         [
