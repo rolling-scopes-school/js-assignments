@@ -22,14 +22,14 @@ describe('01-strings-tasks', function() {
         assert.equal('Hello, Chuck Norris!', tasks.getStringFromTemplate('Chuck','Norris'));
     });
 
-    it.optional('getFirstChar should return the first char from given string', function() {
-        assert.equal('J', tasks.getFirstChar('John Doe'));
-        assert.equal('c', tasks.getFirstChar('cat'));
-    });
-
     it.optional('extractNameFromTemplate should parse the name from given string', function() {
         assert.equal('John Doe', tasks.extractNameFromTemplate('Hello, John Doe!'));
         assert.equal('Chuck Norris', tasks.extractNameFromTemplate('Hello, Chuck Norris!'));
+    });
+
+    it.optional('getFirstChar should return the first char from given string', function() {
+        assert.equal('J', tasks.getFirstChar('John Doe'));
+        assert.equal('c', tasks.getFirstChar('cat'));
     });
 
     it.optional('removeLeadingAndTrailingWhitespaces should remove leading and trailing whitespaces from the string', function() {
