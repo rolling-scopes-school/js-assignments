@@ -1,3 +1,4 @@
+// debugger;
 'use strict';
 
 /********************************************************************************************
@@ -203,7 +204,7 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    str="┌" + "─".repeat(width-2) + "┐\n";
+   var str="┌" + "─".repeat(width-2) + "┐\n";
 
     for (var i=0 ; i< height - 2 ; i++)
         str= str + "│" + " ".repeat(width-2) + "│\n";
