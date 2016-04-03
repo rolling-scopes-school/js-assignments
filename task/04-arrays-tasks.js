@@ -550,11 +550,12 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   return arr.reduce(function(previousValue, element){
-          if (previousValue.includes(element) !== true )
-              return previousValue.concat(element);
-            return previousValue;
-   }, []);
+   // return arr.reduce(function(previousValue, element){
+   //        if (previousValue.includes(element) !== true )
+   //            return previousValue.concat(element);
+   //          return previousValue;
+   // }, []);
+     throw new Error('Not implemented');
 }
 
 /**
@@ -589,7 +590,7 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
    // return array.reduce(function(previousValue,value,index){
-   //    if ( previousValue.some( keySelectorvalue(value) == false )
+   //    if ( previousValue.some(keySelectorvalue) == false )
    //      {return previousValue }
    // }, [])
     throw new Error('Not implemented');
