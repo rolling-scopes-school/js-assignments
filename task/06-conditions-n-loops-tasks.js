@@ -467,11 +467,16 @@ function getCommonDirectoryPath(pathes) {
  */
 function getMatrixProduct(m1, m2) {
     var mult_matrix = [];
+    //the creation of  a matrix
     for (var i = 0; i < m1.length; i++) 
         mult_matrix[i] = [];
+    
+    //columns of the matrix
     for (var k = 0; k < m2[0].length; k++)
-     { for (var i = 0; i < m1.length; i++)
+     { //The first row of the matrix
+        for (var i = 0; i < m1.length; i++)
         { var buf = 0;
+            //The first element in the matrix row
           for (var j = 0; j < m2.length; j++) buf += m1[i][j]*m2[j][k];
           mult_matrix[i][k] = buf;
         }
