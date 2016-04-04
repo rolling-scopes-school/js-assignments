@@ -38,7 +38,7 @@ describe('02-numbers-tasks', function() {
 
     it.optional('getAngleBetweenVectors should return a angle (in radians) between two linear vectors', function() {
         assert.equal(Math.PI/2, tasks.getAngleBetweenVectors(1, 0, 0, 1));
-        assert.equal(-Math.PI, tasks.getAngleBetweenVectors(0, 1, 0, -1));
+        assert.equal(Math.PI, tasks.getAngleBetweenVectors(0, 1, 0, -1));
         assert.equal(Math.PI/2, tasks.getAngleBetweenVectors(0, -1, 1, 0));
         assert.equal(0, tasks.getAngleBetweenVectors(0, 1, 0, 1));
     });

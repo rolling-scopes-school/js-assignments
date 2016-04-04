@@ -516,25 +516,28 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
- if (  (position[0][0] == position[1][1] && position[0][0] == position[2][2])
-    || (position[0][1] == position[1][1] && position[0][1] == position[2][1])
-    || (position[1][0] == position[1][1] && position[1][0] == position[1][2])
-    || (position[2][0] == position[1][1] && position[2][0] == position[0][2]) ){
-    if (position[1][1] != undefined)
-    return position[1][1];
-}
+    //I'm standing in the centre of Tic Tac Toe and checking both diagonal lines 
+    //and both central row and column
+     if (  (position[0][0] == position[1][1] && position[0][0] == position[2][2])
+        || (position[0][1] == position[1][1] && position[0][1] == position[2][1])
+        || (position[1][0] == position[1][1] && position[1][0] == position[1][2])
+        || (position[2][0] == position[1][1] && position[2][0] == position[0][2]) ){
+        if (position[1][1] != undefined)
+        return position[1][1];
+    }
 
-else if ( (position[0][2] == position[1][2] && position[0][2] == position[2][2])
-    || (position[2][0] == position[2][1] && position[2][0] == position[2][2]) ){
-    if (position[2][2] != undefined)
-    return position[2][2];
-}
+    //I'm standing at the bottom right position and checking bottom row and right columh
+    else if ( (position[0][2] == position[1][2] && position[0][2] == position[2][2])
+        || (position[2][0] == position[2][1] && position[2][0] == position[2][2]) ){
+        if (position[2][2] != undefined)
+        return position[2][2];
+    }
+    //I'm standing at the top left position and checking top row and left column
+    else if ( (position[0][0] == position[0][1] && position[0][0] == position[0][2]) 
+        || (position[0][0] == position[1][0] && position[0][0] == position[2][0]) )
+        return position[0][0];
 
-else if ( (position[0][0] == position[0][1] && position[0][0] == position[0][2]) 
-    || (position[0][0] == position[1][0] && position[0][0] == position[2][0]) )
-    return position[0][0];
-
-else  return undefined;
+    else  return undefined;
 }
 
 
