@@ -126,8 +126,8 @@ describe('03-date-tasks', function() {
             }
         ].forEach(data => {
             assert.equal(
-                tasks.angleBetweenClockHands(new Date(data.date)),
-                data.expected,
+                tasks.angleBetweenClockHands(new Date(data.date)).toFixed(14),
+                data.expected.toFixed(14),
                 `Incorrect result for angleBetweenClockHands(${new Date(data.date).toUTCString()}):`   
             );
         });
