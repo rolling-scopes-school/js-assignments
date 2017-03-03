@@ -22,7 +22,7 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    throw new Error('Not implemented');
+    return value1 + value2;
 }
 
 
@@ -38,7 +38,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    throw new Error('Not implemented');
+    return value.length;
 }
 
 /**
@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+     return (`Hello, ${firstName} ${lastName}!`);
 }
 
 /**
@@ -69,7 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    return value.slice(7,-1);
 }
 
 
@@ -84,7 +84,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    return value[0];
 }
 
 /**
@@ -99,7 +99,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    return value.trim().replace(/\s+(\t)/g, '');
 }
 
 /**
@@ -114,7 +114,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    return value.repeat(count);
 }
 
 /**
@@ -130,7 +130,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    return str.replace(value, "", "g");
 }
 
 /**
@@ -145,7 +145,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.slice(1,-1);
 }
 
 
@@ -160,7 +160,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -174,7 +174,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -201,7 +201,16 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    
+    var hor = ('─').repeat(width-2);
+    var vert = '│' + (' ').repeat(width-2) + '│' + '\n';
+    var lt = '┌';
+    var rt = '┐' + '\n';
+    var lb = '└';
+    var rb = '┘' + '\n';
+    var stringRect = lt + hor + rt + vert.repeat(height-2) + lb + hor + rb;
+
+    return stringRect;
 }
 
 
@@ -221,7 +230,15 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    var cript = '';
+    for (var i = 0; i < str.length; i++) {
+    var base = (str).charCodeAt(i);
+    if (((64 < base)&&(base < 78)) || ((96 < base)&&(base < 110))) {base += 13;} 
+    else if (((77 < base)&&(base < 91)) || ((109 < base)&&(base < 123))) {base -= 13;}
+    cript = cript + String.fromCharCode(base);
+    }
+    return cript;
+
 }
 
 /**
@@ -238,7 +255,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    if ((typeof(value) == 'string')||(value instanceof String)) {return true;} else {return false;}
 }
 
 
@@ -267,7 +284,31 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    var ind0 = (value).charCodeAt(0);
+    var ind1 = (value).charCodeAt(1);
+    if (ind1 == 48) {ind0 = 58; ind1 = (value).charCodeAt(2);}
+    if (ind0 < 65) {ind0 = ind0 - 49};
+switch (ind0) {
+    case 65: ind0 = 0
+    break
+    case 74: ind0 = 10
+    break
+    case 81: ind0 = 11
+    break
+    case 75: ind0 = 12
+    break
+}
+switch (ind1) {
+    case 9827: ind1 = 0
+    break
+    case 9830: ind1 = 13
+    break
+    case 9829: ind1 = 26
+    break
+    case 9824: ind1 = 39
+    break
+}
+    return ind0 + ind1;
 }
 
 
