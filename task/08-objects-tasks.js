@@ -23,7 +23,11 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
+    this.getArea = function(){
+        return this.width*this.height;
+    }
 }
 
 
@@ -38,7 +42,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    return JSON.stringify(obj);
 }
 
 
@@ -54,8 +58,33 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    var Rectangle = function() {proto.constructor.call(this)};
+    Rectangle.prototype = Object.create(proto);
+    Rectangle.prototype.constructor = Rectangle;
+    var rez = new Rectangle;
+    Object.assign(rez,JSON.parse(json));
+return rez; 
 }
+
+//function nouveau (Constructor,...arg) {
+//var newObject = Object.create (Constructor.prototype);
+//Constructor.prototype.constructor = newObject;
+//var result = Constructor.apply (newObject, arg);
+//if (((typeof result == "object")||(typeof result == "function"))&&(result != null)) { return result; }
+//return newObject; }
+
+//    var Obj = function() {proto.constructor.call(this)};
+//    Obj.prototype = Object.create(proto);
+//    Obj.prototype.constructor = Obj;
+//    var rez = new Obj;
+//    Object.assign(rez,JSON.parse(json));
+//return rez; 
+//}
+
+
+
+
+
 
 
 /**
