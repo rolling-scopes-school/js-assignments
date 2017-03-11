@@ -68,11 +68,14 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom(...arg) {
+function getPolynom() {
+    var len = arguments.length;
+    var a = [];
+    for (var i = 0; i < len; i++) { a[i] = arguments[i]; }
     return function y(x) {
         var sum = 0;
-        for (var i = 0; i < arg.length; i++) {
-            sum += arg[i]*Math.pow(x,arg.length-i-1);
+        for (var i = 0; i < len; i++) {
+            sum += a[i]*Math.pow(x,len-i-1);
         }
         return sum;
     };
@@ -96,9 +99,10 @@ function getPolynom(...arg) {
 function memoize(func) {
 
 var obj = {};
-return function (...arg) {
+return function () {
+var arg = Array.prototype.slice.call(arguments, 0);
 var key = JSON.stringify(arg);
-if (!(key in obj)) { obj[key] = func(...arg);};
+if (!(key in obj)) { obj[key] = func();};
 return obj[key]; }
 }
 
@@ -166,9 +170,16 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
- return (function (...arg){
-    return fn(...arg);
-  })();
+   
+ 
+    var arg = Array.prototype.slice.call(arguments, 1);
+    return function (){
+        var argnext = Array.prototype.slice.call(arguments, 0);
+        return fn.apply(null,arg.concat(argnext));
+};
+    //if (arg.length > 0) {arrtemp = arrtemp.concat(arg); return partialUsingArguments(
+     //return function(){ return fn.apply(this, fun.concat(arg)); } 
+
 }
 
 
