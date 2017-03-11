@@ -38,7 +38,12 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-    throw new Error('Not implemented');
+    const arr = new Array(len).fill(0);
+    let i = -1;
+    return arr.map((x) => {
+        i += 2;
+        return x + i; 
+    });
 }
 
 
@@ -372,7 +377,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   throw new Error('Not implemented');
+    return arr.filter((x) => x === item).length;
 }
 
 /**
@@ -387,7 +392,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   throw new Error('Not implemented');
+    return arr.join(',');
 }
 
 
@@ -416,7 +421,16 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+    throw new Error('Not implemented');
+    let f = arr.sort((x,y) => {
+
+      if (x['country'] === y['country']) {
+        return x['city'] > y['city']
+      }
+      return x['country'] > y['country'];
+    });
+    console.log(f)
+    return f;
 }
 
 /**
@@ -438,7 +452,18 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   throw new Error('Not implemented');
+    throw new Error('Not implemented');
+    const x = new Array(n).fill([]);
+    const y = new Array(n).fill(0);
+    let zz = -1
+    return x.map(() => {
+      let z = 0;
+      zz+= 1;
+      return y.map(()=> {
+        if (z === zz) return 1;
+        z += 1
+        return 0;
+      })})
 }
 
 /**
@@ -455,7 +480,9 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+    const len = end - start + 1;
+    const arr = new Array(len).fill(0);
+    return arr.map(() => start++);
 }
 
 /**
@@ -560,7 +587,20 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    let even = false;
+    let len = 0;
+    if (!arr.length) return [];
+    if (arr.length % 2) {
+      even = true;
+      len = Math.floor(arr.length/2);
+    }
+    else {
+      len = arr.length/2;
+    }
+    const head = arr.slice(0,len);
+    const mid = arr.slice(len, len+even);
+    const tail = arr.slice(len+even,arr.length);
+    return tail.concat(mid).concat(head);
 }
 
 
