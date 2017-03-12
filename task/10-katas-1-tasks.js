@@ -17,10 +17,38 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
-}
+    var sides = ['N','E','S','W'];
+var shiftsides = sides.map(function(e,i) { return sides[(i+1)%4] });
+var i = 0, j = 0;
+    var sides32 = new Array(32);
 
+    while (j < 32){
+        switch (true) {
+            case j%8 == 0 : sides32[j] = sides[j/8]; break;
+            case j%5%4 == 0 : sides32[j] = sides[(j-4)/8] + shiftsides[(j-4)/8]; break;
+            default : sides32[j] = shiftsides[(j-4)/8] + sides[(j-4)/8];
+        }
+        j += 4;
+    }
+
+    for (i = 0; i < 32; i++){
+        switch (true) {
+            case i%4 == 0 : break;
+            case i%8 == 1 : sides32[i] = sides[(i-1)/8] + 'b' + shiftsides[(i-1)/8]; break;
+            case i%8 == 2 : sides32[i] = sides[(i-2)/8] + sides32[i+2]; break;
+            case i%8 == 6 : sides32[i] = shiftsides[(i-6)/8] + sides32[i-2]; break;
+            case i%8 == 3 : sides32[i] = sides32[i+1] + 'b' + sides[(i-3)/8]; break;
+            case i%8 == 5 : sides32[i] = sides32[i-1] + 'b' + shiftsides[(i-5)/8]; break;
+            case i%8 == 7 : sides32[i] = shiftsides[(i-7)/8] + 'b' + sides[(i-7)/8]; break;
+        }
+    }
+
+   function adde(abb,az) {
+    return [{abbreviation: abb, azimuth: parseFloat(az).toFixed(2)}]
+     } 
+
+    sides32 = sides32.map(function(e,i) { return adde(e, i*11.25) }).reduceRight(function(p,c) { return c.concat(p) });
+}
 
 /**
  * Expand the braces of the specified string.

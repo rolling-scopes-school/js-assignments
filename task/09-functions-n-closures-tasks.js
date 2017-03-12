@@ -177,9 +177,7 @@ function partialUsingArguments(fn) {
         var argnext = Array.prototype.slice.call(arguments, 0);
         return fn.apply(null,arg.concat(argnext));
 };
-    //if (arg.length > 0) {arrtemp = arrtemp.concat(arg); return partialUsingArguments(
-     //return function(){ return fn.apply(this, fun.concat(arg)); } 
-
+   
 }
 
 

@@ -33,7 +33,17 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    var numberofbottle = 99;
+    var s = "s";
+    while (numberofbottle > 1){
+        if (numberofbottle == 2) { var s = "" };
+            yield numberofbottle + " bottles of beer on the wall, " + numberofbottle-- + " bottles of beer.";
+            yield "Take one down and pass it around, " + numberofbottle + " bottle" + s + " of beer on the wall."}
+yield  '1 bottle of beer on the wall, 1 bottle of beer.'
+yield  'Take one down and pass it around, no more bottles of beer on the wall.'
+yield  'No more bottles of beer on the wall, no more bottles of beer.'
+yield  'Go to the store and buy some more, 99 bottles of beer on the wall.'
+
 }
 
 
@@ -47,7 +57,18 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    var prev = 0;
+    var next = 1;
+    yield prev;
+    
+    while (true) {
+        var cur = next;
+        
+        next = next + prev;
+        prev = cur;
+
+        yield cur; }
+
 }
 
 
@@ -82,11 +103,39 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
+
+
     throw new Error('Not implemented');
 }
+    //if (root == null) {return;}
+   // var curnode = root;
+   // yield curnode.n; 
+   // if (!curnode.children){return;}
+
+ 
+
+   // curnode = curnode.children;
+//
+  //  yield* curnode.forEach(function*(e){ 
+  //  console.log (e.n);
+ //   depthTraversalTree(curnode); })  
+
+ //   yield curnode.n; 
+ //   yield* depthTraversalTree(curnode);
+
+  //  yield while (curnode.children) { 
+  //      curnode = curnode.children.next;
+   //     console.log(curnode);
+  //  yield curnode.n; 
+  //  yield* depthTraversalTree (curnode);
+ //}     
 
 
-/**
+
+/**yield curnode.children.forEach(function(e){ 
+    console.log (e.n);
+    curnode = e;
+    depthTraversalTree(curnode); })   
  * Traverses a tree using the breadth-first strategy
  * See details: https://en.wikipedia.org/wiki/Breadth-first_search
  *
