@@ -637,6 +637,13 @@ describe('04-arrays-tasks', function() {
     it.optional('getIdentityMatrix should return the identity matrix of the specified size', function () {
         [
             {
+                n:         1,
+                expected: [[1]]
+            }, {
+                n:         2,
+                expected: [[1,0],
+                           [0,1]]
+            }, {
                 n:         5,
                 expected: [[1,0,0,0,0],
                            [0,1,0,0,0],
