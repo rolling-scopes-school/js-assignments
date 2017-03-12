@@ -121,7 +121,20 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    const diffT = Math.abs(rect1.top - rect2.top)
+    const diffL = Math.abs(rect1.left - rect2.left)
+    if (diffT == diffL) {
+        const diag1 = Math.sqrt(Math.pow(rect1.width/2,2) + Math.pow(rect1.height/2,2));
+        const diag2 = Math.sqrt(Math.pow(rect2.width/2,2) + Math.pow(rect2.height/2,2)) 
+        return diag2 - diag1 < diag1 ? true : false;
+    }
+    else if (diffL > diffT) {
+        return rect1.width/2 + rect2.width/2 > diffL ? true : false;
+    }
+    else if (diffL < diffT) {
+        return rect1.height/2 + rect2.height/2 > diffT ? true : false;
+    }
+
 }
 
 
@@ -168,12 +181,7 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
-    return JSON.parse("[" + str + "]").reduce((newArr, s) => {
-        if (!newArr.length) newArr.psuh(s);
-        newArr.filter((x) => x === s).length > 0 ? 0 : newArr.push(s);
-        return newArr;         
-    })
+    return str.split('').filter((x) => str.indexOf(x,str.indexOf(x)+1) == -1)[0]
 }
 
 
@@ -199,7 +207,14 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    isStartIncluded = isStartIncluded ? '[' : '(';
+    isEndIncluded = isEndIncluded ? ']' : ')';
+    if (b < a) {
+        let x = b;
+        b = a;
+        a = x;
+    }
+    return `${isStartIncluded}${a}, ${b}${isEndIncluded}`;
 }
 
 
@@ -258,7 +273,22 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    ccn = ccn.toString()
+    let sum = 0;
+    const odd = ccn.length % 2
+    for(let i = 0 + odd; i < ccn.length; i += 2) {
+        if (ccn[i] * 2 > 9) {
+            sum += ccn[i] * 2 - 9;
+        }
+        else {
+            sum += ccn[i] * 2;
+        }
+    }
+    for (let i = 1 - odd; i < ccn.length; i += 2) {
+        sum += parseInt(ccn[i]);
+    }
+    if (sum % 10) return false;
+    return true;
 }
 
 
@@ -305,6 +335,8 @@ function getDigitalRoot(num) {
  */
 function isBracketsBalanced(str) {
     throw new Error('Not implemented');
+    if (!str.length % 2) return false;
+
 }
 
 
@@ -382,6 +414,7 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath(pathes) {
     throw new Error('Not implemented');
+    return pathes.map((x) => x.split('/'));
 }
 
 
@@ -405,6 +438,7 @@ function getCommonDirectoryPath(pathes) {
  */
 function getMatrixProduct(m1, m2) {
     throw new Error('Not implemented');
+
 }
 
 
@@ -440,6 +474,52 @@ function getMatrixProduct(m1, m2) {
  */
 function evaluateTicTacToePosition(position) {
     throw new Error('Not implemented');
+    console.log(position);
+    
+    const matr = position;
+    console.log(matr)
+    let x = 0;
+    let o = 0;
+    for (let i = 0; i < matr.length; i++) {
+        x = 0;
+        o = 0;
+        
+        for (let j = 0; j < matr[i].length; i++) {
+
+            if (matr[i][j] == 'X') x += 1;
+            if (matr[i][j] == '0') o += 1;
+        }
+        if (x == 3) return 'X';
+        else if (o == 3) return '0'
+    }
+    for (let i = 0; i < matr.length; i++) {
+        x = 0;
+        o = 0;
+        for (let j = 0; j < matr[i].length; i++) {
+            if (matr[j][i] == 'X') x += 1;
+            if (matr[j][i] == '0') o += 1;
+        }
+        if (x == 3) return 'X';
+        else if (o == 3) return '0'
+    }
+    x = 0;
+    o = 0;
+    for (let i = 0; i < matr.length; i++) {
+        if (matr[i][i] == 'X') x += 1;
+        if (matr[i][i] == '0') o += 1;
+    }
+    if (x == 3) return 'X';
+    else if (o == 3) return '0'
+    x = 0;
+    o = 0;
+    for (let i = 0; i < matr.length; i++) {
+        if (matr[i][2-i] == 'X') x += 1;
+        if (matr[i][2-i] == '0') o += 1;
+    }
+    if (x == 3) return 'X';
+    else if (o == 3) return '0'    
+
+    return undefined;
 }
 
 
