@@ -25,9 +25,11 @@
 function Rectangle(width, height) {
     this.height = height;
     this.width = width;
+    /*
     this.getArea = function() {
         return this.height * this.width;
-    }
+    } */
+    this.__proto__.getArea = () => this.width * this.height;
 }
 
 
@@ -58,7 +60,7 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    return Object.assign(Object.create(proto), JSON.parse(json));
 }
 
 
