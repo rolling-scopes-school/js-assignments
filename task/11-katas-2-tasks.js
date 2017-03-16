@@ -101,7 +101,19 @@ return sumrez;
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-    throw new Error('Not implemented');
+  //  throw new Error('Not implemented');
+var sumstr = '';
+var sign = '';
+var toAdd = '';
+var arr = text.split(' ');
+for (var i = 0; i < arr.length; i++){
+    toAdd = sign + arr[i];
+    if ((sumstr + toAdd).length > columns) { yield sumstr; i--; sign = ''; sumstr = '';} else { 
+        sumstr = sumstr + toAdd; 
+        if (i+1 == arr.length) { yield sumstr; } else { sign = ' '; } }
+
+}
+
 }
 
 

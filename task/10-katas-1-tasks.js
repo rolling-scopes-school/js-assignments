@@ -168,8 +168,35 @@ return matrix;
  *
  */
 function canDominoesMakeRow(dominoes) {
-    throw new Error('Not implemented');
-}
+
+    var start = [1,2,3,4,5,6];
+    var isDomino = true;
+    if (dominoes.length == 2) { 
+        if ((dominoes[0][0] == dominoes[1][0])||(dominoes[0][0] == dominoes[1][1])
+            ||(dominoes[0][1] == dominoes[1][0])||(dominoes[0][0] == dominoes[1][1]))
+            { return isDomino = true; }
+    }
+    var arr = dominoes.join().split(',').map(function(e){ return parseInt(e) });
+    start = start.map(function (e,i) { return arr.filter(function (ee) { return ee == i }).length });
+
+    var isOdd = start.filter(function (e){ return e%2 == 1 }).length;
+    if ( isOdd > 2 ) { return isDomino = false; };
+
+    dominoes.forEach(function(e){ var a = e[0]; var b = e[1]; 
+        var zeronum1 = start.filter(function(e){ return e == 0; }).length;
+        var startcopy = [].concat(start); startcopy[a]--; startcopy[b]--; 
+        var zeronum2 = startcopy.filter(function(e){ return e == 0; }).length;
+        if (zeronum1 != zeronum2) { return isDomino = false; };
+
+    });
+
+    return isDomino;
+
+    }
+        
+
+
+
 
 
 /**

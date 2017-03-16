@@ -173,10 +173,22 @@ for ( let i = 0; i < curnode.length; i++ ) {
  *   [ 1, 3, 5, ... ], [2, 4, 6, ... ]  => [ 1, 2, 3, 4, 5, 6, ... ]
  *   [ 0 ], [ 2, 4, 6, ... ]  => [ 0, 2, 4, 6, ... ]
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
- */
+ */ 
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
-}
+
+function Mincurr(source1,source2) {
+            var curr1 = source1;
+            var curr2 = source2;
+        if (curr1().next().value < curr2().next().value) { return source1().next().value; } else { return source2().next().value; }};
+
+    if (!source1().next().done) {
+        if (!source2().next().done) { yield Mincurr(source1,source2); } else {  yield source1().next().value;  }
+        yield source2().next().value;   }
+
+
+    }
+
+ //   throw new Error('Not implemented');
 
 
 module.exports = {
