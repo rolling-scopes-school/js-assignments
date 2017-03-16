@@ -68,29 +68,29 @@ return Obj;
 
 
 //function nouveau (Constructor,...arg) {
-function fromJSON(proto, json){
-var newObject = Object.create (proto);
+//function fromJSON(proto, json){
+//var newObject = Object.create (proto);
+//
+//
+  //  var i , descriptor , keys = Object.getOwnPropertyNames( proto.constructor ) ;
+ //   for ( i = 0 ; i < keys.length ; i ++ )
+ //   { descriptor = Object.getOwnPropertyDescriptor( proto.constructor , keys[ i ] ) ;
+ //       if ( descriptor.value && typeof descriptor.value === 'object' )        
+ //       {  descriptor.value = naiveDeepCopy( descriptor.value ); }
+ //       Object.defineProperty( newObject , keys[ i ] , descriptor ) ;
+ //   }
+//proto.constructor = newObject;
+//Object.assign (newObject, JSON.parse(json));
+//return newObject; }
 
 
-    var i , descriptor , keys = Object.getOwnPropertyNames( proto.constructor ) ;
-    for ( i = 0 ; i < keys.length ; i ++ )
-    { descriptor = Object.getOwnPropertyDescriptor( proto.constructor , keys[ i ] ) ;
-        if ( descriptor.value && typeof descriptor.value === 'object' )        
-        {  descriptor.value = naiveDeepCopy( descriptor.value ); }
-        Object.defineProperty( newObject , keys[ i ] , descriptor ) ;
-    }
-proto.constructor = newObject;
-Object.assign (newObject, JSON.parse(json));
-return newObject; }
+//if (((typeof result == "object")||(typeof result == "function"))&&(result != null)) { return result; }
+//return newObject; }
 
-
-if (((typeof result == "object")||(typeof result == "function"))&&(result != null)) { return result; }
-return newObject; }
-
-function fromJSON(proto, json){
-var newObject = Object.create (proto);
-proto.constructor = newObject;
-return newObject; }
+//function fromJSON(proto, json){
+//var newObject = Object.create (proto);
+//proto.constructor = newObject;
+//return newObject; }
 
 //    var Obj = function() {proto.constructor.call(this)};
 //    Obj.prototype = Object.create(proto);

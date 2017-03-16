@@ -154,7 +154,7 @@ for ( let i = 0; i < curnode.length; i++ ) {
     
     yield curnode[i]; 
     var temp = curnode[i].children;
-    if (temp) {ch = ch.concat(temp);}
+    if (curnode[i].children) {ch = ch.concat(curnode[i].children);}
 }
         yield *breadthTraversalTree(ch);
     }
