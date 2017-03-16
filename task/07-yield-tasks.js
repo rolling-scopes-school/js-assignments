@@ -105,37 +105,24 @@ function* getFibonacciSequence() {
 function* depthTraversalTree(root) {
 
 
-    throw new Error('Not implemented');
-}
-    //if (root == null) {return;}
-   // var curnode = root;
-   // yield curnode.n; 
-   // if (!curnode.children){return;}
+ //   throw new Error('Not implemented');
+   var curnode = [];
 
+   if (root == null) { return; }
+   if (!Array.isArray(root)) { curnode.push(root); } else { curnode = root; }
+
+ for ( let i = 0; i < curnode.length; i++ ){
+    yield curnode[i];
+    if (curnode[i].children){
+        yield *depthTraversalTree(curnode[i].children);
+    }
+}
+}
  
 
-   // curnode = curnode.children;
-//
-  //  yield* curnode.forEach(function*(e){ 
-  //  console.log (e.n);
- //   depthTraversalTree(curnode); })  
-
- //   yield curnode.n; 
- //   yield* depthTraversalTree(curnode);
-
-  //  yield while (curnode.children) { 
-  //      curnode = curnode.children.next;
-   //     console.log(curnode);
-  //  yield curnode.n; 
-  //  yield* depthTraversalTree (curnode);
- //}     
 
 
-
-/**yield curnode.children.forEach(function(e){ 
-    console.log (e.n);
-    curnode = e;
-    depthTraversalTree(curnode); })   
+/** 
  * Traverses a tree using the breadth-first strategy
  * See details: https://en.wikipedia.org/wiki/Breadth-first_search
  *
@@ -157,8 +144,21 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    
+    var curnode = [];
+    if (!Array.isArray(root)) { curnode.push(root); } else { curnode = root; }
+    if (curnode.length == 0) { return; }
+    var ch = [];
+
+for ( let i = 0; i < curnode.length; i++ ) { 
+    
+    yield curnode[i]; 
+    var temp = curnode[i].children;
+    if (temp) {ch = ch.concat(temp);}
 }
+        yield *breadthTraversalTree(ch);
+    }
+
 
 
 /**
