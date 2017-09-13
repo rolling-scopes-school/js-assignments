@@ -446,4 +446,39 @@ describe('07-yield-tasks', function() {
         assert.equal(count, ITEMS_COUNT);
 
     });
+
+    it.optional('async should resolve Promises and take values step by step', () => {
+        return new Promise((resolve, reject)=> {
+            tasks.async(function*() {
+                let a = yield new Promise((resolve)=> setTimeout(()=>resolve(5), 100)),
+                    b = yield Promise.resolve(6);
+                assert.equal(a, 5);
+                assert.equal(b, 6);
+
+                return yield new Promise((resolve)=> resolve(a + b));
+            }).then(value=> {
+                try {
+                    assert.equal(value, 11);
+                    resolve()
+                } catch (err) {
+                    reject(err);
+                }
+            }, (err)=> {
+                reject(err);
+            });
+        });
+    });
+
+    it.optional('async should handle exception during generator work', () => {
+        return new Promise((resolve, reject)=> {
+            tasks.async(function*() {
+                yield new Promise(()=> {throw new Error("test error");});
+            }).then(()=> {
+                reject();
+            }, (err)=> {
+                if (err.message === 'test error') resolve();
+                else reject(err);
+            });
+        });
+    });
 });
