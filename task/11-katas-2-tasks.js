@@ -19,6 +19,14 @@
  * @return {number}
  *
  * Example of return :
+
+
+ '    _  _     _  _  _  _  _ \n'+'  | _| _||_||_ |_   ||_||_|\n'+'  ||_  _|  | _||_|  ||_| _|\n'
+ ' _  _  _  _  _  _  _  _  _ \n'+'| | _| _|| ||_ |_   ||_||_|\n'+'|_||_  _||_| _||_|  ||_| _|\n'
+ _  _  _  _  _  _  _  _  _ 
+| || || || || || || || || |
+|_||_||_||_||_||_||_||_||_|
+
  *
  *   '    _  _     _  _  _  _  _ \n'+
  *   '  | _| _||_||_ |_   ||_||_|\n'+     =>  123456789
@@ -34,8 +42,38 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented'
+        function RetNum(num){
+            switch(num){
+                case 199: return 1;
+                case 156: return 2;
+                case 220: return 3;
+                case 209: return 4;
+                case 188: return 5;
+                case 196: return 6;
+                case 202: return 7;
+                case 232: return 8;
+                case 224: return 9;
+                default : return 0;
+            }
+        }
+
+var rez = bankAccount.replace(/\n/g,'0').replace(/\s/g,'1').replace(/\_/g,'2').replace(/\|/g,'3').slice(0,-1);
+rez = rez.split('0');
+var sumarr = [], numarr = [], sumrez = 0, len = 8;
+for (var i = 0; i < 27; i++){
+    var sum = 0;
+    rez.forEach(function(e,j){ sum += Math.pow(2,(j)%3)*parseInt(e[i], 10); return sum; });
+    sumarr.push(sum*Math.pow(3,(i)%3));
 }
+
+while(sumarr.length!=0){ numarr.push( sumarr.pop()+sumarr.pop()+sumarr.pop() ) }; 
+
+while(numarr.length!=0){ sumrez += RetNum(numarr.pop())*Math.pow(10,len); len--; }
+return sumrez;
+}
+
+
 
 
 /**
@@ -63,7 +101,19 @@ function parseBankAccount(bankAccount) {
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-    throw new Error('Not implemented');
+  //  throw new Error('Not implemented');
+var sumstr = '';
+var sign = '';
+var toAdd = '';
+var arr = text.split(' ');
+for (var i = 0; i < arr.length; i++){
+    toAdd = sign + arr[i];
+    if ((sumstr + toAdd).length > columns) { yield sumstr; i--; sign = ''; sumstr = '';} else { 
+        sumstr = sumstr + toAdd; 
+        if (i+1 == arr.length) { yield sumstr; } else { sign = ' '; } }
+
+}
+
 }
 
 

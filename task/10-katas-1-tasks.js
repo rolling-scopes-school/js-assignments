@@ -17,10 +17,38 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
-}
+    var sides = ['N','E','S','W'];
+var shiftsides = sides.map(function(e,i) { return sides[(i+1)%4] });
+var i = 0, j = 0;
+    var sides32 = new Array(32);
 
+    while (j < 32){
+        switch (true) {
+            case j%8 == 0 : sides32[j] = sides[j/8]; break;
+            case j%5%4 == 0 : sides32[j] = sides[(j-4)/8] + shiftsides[(j-4)/8]; break;
+            default : sides32[j] = shiftsides[(j-4)/8] + sides[(j-4)/8];
+        }
+        j += 4;
+    }
+
+    for (i = 0; i < 32; i++){
+        switch (true) {
+            case i%4 == 0 : break;
+            case i%8 == 1 : sides32[i] = sides[(i-1)/8] + 'b' + shiftsides[(i-1)/8]; break;
+            case i%8 == 2 : sides32[i] = sides[(i-2)/8] + sides32[i+2]; break;
+            case i%8 == 6 : sides32[i] = shiftsides[(i-6)/8] + sides32[i-2]; break;
+            case i%8 == 3 : sides32[i] = sides32[i+1] + 'b' + sides[(i-3)/8]; break;
+            case i%8 == 5 : sides32[i] = sides32[i-1] + 'b' + shiftsides[(i-5)/8]; break;
+            case i%8 == 7 : sides32[i] = shiftsides[(i-7)/8] + 'b' + sides[(i-7)/8]; break;
+        }
+    }
+
+   function adde(abb,az) {
+    return [{abbreviation: abb, azimuth: parseFloat(az.toFixed(2))}]
+     } 
+
+    return sides32 = sides32.map(function(e,i) { return adde(e, i*11.25) }).reduceRight(function(p,c) { return c.concat(p) });
+}
 
 /**
  * Expand the braces of the specified string.
@@ -88,8 +116,35 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
-}
+    var stek = [];
+    var matrix = new Array(n);
+    for (var i = 0; i < n; i++) { matrix[i] = new Array(n); }
+    for (var i = 0; i < n*n; i++) { stek.push(n*n-i-1); }
+
+    function odd(num) {
+        for (var i = 0; i < n; i++) {
+                for (var j = 0; j < n; j++)  {
+                if (num == i+j) { matrix[i][j] = stek.pop(); }
+                }
+        }
+    }
+
+        function even(num) {
+        for (var j = 0; j < n; j++) {
+                for (var i = 0; i < n; i++)  {
+                if (num == i+j) { matrix[i][j] = stek.pop(); }
+                } 
+        }
+    }
+
+    for (var a = 0; a < 2*n-1; a++){
+        if (stek.length == 0) { break; } else { if (a%2 == 0) { even(a); } else { odd(a); } }
+    }
+return matrix;
+
+     }   
+
+
 
 
 /**
@@ -113,8 +168,35 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
-    throw new Error('Not implemented');
-}
+
+    var start = [1,2,3,4,5,6];
+    var isDomino = true;
+    if (dominoes.length == 2) { 
+        if ((dominoes[0][0] == dominoes[1][0])||(dominoes[0][0] == dominoes[1][1])
+            ||(dominoes[0][1] == dominoes[1][0])||(dominoes[0][0] == dominoes[1][1]))
+            { return isDomino = true; }
+    }
+    var arr = dominoes.join().split(',').map(function(e){ return parseInt(e) });
+    start = start.map(function (e,i) { return arr.filter(function (ee) { return ee == i }).length });
+
+    var isOdd = start.filter(function (e){ return e%2 == 1 }).length;
+    if ( isOdd > 2 ) { return isDomino = false; };
+
+    dominoes.forEach(function(e){ var a = e[0]; var b = e[1]; 
+        var zeronum1 = start.filter(function(e){ return e == 0; }).length;
+        var startcopy = [].concat(start); startcopy[a]--; startcopy[b]--; 
+        var zeronum2 = startcopy.filter(function(e){ return e == 0; }).length;
+        if (zeronum1 != zeronum2) { return isDomino = false; };
+
+    });
+
+    return isDomino;
+
+    }
+        
+
+
+
 
 
 /**
@@ -137,8 +219,21 @@ function canDominoesMakeRow(dominoes) {
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    if ((nums.length < 3) || (nums.length == 3)&&(nums[1]-nums[0] != 1)) return nums.join(',');
+    var seq = [];
+    var end = nums.pop();
+    seq.push(end);
+    var iscon = false;
+
+while (nums.length > 0) {
+var cur = nums.pop();
+if (end-cur == 1 && nums.length != 0) { end = cur; iscon = true; seq.push('-');} else { 
+    if (!iscon||nums.length == 0) { seq.push('-'); seq.push(cur) } else { seq.push(end); seq.push(cur) }; end = cur; iscon = false; }}
+var ans = seq.reverse().join(',').replace(/(-,)(?!-)/g,'').replace(/(-,)/g,'-').replace(/[,-](?=-)/g,'');
+return ans;
+
 }
+
 
 module.exports = {
     createCompassPoints : createCompassPoints,

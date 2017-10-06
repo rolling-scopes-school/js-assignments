@@ -23,7 +23,11 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
+    this.getArea = function(){
+        return this.width*this.height;
+    }
 }
 
 
@@ -38,7 +42,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    return JSON.stringify(obj);
 }
 
 
@@ -54,8 +58,52 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    var Obj = function() {proto.constructor.call(this)};
+    Obj.prototype = Object.create(proto);
+    Obj.prototype.constructor = Obj;
+    var rez = new Obj;
+    Object.assign(Obj,JSON.parse(json));
+return Obj; 
 }
+
+
+//function nouveau (Constructor,...arg) {
+//function fromJSON(proto, json){
+//var newObject = Object.create (proto);
+//
+//
+  //  var i , descriptor , keys = Object.getOwnPropertyNames( proto.constructor ) ;
+ //   for ( i = 0 ; i < keys.length ; i ++ )
+ //   { descriptor = Object.getOwnPropertyDescriptor( proto.constructor , keys[ i ] ) ;
+ //       if ( descriptor.value && typeof descriptor.value === 'object' )        
+ //       {  descriptor.value = naiveDeepCopy( descriptor.value ); }
+ //       Object.defineProperty( newObject , keys[ i ] , descriptor ) ;
+ //   }
+//proto.constructor = newObject;
+//Object.assign (newObject, JSON.parse(json));
+//return newObject; }
+
+
+//if (((typeof result == "object")||(typeof result == "function"))&&(result != null)) { return result; }
+//return newObject; }
+
+//function fromJSON(proto, json){
+//var newObject = Object.create (proto);
+//proto.constructor = newObject;
+//return newObject; }
+
+//    var Obj = function() {proto.constructor.call(this)};
+//    Obj.prototype = Object.create(proto);
+//    Obj.prototype.constructor = Obj;
+//    var rez = new Obj;
+//    Object.assign(rez,JSON.parse(json));
+//return rez; 
+//}
+
+
+
+
+
 
 
 /**
