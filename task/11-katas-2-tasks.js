@@ -1,19 +1,19 @@
 'use strict';
 
 /**
- * Returns the bank account number parsed from specified string.
+ * Возвращает номер банковского счета, распаршеный из предоставленной строки.
  *
- * You work for a bank, which has recently purchased an ingenious machine to assist in reading letters and faxes sent in by branch offices.
- * The machine scans the paper documents, and produces a string with a bank account that looks like this:
+ * Вы работаете в банке, который недавно приобрел аппарат, помогающий в чтении писем и факсов, отправленных филиалами.
+ * Аппарат сканирует бумажный документ и генерирует строку с банковсчким счетом, который выглядит следующим образом:
  *
  *    _  _     _  _  _  _  _
  *  | _| _||_||_ |_   ||_||_|
  *  ||_  _|  | _||_|  ||_| _|
  *
- * Each string contains an account number written using pipes and underscores.
- * Each account number should have 9 digits, all of which should be in the range 0-9.
+ * Каждая строка содержит номер счета, записанный с помощью '|' и '_'.
+ * Каждый счет должен иметь 9 цифр в диапазоне от 0 до 9.
  *
- * Your task is to write a function that can take bank account string and parse it into actual account numbers.
+ * Ваша задача -- написать функцию, которая будет принимать номер счета строкой, как описано выше, и парсить ее в обычные числа.
  *
  * @param {string} bankAccount
  * @return {number}
@@ -39,8 +39,8 @@ function parseBankAccount(bankAccount) {
 
 
 /**
- * Returns the string, but with line breaks inserted at just the right places to make sure that no line is longer than the specified column number.
- * Lines can be broken at word boundaries only.
+ * Возвращает строку, в которой будут вставлены переносы строки в правильных местах. Каждая часть до переноса строки должна быть не больше, чем переданное в функцию число.
+ * Строка может быть перенесена только по границе слов.
  *
  * @param {string} text
  * @param {number} columns
@@ -68,8 +68,9 @@ function* wrapText(text, columns) {
 
 
 /**
- * Returns the rank of the specified poker hand.
- * See the ranking rules here: https://en.wikipedia.org/wiki/List_of_poker_hands.
+ * Возвращает ранг заданной покерной комбинации.
+ * Ранги смотрите тут: https://en.wikipedia.org/wiki/List_of_poker_hands
+ * https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BA%D0%B5%D1%80
  *
  * @param {array} hand
  * @return {PokerRank} rank
@@ -105,12 +106,12 @@ function getPokerHandRank(hand) {
 
 
 /**
- * Returns the rectangles sequence of specified figure.
- * The figure is ASCII multiline string comprised of minus signs -, plus signs +, vertical bars | and whitespaces.
- * The task is to break the figure in the rectangles it is made of.
+ * Возвращает набор прямоугольников из заданной фигуры.
+ * Фигура -- это многострочный набор ASCII символов из '-', '+', '|' и пробелов.
+ * Ваша задача -- разбить фигуру на прямоугольники, из которых она составлена.
  *
- * NOTE: The order of rectanles does not matter.
- * 
+ * К СВЕДЕНИЮ: Порядок прямоугольников не имеет значения.
+ *
  * @param {string} figure
  * @return {Iterable.<string>} decomposition to basic parts
  * 

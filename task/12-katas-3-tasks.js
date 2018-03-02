@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * Returns true if word occurrs in the specified word snaking puzzle.
- * Each words can be constructed using "snake" path inside a grid with top, left, right and bottom directions.
- * Each char can be used only once ("snake" should not cross itself).
+ * Возвращает true если слово попадается в заданной головоломке.
+ * Каждое слово может быть построено при помощи прохода "змейкой" по таблице вверх, влево, вправо, вниз.
+ * Каждый символ может быть использован только один раз ("змейка" не может пересекать себя).
  *
  * @param {array} puzzle
  * @param {array} searchStr
@@ -17,13 +17,13 @@
  *      'AGNEGSA',
  *      'YTIRTSP',
  *   ]; 
- *   'ANGULAR'   => true   (first row)
- *   'REACT'     => true   (starting from the top-right R adn follow the ↓ ← ← ↓ )
+ *   'ANGULAR'   => true   (первая строка)
+ *   'REACT'     => true   (начиная с верхней правой R и дальше ↓ ← ← ↓)
  *   'UNDEFINED' => true
  *   'RED'       => true
  *   'STRING'    => true
  *   'CLASS'     => true
- *   'ARRAY'     => true   (first column)
+ *   'ARRAY'     => true   (первая колонка)
  *   'FUNCTION'  => false
  *   'NULL'      => false 
  */
@@ -33,12 +33,12 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
 
 
 /**
- * Returns all permutations of the specified string.
- * Assume all chars in the specified string are different.
- * The order of permutations does not matter.
- * 
+ * Возвращает все перестановки заданной строки.
+ * Принимаем, что все символы в заданной строке уникальные.
+ * Порядок перестановок не имеет значения.
+ *
  * @param {string} chars
- * @return {Iterable.<string>} all posible strings constructed with the chars from the specfied string
+ * @return {Iterable.<string>} все возможные строки, построенные из символов заданной строки
  *
  * @example
  *    'ab'  => 'ab','ba'
@@ -50,19 +50,19 @@ function* getPermutations(chars) {
 
 
 /**
- * Returns the most profit from stock quotes.
- * Stock quotes are stores in an array in order of date.
- * The stock profit is the difference in prices in buying and selling stock.
- * Each day, you can either buy one unit of stock, sell any number of stock units you have already bought, or do nothing. 
- * Therefore, the most profit is the maximum difference of all pairs in a sequence of stock prices.
- * 
+ * Возвращает наибольшую прибыль от игры на котировках акций.
+ * Цены на акции храняться в массиве в порядке увеличения даты.
+ * Прибыль -- это разница между покупкой и продажей.
+ * Каждый день вы можете либо купить одну акцию, либо продать любое количество акций, купленных до этого, либо ничего не делать.
+ * Таким образом, максимальная прибыль -- это максимальная разница всех пар в последовательности цен на акции.
+ *
  * @param {array} quotes
  * @return {number} max profit
  *
  * @example
- *    [ 1, 2, 3, 4, 5, 6]   => 15  (buy at 1,2,3,4,5 and then sell all at 6)
- *    [ 6, 5, 4, 3, 2, 1]   => 0   (nothing to buy)
- *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
+ *    [ 1, 2, 3, 4, 5, 6]   => 15  (купить по 1,2,3,4,5 и затем продать все по 6)
+ *    [ 6, 5, 4, 3, 2, 1]   => 0   (ничего не покупать)
+ *    [ 1, 6, 5, 10, 8, 7 ] => 18  (купить по 1,6,5 и затем продать все по 10)
  */
 function getMostProfitFromStockQuotes(quotes) {
     throw new Error('Not implemented');
@@ -70,10 +70,10 @@ function getMostProfitFromStockQuotes(quotes) {
 
 
 /**
- * Class representing the url shorting helper.
- * Feel free to implement any algorithm, but do not store link in the key\value stores.
- * The short link can be at least 1.5 times shorter than the original url.
- * 
+ * Класс, предосатвляющий метод по сокращению url.
+ * Реализуйте любой алгоритм, но не храните ссылки в хранилище пар ключ\значение.
+ * Укороченные ссылки должны быть как минимум в 1.5 раза короче исходных.
+ *
  * @class
  *
  * @example
