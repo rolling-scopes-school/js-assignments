@@ -133,7 +133,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    return str.slice(0, str.indexOf(value))+str.slice(str.indexOf(value)+value.length);
 }
 
 /**
@@ -148,7 +148,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.slice(1,-1);
 }
 
 
@@ -163,7 +163,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -177,7 +177,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+  return str.split(';');
 }
 
 /**
@@ -224,6 +224,12 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
+    /*
+    for (var i = 0; i < str.length; i++) {
+    ch = str.slice(i);
+    newstr = newstr + String.fromCharCode(ch.charCodeAt()+13);
+    }
+     */
     throw new Error('Not implemented');
 }
 
