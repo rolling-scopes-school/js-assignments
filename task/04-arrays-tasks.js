@@ -391,9 +391,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-    var kolv = 0;
-    arr.filter(function (value) { if (!value) kolv++; })
-    return kolv;
+    return arr.filter(function (value) {  return !value }).length
 }
 
 /**
@@ -411,9 +409,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-    var kolv = 0;
-    arr.filter(function (value) { if (value === item) kolv++; })
-    return kolv;
+    return  arr.filter(function (value) { return value===item }).length;
 }
 
 /**
