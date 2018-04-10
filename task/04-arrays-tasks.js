@@ -312,7 +312,13 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   throw new Error('Not implemented');
+    function sorting(a, b) {
+        if (a > b) return -1;
+        if (a < b) return 1;
+
+    }
+    arr.sort(sorting);
+    return arr.slice(0,3)
 }
  
  
@@ -330,7 +336,10 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+    var count = 0;
+    arr.filter(function (value) {
+        if (value > 0 && typeof value === 'number') count ++;})
+    return count;
 }
  
 /** 
@@ -363,7 +372,10 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+    if (arr.length > 0) {
+       var last = arr.reduce(function (prev, curr) { return prev+curr; });
+       return last; }
+       else return 0;
 }
  
 /** 
@@ -379,7 +391,9 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   throw new Error('Not implemented');
+    var kolv = 0;
+    arr.filter(function (value) { if (!value) kolv++; })
+    return kolv;
 }
 
 /**
@@ -397,7 +411,9 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   throw new Error('Not implemented');
+    var kolv = 0;
+    arr.filter(function (value) { if (value === item) kolv++; })
+    return kolv;
 }
 
 /**
@@ -412,7 +428,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   throw new Error('Not implemented');
+    return arr.toString();
 }
 
 
