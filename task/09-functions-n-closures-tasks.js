@@ -2,7 +2,7 @@
 
 /**********************************************************************************************
  *                                                                                            *
- * Plese read the following tutorial before implementing tasks:                               *
+ * Перед началом работы с заданием, пожалуйста ознакомьтесь с туториалом:                     *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions                    *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function  *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments      *
@@ -12,10 +12,11 @@
 
 
 /**
- * Returns the functions composition of two specified functions f(x) and g(x).
- * The result of compose is to be a function of one argument, (lets call the argument x),
- * which works like applying function f to the result of applying function g to x, i.e.
- *  getComposition(f,g)(x) = f(g(x))
+ *  Возвращает функцию, которая является композицией двух заданных функций f (x) и g (x).
+ *  Результатом должена быть функцией одного аргумента (позволяет вызывать аргумент x),
+ *  который работает как применение функции f к результату применения функции g к x, т.е.
+ *  getComposition (f, g) (x) = f (g (x))
+ *
  *
  * @param {Function} f
  * @param {Function} g
@@ -31,7 +32,7 @@ function getComposition(f,g) {
 
 
 /**
- * Returns the math power function with the specified exponent
+ * Возвращает функцию возведения в степень для переданного аргумента
  *
  * @param {number} exponent
  * @return {Function}
@@ -52,8 +53,8 @@ function getPowerFunction(exponent) {
 
 
 /**
- * Returns the polynom function of one argument based on specified coefficients.
- * See: https://en.wikipedia.org/wiki/Polynomial#Definition
+ * Возвращает полином на основании переданных аргументов
+ * Подробнее: https://en.wikipedia.org/wiki/Polynomial#Definition
  *
  * @params {integer}
  * @return {Function}
@@ -70,18 +71,18 @@ function getPolynom() {
 
 
 /**
- * Memoizes passed function and returns function
- * which invoked first time calls the passed function and then always returns cached result.
+ * Заменяет переданную функцию и возвращает функцию,
+ * которая в первый раз вызывает переданную функцию, а затем всегда возвращает результат кэширования.
  *
- * @params {Function} func - function to memoize
- * @return {Function} memoized function
+ * @params {Function} func - функция для запонимания
+ * @return {Function} запомненная функция
  *
  * @example
  *   var memoizer = memoize(() => Math.random());
- *   memoizer() => some random number  (first run, evaluates the result of Math.random())
- *   memoizer() => the same random number  (second run, returns the previous cached result)
+ *   memoizer() => любое рандомное число (при первом запуске вычисляется Math.random())
+ *   memoizer() => тоже раномное число (при втором запуске возвращается закешированный результат)
  *   ...
- *   memoizer() => the same random number  (next run, returns the previous cached result)
+ *   memoizer() => тоже рандомное число  (при всех последующих вызовах возвращается тоже закешированный результат)
  */
 function memoize(func) {
     throw new Error('Not implemented');
@@ -89,11 +90,10 @@ function memoize(func) {
 
 
 /**
- * Returns the function trying to call the passed function and if it throws,
- * retrying it specified number of attempts.
- *
- * @param {Function} func
- * @param {number} attempts
+ * Возвращает функцию, которая пытаеся вызвать переданную функцию, и,
+ * если она выбрасывает ошибку, повторяет вызов функции заданное количество раз.
+ * @param {Function} функция
+ * @param {number} количество попыток
  * @return {Function}
  *
  * @example
@@ -109,16 +109,15 @@ function retry(func, attempts) {
 
 
 /**
- * Returns the logging wrapper for the specified method,
- * Logger has to log the start and end of calling the specified function.
- * Logger has to log the arguments of invoked function.
- * The fromat of output log is:
+ * Возвращает логирующую обертку для указанного метода,
+ * Logger должен логировать начало и конец вызова указанной функции.
+ * Logger должен логировать аргументы вызываемой функции.
+ * Формат вывода:
  * <function name>(<arg1>, <arg2>,...,<argN>) starts
  * <function name>(<arg1>, <arg2>,...,<argN>) ends
- *
- *
- * @param {Function} func
- * @param {Function} logFunc - function to output log with single string argument
+ * 
+ * @param {Function} функция
+ * @param {Function} логирующая функция - функия для вывода логов с однис строковым аргументом
  * @return {Function}
  *
  * @example
@@ -137,8 +136,7 @@ function logger(func, logFunc) {
 
 
 /**
- * Return the function with partial applied arguments
- *
+ * Возвращает фуункцию с частично примененными аргументами
  * @param {Function} fn
  * @return {Function}
  *
@@ -155,9 +153,9 @@ function partialUsingArguments(fn) {
 
 
 /**
- * Returns the id generator function that returns next integer starting from specified number every time when invoking.
+ * Возвращает функцию IdGenerator, которая возвращает следующее целое число при каждом вызове начиная с переданного
  *
- * @param {Number} startFrom
+ * @param {Number} стартовое число
  * @return {Function}
  *
  * @example

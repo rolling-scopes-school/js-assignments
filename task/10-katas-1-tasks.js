@@ -1,13 +1,13 @@
 'use strict';
 
 /**
- * Returns the array of 32 compass points and heading.
- * See details here:
+ * Возвращает массив из 32 делений катушки компаса с названиями.
+ * Смотрите детали здесь:
  * https://en.wikipedia.org/wiki/Points_of_the_compass#32_cardinal_points
  *
  * @return {array}
  *
- * Example of return :
+ * Пример возвращаемого значения :
  *  [
  *     { abbreviation : 'N',     azimuth : 0.00 ,
  *     { abbreviation : 'NbE',   azimuth : 11.25 },
@@ -23,18 +23,18 @@ function createCompassPoints() {
 
 
 /**
- * Expand the braces of the specified string.
- * See https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
+ * Раскройте фигурные скобки указанной строки.
+ * Смотрите https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
  *
- * In the input string, balanced pairs of braces containing comma-separated substrings
- * represent alternations that specify multiple alternatives which are to appear at that position in the output.
+ * Во входной строке пары фигурных скобок, содержащие разделенные запятыми подстроки,
+ * представляют наборы подстрок, которые могут появиться в этой позиции на выходе.
  *
  * @param {string} str
  * @return {Iterable.<string>}
  *
- * NOTE: The order of output string does not matter.
+ * К СВЕДЕНИЮ: Порядок выходных строк не имеет значения.
  *
- * Example:
+ * Пример:
  *   '~/{Downloads,Pictures}/*.{jpg,gif,png}'  => '~/Downloads/*.jpg',
  *                                                '~/Downloads/*.gif'
  *                                                '~/Downloads/*.png',
@@ -61,15 +61,16 @@ function* expandBraces(str) {
 
 
 /**
- * Returns the ZigZag matrix
+ * Возвращает ZigZag матрицу
  *
- * The fundamental idea in the JPEG compression algorithm is to sort coefficient of given image by zigzag path and encode it.
- * In this task you are asked to implement a simple method to create a zigzag square matrix.
- * See details at https://en.wikipedia.org/wiki/JPEG#Entropy_coding
- * and zigzag path here: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/JPEG_ZigZag.svg/220px-JPEG_ZigZag.svg.png
+ * Основная идея в алгоритме сжатия JPEG -- отсортировать коэффициенты заданного изображения зигзагом и закодировать их.
+ * В этом задании вам нужно реализовать простой метод для создания квадратной ZigZag матрицы.
+ * Детали смотрите здесь: https://en.wikipedia.org/wiki/JPEG#Entropy_coding
+ * https://ru.wikipedia.org/wiki/JPEG
+ * Отсортированные зигзагом элементы расположаться так: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/JPEG_ZigZag.svg/220px-JPEG_ZigZag.svg.png
  *
- * @param {number} n - matrix dimension
- * @return {array}  n x n array of zigzag path
+ * @param {number} n - размер матрицы
+ * @return {array}  массив размером n x n с зигзагообразным путем
  *
  * @example
  *   1  => [[0]]
@@ -93,13 +94,13 @@ function getZigZagMatrix(n) {
 
 
 /**
- * Returns true if specified subset of dominoes can be placed in a row accroding to the game rules.
- * Dominoes details see at: https://en.wikipedia.org/wiki/Dominoes
- *
- * Each domino tile presented as an array [x,y] of tile value.
- * For example, the subset [1, 1], [2, 2], [1, 2] can be arranged in a row (as [1, 1] followed by [1, 2] followed by [2, 2]),
- * while the subset [1, 1], [0, 3], [1, 4] can not be arranged in one row.
- * NOTE that as in usual dominoes playing any pair [i, j] can also be treated as [j, i].
+ * Возвращает true если заданный набор костяшек домино может быть расположен в ряд по правилам игры.
+ * Детали игры домино смотрите тут: https://en.wikipedia.org/wiki/Dominoes
+ * https://ru.wikipedia.org/wiki/%D0%94%D0%BE%D0%BC%D0%B8%D0%BD%D0%BE
+ * Каждая костяшка представлена как массив [x,y] из значений на ней.
+ * Например, набор [1, 1], [2, 2], [1, 2] может быть расположен в ряд ([1, 1] -> [1, 2] -> [2, 2]),
+ * тогда как набор [1, 1], [0, 3], [1, 4] не может.
+ * К СВЕДЕНИЮ: в домино любая пара [i, j] может быть перевернута и представлена как [j, i].
  *
  * @params {array} dominoes
  * @return {bool}
@@ -118,13 +119,13 @@ function canDominoesMakeRow(dominoes) {
 
 
 /**
- * Returns the string expression of the specified ordered list of integers.
+ * Возвращает строковое представление заданного упорядоченного списка целых чисел.
  *
- * A format for expressing an ordered list of integers is to use a comma separated list of either:
- *   - individual integers
- *   - or a range of integers denoted by the starting integer separated from the end integer in the range by a dash, '-'.
- *     (The range includes all integers in the interval including both endpoints)
- *     The range syntax is to be used only for, and for every range that expands to more than two values.
+ * Строковое представление списка целых чисел будет состоять из элементов, разделенных запятыми. Элементами могут быть:
+ *   - отдельное целое число
+ *   - или диапазон целых чисел, заданный начальным числом, отделенным от конечного числа черточкой('-').
+ *     (Диапазон включает все целые числа в интервале, включая начальное и конечное число)
+ *     Синтаксис диапазона должен быть использован для любого диапазона, где больше двух чисел.
  *
  * @params {array} nums
  * @return {bool}

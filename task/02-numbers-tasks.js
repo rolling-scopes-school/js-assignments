@@ -2,7 +2,7 @@
 
 /********************************************************************************************
  *                                                                                          *
- * Plese read the following tutorial before implementing tasks:                             *
+ * Докуметация к прочтению перед выполнением задания:                             *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates          *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number  *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math    *
@@ -11,7 +11,7 @@
 
 
 /**
- * Returns an area of a rectangle given by width and heigth.
+ * Возвращает площадь прямоугольника при передаче ширины и высоты.
  *
  * @param {numder} width
  * @param {number} height
@@ -27,7 +27,7 @@ function getRectangleArea(width, height) {
 
 
 /**
- * Returns a circumference of circle given by radius.
+ * Возвращает окружность круга, заданную радиусом.
  *
  * @param {number} radius
  * @return {number}
@@ -42,7 +42,7 @@ function getCicleCircumference(radius) {
 }
 
 /**
- * Returns an average of two given numbers.
+ * Возвращает среднее значение двух заданных чисел.
  *
  * @param {numder} value1
  * @param {number} value2
@@ -58,7 +58,7 @@ function getAverage(value1, value2) {
 }
 
 /**
- * Returns a distance beetween two points by cartesian coordinates.
+ * Возвращает расстояние между двумя точками по декартовым координатам.
  *
  * @param {number} x1
  * @param {number} y1
@@ -77,7 +77,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
 }
 
 /**
- * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
+ * Возвращает корень линейного уравнения a * x + b = 0, при заданных коэффициентах a и b.
  *
  * @param {number} a
  * @param {number} b
@@ -94,8 +94,8 @@ function getLinearEquationRoot(a, b) {
 
 
 /**
- * Returns an angle (in radians) between two vectors given by xi and yi, coordinates in Cartesian plane
- * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
+ * Возвращает угол (в радианах) между двумя векторами, заданными значениями xi и yi в декартовой системе координат
+ * Подробнее https://en.wikipedia.org/wiki/Euclidean_vector#Representations
  *
  * @param {number} x1
  * @param {number} y1
@@ -115,7 +115,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
 }
 
 /**
- * Returns a last digit of a integer number.
+ * Возвращает последнюю цифру целого числа.
  *
  * @param {number} value
  * @return {number}
@@ -132,7 +132,7 @@ function getLastDigit(value) {
 
 
 /**
- * Returns a number by given string representation.
+ * Возвращает число, первоначально заданное строкой.
  *
  * @param {string} value
  * @return {number}
@@ -147,7 +147,7 @@ function parseNumberFromString(value) {
 }
 
 /**
- * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
+ * Возвращает длину диагонали прямоугольного параллелепипеда, заданного сторонами a, b, c.
  *
  * @param {number} a
  * @param {number} b
@@ -159,12 +159,12 @@ function parseNumberFromString(value) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelipidedDiagonal(a,b,c) {
+function getParallelipidedDiagonal(a, b, c) {
     throw new Error('Not implemented');
 }
 
 /**
- * Returns the number rounded to specified power of 10.
+ * Возвращает число, округленное до заданного десятка.
  *
  * @param {number} num
  * @param {number} pow
@@ -185,8 +185,8 @@ function roundToPowerOfTen(num, pow) {
 }
 
 /**
- * Returns true is the number is prime; otherwise false.
- * See: https://en.wikipedia.org/wiki/Primality_test
+ * Возвращает true, если число является простым, иначе - false.
+ * Смотри: https://en.wikipedia.org/wiki/Primality_test
  *
  * @param {number} n
  * @return {bool}
@@ -206,8 +206,8 @@ function isPrime(n) {
 }
 
 /**
- * Tries to convert value to number and returns it if conversion was successfull;
- * otherwise returns default value passed as a second argument.
+ * Пытается преобразовать первый агумент функции в число и возвращает его, если конвертация была успешной;
+ * в противном случае возвращает значение второго аргумента.
  *
  * @param {any} value
  * @param {any} def
