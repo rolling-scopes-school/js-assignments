@@ -356,7 +356,10 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+    let digits = ['zero','one','two','three','four','five','six','seven','eight','nine'];
+    return arr.sort((a, b) => {
+        return digits.indexOf(a) - digits.indexOf(b);
+});
 }
 
 /** 
@@ -453,7 +456,17 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+    return arr.sort((value1, value2)  => {
+        if(value1.country === value2.country){
+        return value1.city > value2.city;
+    }
+else if(value1.country > value2.country){
+        return 1;
+    }
+    else{
+        return -1;
+    }
+});
 }
 
 /**
