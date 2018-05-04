@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return new Date(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+    return new Date(value);
 }
 
 
@@ -56,7 +56,18 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+    var year = date.getFullYear();
+    if(year%4!==0){
+        return false;
+    }
+    else if (year%100!==0){
+        return true;
+    }
+    else if (year%400!==0){
+        return false;
+    }
+    else return true;
+
 }
 
 
@@ -75,8 +86,21 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
+
+function NumberFormat(num, len) {
+    var format=num.toString();
+    while (format.length < len) {
+        format="0"+format;
+    }
+    return format;
+}
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+    var hours=endDate.getHours()-startDate.getHours();
+    var minutes=endDate.getMinutes()-startDate.getMinutes();
+    var secs=endDate.getSeconds()-startDate.getSeconds();
+    var msecs=endDate.getMilliseconds()-startDate.getMilliseconds();
+    var time=NumberFormat(hours,2)+':'+NumberFormat(minutes,2)+':'+NumberFormat(secs,2)+'.'+NumberFormat(msecs,3);
+    return time;
 }
 
 
@@ -94,9 +118,11 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+    var hours=date.getUTCHours()%12;
+    var minutes=date.getUTCMinutes();
+    var angle=Math.abs(hours*30-minutes*6+minutes/2)*Math.PI/180;
+    return Math.min(angle, 2*Math.PI-angle);
 }
-
 
 module.exports = {
     parseDataFromRfc2822: parseDataFromRfc2822,
