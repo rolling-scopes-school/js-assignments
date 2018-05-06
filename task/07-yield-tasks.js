@@ -106,6 +106,7 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
+    /*С генерацией деревьев туго идет*/
     throw new Error('Not implemented');
 }
 
@@ -132,6 +133,7 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
+    /*С генерацией деревьев туго идет*/
     throw new Error('Not implemented');
 }
 
