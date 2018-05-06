@@ -31,7 +31,8 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
+    var reg = '[\\da-fA-F]';
+    return new RegExp(`^\\{${reg}{8}-${reg}{4}-${reg}{4}-${reg}{4}-${reg}{12}\\}$`, 'i');
 }
 
 
@@ -53,7 +54,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+    return /p.t/;
 }
 
 
