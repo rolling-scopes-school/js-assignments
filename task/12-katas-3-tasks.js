@@ -45,7 +45,27 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
  *    'abc' => 'abc','acb','bac','bca','cab','cba'
  */
 function* getPermutations(chars) {
-    throw new Error('Not implemented');
+    function* HeapsAlgorithm(n, A) {
+        if (n == 1) {
+            yield A.join('');
+        } else {
+            let temp;
+            for (let i = 0; i < n; i++) {
+                yield* HeapsAlgorithm(n - 1, A);
+                if (n % 2 == 0) {
+                    temp = A[i];
+                    A[i] = A[n - 1];
+                    A[n - 1] = temp;
+                } else {
+                    temp = A[0];
+                    A[0] = A[n - 1];
+                    A[n - 1] = temp;
+                }
+            }
+        }
+    }
+
+    yield* HeapsAlgorithm(chars.length, chars.split(''));
 }
 
 
@@ -65,7 +85,11 @@ function* getPermutations(chars) {
  *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
  */
 function getMostProfitFromStockQuotes(quotes) {
-    throw new Error('Not implemented');
+    let sum = 0;
+    quotes.forEach((value, index) => {
+        sum += quotes.slice(index).sort((a, b) => b - a)[0] - value;
+    });
+    return sum;
 }
 
 

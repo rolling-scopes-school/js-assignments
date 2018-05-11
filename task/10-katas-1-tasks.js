@@ -17,8 +17,39 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    const sides = ['N','E','S','W'],
+        result = [];
+
+    for (let i = 0; i < 4; i++) {
+        const from = i % 2 ? 2 : 5;
+        for (let j = -from; j <= from; j++) {
+            const pos = (i * 8 + j + 32) % 32,
+                posi = (i + (j < 0 ? -1 : 1) + 4) % 4,
+                ja = Math.abs(j);
+            result[pos] = sides[i];
+            if (j) {
+                result[pos] +=
+                    ja % 2 ?
+                        (
+                            (ja > 1 ? sides[posi] : '') +
+                            'b' +
+                            (ja === 3 ? sides[i] : sides[posi])
+                        ) :
+                        (
+                            ja === 4 ?
+                                sides[posi] :
+                                (i % 2 ? sides[posi] + sides[i] : sides[i] + sides[posi])
+
+                        );
+            }
+        }
+    }
+    return result.map((v, i) => {
+        return {
+            abbreviation: v,
+            azimuth: i * 11.25
+        };
+    });
 }
 
 
@@ -56,7 +87,19 @@ function createCompassPoints() {
  *   'nothing to do' => 'nothing to do'
  */
 function* expandBraces(str) {
-    throw new Error('Not implemented');
+    const temp = [str],
+        isExist = [];
+    while (temp.length > 0) {
+        str = temp.shift();
+        let match = str.match(/\{([^{}]+)\}/);
+        if (match) {
+            for (let value of match[1].split(','))
+                temp.push(str.replace(match[0], value));
+        } else if (isExist.indexOf(str) < 0) {
+            isExist.push(str);
+            yield str;
+        }
+    }
 }
 
 
@@ -88,7 +131,24 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
+    let row = 0,
+        col = 0,
+        direction = 0,
+        arr = Array.from({length: n}, () => Array.from({length: n}));
+    for (let i = 0; i < n * n; i++) {
+        arr[row][col] = i;
+
+        if (direction % 2) {
+            row += direction % 4 === 1 ? 1 : -1;
+            col += direction % 4 === 1 ? -1 : 1;
+        } else if ((direction % 4 === 0 && col < n - 1) || row === n - 1)
+            col++;
+        else
+            row++;
+        if (direction % 2 === 0 || row === 0 || row === n - 1 || col === 0 || col === n - 1)
+            direction++;
+    }
+    return arr;
 }
 
 
@@ -113,6 +173,7 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
+    /*сложна*/
     throw new Error('Not implemented');
 }
 
@@ -137,7 +198,18 @@ function canDominoesMakeRow(dominoes) {
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    let arr = [[nums[0]]];
+    for (let i = 1; i < nums.length; i++)
+        if (nums[i] - 1 === arr[arr.length - 1][arr[arr.length - 1].length - 1])
+            arr[arr.length - 1].push(nums[i]);
+        else
+            arr.push([nums[i]]);
+    for (let i in arr)
+        if (arr[i].length > 2)
+            arr[i] = arr[i][0] + '-' + arr[i][arr[i].length - 1];
+        else
+            arr[i] = arr[i].join(',');
+    return arr.join(',');
 }
 
 module.exports = {
