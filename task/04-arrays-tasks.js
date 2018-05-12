@@ -488,16 +488,20 @@ else if(value1.country > value2.country){
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   throw new Error('Not implemented');
+    return new Array(n).fill([]).map((item, i) => {
+        item = new Array(n).fill(0);
+    item[i] = 1;
+    return item;
+})
 }
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
- * 
+ *
  * @param {number} start
  * @param {number} end
  * @return {array}
- * 
+ *
  * @example
  *     1, 5  => [ 1, 2, 3, 4, 5 ]
  *    -2, 2  => [ -2, -1, 0, 1, 2 ]
@@ -505,7 +509,9 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+    return new Array(end-start+1).fill(start).map((item,i)  => {
+        return item+i;
+})
 }
 
 /**
@@ -513,14 +519,18 @@ function getIntervalArray(start, end) {
  *
  * @param {array} arr
  * @return {array}
- * 
+ *
  * @example
  *   [ 1, 2, 3, 3, 2, 1 ] => [ 1, 2, 3 ]
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+    return arr.filter((item,i) => {
+        return arr.slice(i + 1).indexOf(item) === -1;
+}).sort((a,b) => {
+        return a-b;
+});
 }
 
 /**
@@ -542,19 +552,25 @@ function distinct(arr) {
  *      { country: 'Belarus', city: 'Grodno' },
  *      { country: 'Belarus', city: 'Minsk' },
  *      { country: 'Poland', city: 'Lodz' }
- *     ], 
- *     item => item.country, 
+ *     ],
+ *     item => item.country,
  *     item => item.city
  *   )
- *            => 
+ *            =>
  *   Map {
  *    "Belarus" => ["Brest", "Grodno", "Minsk"],
- *    "Russia" => ["Omsk", "Samara"], 
+ *    "Russia" => ["Omsk", "Samara"],
  *    "Poland" => ["Lodz"]
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+    return array.reduce((map, item) => {
+        if(!(map.has(keySelector(item)))){
+        map.set(keySelector(item), [])
+    }
+    map.get(keySelector(item)).push(valueSelector(item));
+    return map;
+}, new Map())
 }
 
 
