@@ -23,7 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   throw new Error('Not implemented');
+    return arr.indexOf(value);
 }
 
 /**
@@ -38,7 +38,13 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   throw new Error('Not implemented');
+    var array = [];
+    var last = 1
+    for (var i = 0; i < len; i++) {
+        array.push(last);
+        last += 2;
+    }
+    return array;
 }
 
 
@@ -54,7 +60,7 @@ function generateOdds(len) {
  *    [] => [] 
  */
 function doubleArray(arr) {
-   throw new Error('Not implemented');
+  return arr.concat(arr);
 }
 
 
@@ -70,7 +76,9 @@ function doubleArray(arr) {
  *    [] => [] 
  */
 function getArrayOfPositives(arr) {
-   throw new Error('Not implemented');
+   return arr.filter(function(number) {
+       return number > 0;
+   });
 }
 
 /**
@@ -85,7 +93,9 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-   throw new Error('Not implemented');
+    return arr.filter(function(str) {
+        return typeof str === 'string';
+    });
 }
 
 /**
@@ -102,7 +112,9 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-   throw new Error('Not implemented');
+    return arr.filter(function(item) {
+        return item;
+    });
 }
 
 /**
@@ -116,7 +128,9 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-   throw new Error('Not implemented');
+    return arr.map(function(str) {
+        return str.toUpperCase();
+    });
 }
 
 
@@ -131,7 +145,9 @@ function getUpperCaseStrings(arr) {
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-   throw new Error('Not implemented');
+    return arr.map(function(str) {
+        return str.length;
+    });
 }
 
 /**
@@ -146,7 +162,7 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-   throw new Error('Not implemented');
+   return arr.splice(index, 0, item);
 }
 
 /**
@@ -160,7 +176,8 @@ function insertItem(arr, item, index) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
 function getHead(arr, n) {
-   throw new Error('Not implemented');
+   arr.length = n;
+   return arr;
 }
 
 
@@ -175,7 +192,7 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-   throw new Error('Not implemented');
+   return arr.splice(-n);
 }
 
 
@@ -200,7 +217,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-   throw new Error('Not implemented');
+    return arr.join('\n');
 }
 
 /**
@@ -215,7 +232,7 @@ function toCsvText(arr) {
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
 function toArrayOfSquares(arr) {
-   throw new Error('Not implemented');
+   return arr.map(function (value) { return value*value; });
 }
 
 
@@ -234,7 +251,12 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   throw new Error('Not implemented');
+   var array = [];
+   var last = arr.reduce(function (prev, curr) {
+      array.push(prev);
+      return curr + prev });
+   array.push(last);
+   return array;
 }
 
 /**
@@ -249,7 +271,11 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-   throw new Error('Not implemented');
+    return arr.filter(function (value, index) {
+        if (index % 2 === 1) {
+            return arr.indexOf(value)
+        }
+    })
 }
 
 
@@ -286,7 +312,13 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   throw new Error('Not implemented');
+    function sorting(a, b) {
+        if (a > b) return -1;
+        if (a < b) return 1;
+
+    }
+    arr.sort(sorting);
+    return arr.slice(0,3)
 }
  
  
@@ -304,7 +336,10 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+    var count = 0;
+    arr.filter(function (value) {
+        if (value > 0 && typeof value === 'number') count ++;})
+    return count;
 }
  
 /** 
@@ -321,7 +356,10 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+    let digits = ['zero','one','two','three','four','five','six','seven','eight','nine'];
+    return arr.sort((a, b) => {
+        return digits.indexOf(a) - digits.indexOf(b);
+});
 }
 
 /** 
@@ -337,7 +375,10 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+    if (arr.length > 0) {
+       var last = arr.reduce(function (prev, curr) { return prev+curr; });
+       return last; }
+       else return 0;
 }
  
 /** 
@@ -353,7 +394,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   throw new Error('Not implemented');
+    return arr.filter(function (value) {  return !value }).length
 }
 
 /**
@@ -371,7 +412,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   throw new Error('Not implemented');
+    return  arr.filter(function (value) { return value===item }).length;
 }
 
 /**
@@ -386,7 +427,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   throw new Error('Not implemented');
+    return arr.toString();
 }
 
 
@@ -415,7 +456,17 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+    return arr.sort((value1, value2)  => {
+        if(value1.country === value2.country){
+        return value1.city > value2.city;
+    }
+else if(value1.country > value2.country){
+        return 1;
+    }
+    else{
+        return -1;
+    }
+});
 }
 
 /**
@@ -437,16 +488,20 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   throw new Error('Not implemented');
+    return new Array(n).fill([]).map((item, i) => {
+        item = new Array(n).fill(0);
+    item[i] = 1;
+    return item;
+})
 }
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
- * 
+ *
  * @param {number} start
  * @param {number} end
  * @return {array}
- * 
+ *
  * @example
  *     1, 5  => [ 1, 2, 3, 4, 5 ]
  *    -2, 2  => [ -2, -1, 0, 1, 2 ]
@@ -454,7 +509,9 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+    return new Array(end-start+1).fill(start).map((item,i)  => {
+        return item+i;
+})
 }
 
 /**
@@ -462,14 +519,18 @@ function getIntervalArray(start, end) {
  *
  * @param {array} arr
  * @return {array}
- * 
+ *
  * @example
  *   [ 1, 2, 3, 3, 2, 1 ] => [ 1, 2, 3 ]
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+    return arr.filter((item,i) => {
+        return arr.slice(i + 1).indexOf(item) === -1;
+}).sort((a,b) => {
+        return a-b;
+});
 }
 
 /**
@@ -491,19 +552,25 @@ function distinct(arr) {
  *      { country: 'Belarus', city: 'Grodno' },
  *      { country: 'Belarus', city: 'Minsk' },
  *      { country: 'Poland', city: 'Lodz' }
- *     ], 
- *     item => item.country, 
+ *     ],
+ *     item => item.country,
  *     item => item.city
  *   )
- *            => 
+ *            =>
  *   Map {
  *    "Belarus" => ["Brest", "Grodno", "Minsk"],
- *    "Russia" => ["Omsk", "Samara"], 
+ *    "Russia" => ["Omsk", "Samara"],
  *    "Poland" => ["Lodz"]
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+    return array.reduce((map, item) => {
+        if(!(map.has(keySelector(item)))){
+        map.set(keySelector(item), [])
+    }
+    map.get(keySelector(item)).push(valueSelector(item));
+    return map;
+}, new Map())
 }
 
 
