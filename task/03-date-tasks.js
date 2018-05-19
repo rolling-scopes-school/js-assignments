@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+    return new Date(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+    return new Date(value);
 }
 
 
@@ -56,7 +56,13 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+    let year = date.getFullYear();
+    if (year % 400 == 0) {
+        return true;
+    } else if (year % 4 == 0 && !(year % 100 == 0)) {
+        return true;
+    }
+    return false;
 }
 
 
@@ -94,7 +100,13 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+    let hourcl = date.getUTCHours();
+    let minutecl = date.getUTCMinutes();
+    if (hourcl >= 12) {
+        hourcl -= 12;
+    }
+    let time = Math.abs((60 * hourcl - 11 * minutecl) * 0.5 * Math.PI / 180);
+    return time < Math.PI ? time : Math.PI * 2 - time;
 }
 
 
