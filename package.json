@@ -3,16 +3,25 @@
   "version": "0.9.1",
   "description": "JS training tasks",
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
-    "test-debug": "./node_modules/.bin/mocha --debug-brk"
+    "test": "mocha",
+    "test-debug": "mocha --debug-brk"
   },
   "author": "aorgish",
   "license": "MIT",
   "devDependencies": {
+    "lodash": "^4.17.10",
     "mocha": "^2.3.4"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/rolling-scopes-school/js-assignments.git"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tumkin/js-assignments.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tumkin/js-assignments/issues"
+  },
+  "homepage": "https://github.com/tumkin/js-assignments#readme",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
   }
 }
