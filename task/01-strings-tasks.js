@@ -66,7 +66,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-  let newstr = value.replace(/(Hello, )/, "").replace(/(!)/, "");
+  const newstr = value.replace(/(Hello, )/, "").replace(/(!)/, "");
   return newstr;
 }
 
@@ -197,20 +197,20 @@ function extractEmails(str) {
  *
  */
 
-function getRectangleString(width, height) {
-  let drawing = "┌";
-  for (let x = 1; x <= height; x++) {
+function getRectangleString(columnCount, rowCount) {
+  let drawing = "";
+  for (let row = 1; row <= rowCount; row++) {
     // if this is the first or last row
-    if (x === 1 || x === height) {
-      let filling = "─".repeat(width - 2);
-      if (x === 1) {
-        drawing = `${drawing}${filling}┐\n`;
+    if (row === 1 || row === rowCount) {
+      let filling = "─".repeat(columnCount - 2);
+      if (row === 1) {
+        drawing = `┌${drawing}${filling}┐\n`;
       } else {
         drawing = `${drawing}└${filling}┘\n`;
       }
       // if this is the middle-row
     } else {
-      let filling = " ".repeat(width - 2);
+      let filling = " ".repeat(columnCount - 2);
       drawing = `${drawing}│${filling}│\n`;
     }
   }
