@@ -1,4 +1,5 @@
-"use strict";
+const _ = require("lodash");
+("use strict");
 
 /**************************************************************************************************
  *                                                                                                *
@@ -51,11 +52,10 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-  let value = n;
-  for (let i = 1; i < n; i++) {
-    value = value * i;
-  }
-  return value;
+  let sum = _.reduce(_.range(1, n + 1), function(accumul, current) {
+    return accumul * current;
+  });
+  return sum;
 }
 
 /**
@@ -311,7 +311,6 @@ function getDigitalRoot(num) {
 
 function isBracketsBalanced(str) {
   let wrappers = str.replace(/(\w+)/, "");
-  console.log(wrappers);
   if (wrappers.length % 2 !== 0) {
     return false;
   } else if (wrappers === "") {
@@ -328,7 +327,6 @@ function isBracketsBalanced(str) {
       wrappers = wrappers.replace("[]", "");
       wrappers = wrappers.replace("()", "");
       wrappers = wrappers.replace("{}", "");
-      console.log(wrappers);
     }
     return wrappers.length === 0 ? true : false;
   }

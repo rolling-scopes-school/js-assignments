@@ -362,7 +362,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-  throw new Error("Not implemented");
+  return arr.filter(i => i === item).length;
 }
 
 /**
@@ -444,7 +444,10 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  throw new Error("Not implemented");
+  const arrayLength = Number.parseInt(end, 10) - Number.parseInt(start, 10) + 1;
+  const newArr = Array.from(Array(arrayLength));
+  let x = start;
+  return newArr.map(iterable => x++);
 }
 
 /**
