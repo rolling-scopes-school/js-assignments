@@ -23,7 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   return arr.find(elem => elem === value);
+   return arr.findIndex(elem => elem === value);
 }
 
 /**
