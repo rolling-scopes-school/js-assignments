@@ -111,7 +111,7 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    return (x1*x2 + y1*y2)/(Math.sqrt(x1*x1+y1*y1)*Math.sqrt(x2*x2+y2*y2))
+    return Math.acos((x1*x2 + y1*y2)/(Math.sqrt(x1*x1+y1*y1)*Math.sqrt(x2*x2+y2*y2)));
 }
 
 /**
@@ -143,7 +143,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    return parseFlaoat(value);
+    return parseFloat(value);
 }
 
 /**
@@ -203,7 +203,7 @@ function roundToPowerOfTen(num, pow) {
  */
 function isPrime(n) {
     if (n > 1)
-        for (i=2; i<Math.sqrt(n); i++)
+        for (var i=2; i<Math.sqrt(n); i++)
             if (n % i == 0)
                 return false;
     return true;
