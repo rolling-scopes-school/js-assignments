@@ -23,7 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   return find(arr, value);
+   return arr.find(value);
 }
 
 /**
@@ -102,7 +102,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-   return arr.filter(elem => (elem != false) && (elem != null) && (elem != 0) && (elem != "") && (elem != NaN) && (elem != undefined));
+   return arr.filter(elem => ((elem != false) && (elem != null) && (elem != 0) && (elem != "") && (elem != NaN) && (elem != undefined)));
 }
 
 /**
@@ -175,7 +175,7 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-   return arr.splice(1, -n);
+   return arr.splice(0, arr.length-n);
 }
 
 
