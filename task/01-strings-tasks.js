@@ -201,7 +201,9 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    return String.fromCharCode(250C) + String.fromCharCode(2500).repeat(width-2) + String.fromCharCode(2510) + '\n' +
+        (String.fromCharCode(2502) + ' '.repeat(width-2) + String.fromCharCode(2502) + '\n').repeat(height-2) +
+        String.fromCharCode(2514) + String.fromCharCode(2500).repeat(width-2) + String.fromCharCode(2518) + '\n';
 }
 
 
@@ -221,7 +223,9 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    let Ror13Str = '';
+    return str.replace(/[A-Za-z]/g, function(char){ return String.fromCharCode(
+        (char.charCodeAt(0) - (char <= 'Z'? 65: 97) + 13) % 26 + (char <= 'Z'? 65: 97));} );
 }
 
 /**
@@ -238,7 +242,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    return (typeof value === 'string');
 }
 
 
