@@ -125,10 +125,10 @@ describe('04-arrays-tasks', function() {
 
     it.optional('removeFalsyValues should return the specified array without falsy values', function () {
         [
-            /*{
+            {
                 arr:      [ 0, false, 'cat', NaN, true, '' ],
                 expected: [           'cat',      true     ]
-            },*/{
+            },{
                 arr:      [ 1, 2, 3, 4, 5, 'false' ],
                 expected: [ 1, 2, 3, 4, 5, 'false' ]
             },{
