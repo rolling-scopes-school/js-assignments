@@ -235,8 +235,7 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   throw new Error('Not implemented');                         
-   //return Array.from(arr, (elem, index) => arr.reduce(function(sum, elem){ sum += elem; return sum;}, 0);
+   return Array.from(arr, (elem, index) => arr.slice(0,index+1).reduce(function(sum, elem){ return sum += elem; }, 0));
 }
 
 /**
@@ -270,7 +269,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-   throw new Error('Not implemented');
+   return arr.flatMap((elem,index) => Array(index+1).fill(elem,0,index+1));
 }
 
 
@@ -288,7 +287,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   throw new Error('Not implemented');
+   return (arr.sort(( a, b ) =>  b - a)).slice(0,3);
 }
  
  
@@ -306,7 +305,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+   throw arr.filter(num => num > 0).length;
 }
  
 /** 
@@ -323,7 +322,7 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+   return arr.sort();
 }
 
 /** 
@@ -339,7 +338,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+   return arr.reduce(function(sum, elem){ sum += elem; return sum;});
 }
  
 /** 
@@ -355,7 +354,8 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   throw new Error('Not implemented');
+   return arr.filter(elem => ((elem == false) && (elem == null) && (elem == 0) && (elem == "") &&
+                              ((isNaN(elem)) && (typeof elem !== "string")) && (elem == undefined))).length;
 }
 
 /**
@@ -373,7 +373,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   throw new Error('Not implemented');
+   return arr.reduce(function(count, elem) { return elem === item ? count += 1 : count});
 }
 
 /**
