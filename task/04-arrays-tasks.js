@@ -322,7 +322,7 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   return arr.sort();
+   return arr.sort().reverse();
 }
 
 /** 
@@ -338,7 +338,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   return arr.reduce(function(sum, elem){ sum += elem; return sum;});
+   return arr.reduce(function(sum, elem){ sum += elem; return sum;}, 0);
 }
  
 /** 
@@ -354,8 +354,8 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   return arr.filter(elem => ((elem == false) && (elem == null) && (elem == 0) && (elem == "") &&
-                              ((isNaN(elem)) && (typeof elem !== "string")) && (elem == undefined))).length;
+   return arr.filter(elem => ((elem == false) || (elem == null) || (elem == 0) || (elem == "") ||
+                              ((isNaN(elem)) && (typeof elem !== "string")) || (elem == undefined))).length;
 }
 
 /**
@@ -373,7 +373,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   return arr.reduce(function(count, elem) { return elem === item ? count += 1 : count});
+   return arr.reduce(function(count, elem) { return elem === item ? count += 1 : count;}, 0);
 }
 
 /**
