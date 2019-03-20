@@ -305,7 +305,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw arr.filter(num => num > 0).length;
+   return arr.filter(num => num > 0).length;
 }
  
 /** 
@@ -322,7 +322,8 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   return arr.sort().reverse();
+   let order = ['zero', 'one', 'two', 'tree', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+   return arr.sort(( a, b ) =>  order.findIndex(elem => elem === a) - order.findIndex(elem => elem === b));
 }
 
 /** 
