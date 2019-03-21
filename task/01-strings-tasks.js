@@ -251,9 +251,6 @@ function encodeToRot13(str) {
     return String.fromCharCode(byte);
   } 
   return str.replace(/[A-Za-z]/g, cypher);
-    //throw new Error('Not implemented');
-}
-    //throw new Error('Not implemented');
 }
 
 /**
