@@ -297,7 +297,16 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+  value = value.replace('A','1');
+  value = value.replace('10','A');
+  value = value.replace('J','B');
+  value = value.replace('Q','C');
+  value = value.replace('K','D');
+  value = value.replace('♣','0');
+  value = value.replace('♦','1');
+  value = value.replace('♥','2');
+  value = value.replace('♠','3');
+  return (value[1] * 13 + (parseInt(value[0], 16) - 1));
 }
 
 
