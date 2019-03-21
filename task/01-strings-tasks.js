@@ -239,6 +239,20 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
+  function cypher(match) {
+    let byte = match.charCodeAt();
+    let UP = (byte & 0b00100000);
+    byte &= ~UP;
+    byte -= 'A'.charCodeAt();
+    byte += 13;
+    byte %= 26;
+    byte += 'A'.charCodeAt();
+    byte |= UP;
+    return String.fromCharCode(byte);
+  } 
+  return str.replace(/[A-Za-z]/g, cypher);
+    //throw new Error('Not implemented');
+}
     //throw new Error('Not implemented');
 }
 
