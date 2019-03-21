@@ -153,7 +153,8 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.replace('<','').replace('>','');
+    //throw new Error('Not implemented');
 }
 
 
@@ -168,7 +169,8 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -182,7 +184,8 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
+    //throw new Error('Not implemented');
 }
 
 /**
@@ -209,7 +212,14 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+  let hor = String.fromCodePoint(0x2500);
+  let ver = String.fromCodePoint(0x2502);
+  let res = '';
+  res += String.fromCodePoint(0x250c) + hor.repeat(width - 2) + String.fromCodePoint(0x2510) + '\n';
+  res += (ver + ' '.repeat(width - 2) + ver + '\n').repeat(height - 2);
+  res += String.fromCodePoint(0x2514) + hor.repeat(width - 2) + String.fromCodePoint(0x2518) + '\n';
+  return res;
+    //throw new Error('Not implemented');
 }
 
 
@@ -229,7 +239,7 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
 }
 
 /**
