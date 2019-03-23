@@ -505,7 +505,7 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
     let map = new Map(); 
-    array.every((item) => { map.has(keySelector(item)) ? map.get(keySelector(item)).push(valueSelector(item)) : 
+    array.map((item) => { map.has(keySelector(item)) ? map.get(keySelector(item)).push(valueSelector(item)) : 
         map.set(keySelector(item), [valueSelector(item)]); })
     return map;
 }
