@@ -113,9 +113,9 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  let minHand = (date.getMinutes() * 1000 + date.getSeconds()) / (60 * 1000);
-  let hourHand = ((date.getHours() % 12) * 60 * 1000  + date.getMinutes() * 1000 + date.getSeconds()) / (12 * 60 * 1000);
-  let relAngle = Math.abs(minHand - hourHand);
+  let minHand = (date.getMinutes() * 60 * 1000 + date.getSeconds()*1000 + date.getMilliseconds()) * 12;
+  let hourHand = ((date.getHours() % 12) * 60 * 60 * 1000  + date.getMinutes() * 60 * 1000 + date.getSeconds() * 1000 + date.getMilliseconds()); 
+  let relAngle = Math.abs(minHand - hourHand) / (12*60*60*1000);
   return  ((relAngle > 0.5) ?  ((relAngle - 0.5) * 2 * Math.PI) : (relAngle * Math.PI * 2));
 }
 
