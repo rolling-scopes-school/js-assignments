@@ -470,8 +470,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
-   //return newarr = arr.filter(elem => newarr.find(el => el === elem) === undefined);
+   return Array.from(new Set(arr));
 }
 
 /**
@@ -505,7 +504,10 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+    let map = new Map(); 
+    array.every((item) => { map.has(keySelector(item)) ? map.get(keySelector(item)).push(valueSelector(item)) : map.set(key, [value]);
+    })
+   return map;
 }
 
 
@@ -521,8 +523,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
-    //return arr.reduce((acc, val) => acc.concat(childrenSelector), []);
+    return arr.map(childrenSelector).reduce((acc, item) => acc.concat(item), []);
 }
 
 
@@ -539,7 +540,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+     return indexes.reduce((acc, item) => acc[item], arr);
 }
 
 
