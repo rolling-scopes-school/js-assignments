@@ -272,7 +272,7 @@ function isString(value) {
  */
 function getCardId(value) {
     let Cards = new Map([['♣',0], ['♦',1], ['♥',2], ['♠',3], ['A',0], ['J',10], ['Q',11], ['K',12]]);
-    return Cards.get(value[1])*13 + (isNaN(value[0]) ? Cards.get(value[0]) : (value[0]-1));
+    return Cards.get(value[value.length-1])*13 + (isNaN(value[0]) ? Cards.get(value[0]) : (parseInt(value)-1));
 }
 
 
