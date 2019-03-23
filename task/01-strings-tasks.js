@@ -271,8 +271,8 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    let Cards = [['♣',0], ['♦',13], ['♥',26], ['♠',39], ['A',0], ['J',10], ['Q',11], ['K',12]];
-    return Cards.get(value[1])*4 + (isNan(value[0]) ? Cards.get(value[0]) : (value[0]-1);
+    let Cards = [['♣',0], ['♦',1], ['♥',2], ['♠',3], ['A',0], ['J',10], ['Q',11], ['K',12]];
+    return Cards.get(value[1])*13 + (isNaN(value[0]) ? Cards.get(value[0]) : (value[0]-1));
 }
 
 
