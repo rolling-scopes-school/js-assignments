@@ -103,8 +103,6 @@ function getArrayOfStrings(arr) {
  */
 function removeFalsyValues(arr) {
    return arr.filter(elem => (elem));
-                     /*(elem !== false) && (elem !== null) && (elem !== 0) && (elem !== "") &&
-                              !((isNaN(elem)) && (typeof elem !== "string")) && (elem !== undefined))*/
 }
 
 /**
@@ -357,8 +355,6 @@ function getItemsSum(arr) {
  */
 function getFalsyValuesCount(arr) {
    return arr.filter(elem => (!elem)).length;
-                              /*(elem == false) || (elem == null) || (elem == 0) || (elem == "") ||
-                              ((isNaN(elem)) && (typeof elem !== "string")) || (elem == undefined))*/
 }
 
 /**
