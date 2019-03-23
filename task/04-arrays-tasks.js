@@ -102,8 +102,9 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-   return arr.filter(elem => ((elem !== false) && (elem !== null) && (elem !== 0) && (elem !== "") &&
-                              !((isNaN(elem)) && (typeof elem !== "string")) && (elem !== undefined)));
+   return arr.filter(elem => (elem));
+                     /*(elem !== false) && (elem !== null) && (elem !== 0) && (elem !== "") &&
+                              !((isNaN(elem)) && (typeof elem !== "string")) && (elem !== undefined))*/
 }
 
 /**
@@ -355,8 +356,9 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   return arr.filter(elem => ((elem == false) || (elem == null) || (elem == 0) || (elem == "") ||
-                              ((isNaN(elem)) && (typeof elem !== "string")) || (elem == undefined))).length;
+   return arr.filter(elem => (!elem).length;
+                              /*(elem == false) || (elem == null) || (elem == 0) || (elem == "") ||
+                              ((isNaN(elem)) && (typeof elem !== "string")) || (elem == undefined))*/
 }
 
 /**
