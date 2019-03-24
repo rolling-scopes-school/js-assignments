@@ -382,7 +382,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    return num.ToString(n);
+    return num.toString(n);
 }
 
 
@@ -399,6 +399,10 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
+    /*let res = '';
+    pathes.forEach(item => item.split('/'));
+    for (let i = 0; i < pathes.length; i++)
+        while ()*/
     throw new Error('Not implemented');
 }
 
