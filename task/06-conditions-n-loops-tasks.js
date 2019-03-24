@@ -298,7 +298,7 @@ function isCreditCardNumber(ccn) {
  */
 function getDigitalRoot(num) {
     return (num-1) % 9 + 1;
-
+}
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
