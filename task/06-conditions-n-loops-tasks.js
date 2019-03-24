@@ -359,7 +359,44 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    let monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    
+    let difference = endDate - startDate;
+    let year = difference / (1000 * 60 * 60 * 24 * 365);
+    let day = difference / (1000 * 60 * 60 * 24);
+    let hour = difference / (1000 * 60 * 60);
+    let minute = difference / (1000 * 60);
+    let second = difference / 1000;
+    
+    let month = 0, count = day;
+    monthDays.some(a => {
+        if (count >= a) { count -= a; month++; } 
+        else { month += count / a; return true; }
+    });
+    
+    if (year > 1.5) {
+        return Math.round(year) + ' years ago';
+    } else if (day > 345 && year <= 1.5) {
+        return 'a year ago';
+    } else if (day > 45 && day <= 345) {
+        return Math.round(month) + ' months ago';
+    } else if (day > 25 && day <= 45) {
+        return 'a month ago';
+    } else if (hour > 36 && day <= 25) {
+        return Math.round(day) + ' days ago';
+    } else if (hour > 22 && hour <= 36) {
+        return 'a day ago';
+    } else if (minute > 90 && hour <= 22) {
+        return Math.round(hour) + ' hours ago';
+    } else if (minute > 45 && minute <= 90) {
+        return 'an hour ago';
+    } else if (second > 90 && minute <= 45) {
+        return Math.round(minute) + ' minutes ago';
+    } else if (second > 45 && second <= 90) {
+        return 'a minute ago';
+    } else {
+        return 'a few seconds ago';
+}
 }
 
 
@@ -402,9 +439,11 @@ function toNaryString(num, n) {
 function getCommonDirectoryPath(pathes) {
     /*let res = '';
     pathes.forEach(item => item.split('/'));
-    for (let i = 0; i < pathes.length; i++)
-        while ()*/
-    throw new Error('Not implemented');
+    pathes.reduce((acc, elem) => {});*/
+    //throw new Error('Not implemented');
+    return pathes.forEach(path => path.split('/')).reduce((common, folder) => { let match = true;
+        return common.filter((elem, index) => { return match = (match && elem === folder[index]); })
+            }).reduce((str, item) => str + item + '/', '');
 }
 
 
