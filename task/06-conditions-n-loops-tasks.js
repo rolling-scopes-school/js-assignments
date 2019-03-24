@@ -205,7 +205,7 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    return ''.concat(isStartIncluded ? '[' : '(', a > b ? b : a, ', ', a > b ? b : a, isEndIncluded ? ']' : ')');
+    return ''.concat(isStartIncluded ? '[' : '(', a > b ? b : a, ', ', a > b ? a : b, isEndIncluded ? ']' : ')');
 }
 
 
@@ -242,7 +242,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    num = num.ToString();
+    num = num.toString();
     let res = '';
     for (let i = num.length - 1; i > -1; i--)
         res += num[i];
