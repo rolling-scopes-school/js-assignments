@@ -271,6 +271,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
+  ccn = ccn.toString();
   let sum = 0;
   for (let i = 0; i < ccn.length; i++) {
     let cardNum = parseInt(ccn[i]);
