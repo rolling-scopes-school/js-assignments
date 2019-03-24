@@ -271,7 +271,14 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+  let sum = 0;
+  for (let i = 0; i < ccn.length; i++) {
+    let cardNum = parseInt(ccn[i]);
+    if ((ccn.length - i) % 2 === 0)
+      cardNum = (2*cardNum-1) % 9 + 1;
+    sum += cardNum;
+  }
+  return sum % 10 === 0;
 }
 
 
@@ -290,8 +297,7 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
-}
+    return (num-1) % 9 + 1;
 
 
 /**
@@ -316,7 +322,7 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+     throw new Error('Not implemented');
 }
 
 
@@ -376,7 +382,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.ToString(n);
 }
 
 
@@ -416,7 +422,12 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let res = new Array(m1.legth).fill(new Array(m2[0].length).fill(0));
+    for (let i = 0; i < m1.length; i++)
+        for (let j = 0; j < m2[0].length; j++)
+            for (let k = 0; k < m2.length; k++)
+                res[i][j] += m1[i][k]*m2[k][j];
+    return res;
 }
 
 
