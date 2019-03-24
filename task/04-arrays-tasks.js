@@ -566,7 +566,19 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+  let isSeen = [];
+  let map = new Map();
+  array.map(function(el){
+    if (isSeen.indexOf(keySelector(el)) === -1){
+      	isSeen.push(keySelector(el));
+       map.set(keySelector(el),new Array(valueSelector(el)));
+     }
+     else
+     {
+       map.get(keySelector(el)).push(valueSelector(el));
+     }
+   });
+  return map;
 }
 
 
