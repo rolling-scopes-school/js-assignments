@@ -594,7 +594,12 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+  let res = arr.map(function(el){
+    return childrenSelector(el);
+  });
+  return res.reduce(function (accum, curVal) {
+  	  return accum.concat(curVal);
+  });
 }
 
 
