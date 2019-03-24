@@ -260,7 +260,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-   throw new Error('Not implemented');
+   return arr.filter((el,index) => index & 1 == 1 );
 }
 
 
@@ -279,7 +279,11 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-   throw new Error('Not implemented');
+  let res = new Array();
+  arr.map(function (el, index, array) {
+  	 res = res.concat(Array(index + 1).fill(el));
+  });
+  return res;
 }
 
 
@@ -297,7 +301,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   throw new Error('Not implemented');
+   return arr.sort((a,b) => b - a).slice(0,3);
 }
  
  
@@ -315,7 +319,11 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+  let cnt = 0;
+  arr.map(function(el) {
+    if (typeof el == 'number' && el > 0)
+      cnt++;});
+  return cnt;
 }
  
 /** 
@@ -332,7 +340,10 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+  let nums = Array('zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine');
+  return arr.sort(function(a,b){
+    return nums.indexOf(a) - nums.indexOf(b);
+  });
 }
 
 /** 
@@ -348,7 +359,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+   return arr.reduce((sum, el) => sum + el);
 }
  
 /** 
@@ -364,7 +375,11 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   throw new Error('Not implemented');
+  let cnt = 0;
+  arr.map(function(el) {
+  	 cnt += !Boolean(el);
+  });
+  return cnt;
 }
 
 /**
@@ -382,7 +397,11 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   throw new Error('Not implemented');
+  let cnt = 0;
+  arr.map(function(el) {
+  	 cnt += (el === item);
+  });
+  return cnt;
 }
 
 /**
