@@ -368,30 +368,30 @@ function timespanToHumanString(startDate, endDate) {
     let minute = difference / (1000 * 60);
     let second = difference / 1000;
     
-    let month = 0, count = day;
-    monthDays.some(a => {
-        if (count >= a) { count -= a; month++; } 
-        else { month += count / a; return true; }
-    });
+    
     
     if (year > 1.5) {
-        return Math.round(year) + ' years ago';
+        return -Math.round(-year) + ' years ago';
     } else if (day > 345 && year <= 1.5) {
         return 'a year ago';
     } else if (day > 45 && day <= 345) {
-        return Math.round(month) + ' months ago';
+        let month = 0, count = day;
+        monthDays.some(a => {
+            if (count >= a) { count -= a; month++; } 
+            else { month += count / a; return true; } });
+        return -Math.round(-month) + ' months ago';
     } else if (day > 25 && day <= 45) {
         return 'a month ago';
     } else if (hour > 36 && day <= 25) {
-        return Math.round(day) + ' days ago';
+        return -Math.round(-day) + ' days ago';
     } else if (hour > 22 && hour <= 36) {
         return 'a day ago';
     } else if (minute > 90 && hour <= 22) {
-        return Math.round(hour) + ' hours ago';
+        return -Math.round(-hour) + ' hours ago';
     } else if (minute > 45 && minute <= 90) {
         return 'an hour ago';
     } else if (second > 90 && minute <= 45) {
-        return Math.round(minute) + ' minutes ago';
+        return -Math.round(-minute) + ' minutes ago';
     } else if (second > 45 && second <= 90) {
         return 'a minute ago';
     } else {
