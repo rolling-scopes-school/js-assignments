@@ -426,7 +426,7 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    let res = new Array(m1.legth).fill(new Array(m2[0].length).fill(0));
+    let res = new Array(m1.length).fill(new Array(m2[0].length).fill(0));
     for (let i = 0; i < m1.length; i++)
         for (let j = 0; j < m2[0].length; j++)
             for (let k = 0; k < m2.length; k++)
