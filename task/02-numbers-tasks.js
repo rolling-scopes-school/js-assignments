@@ -54,7 +54,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    return (value1 + value2) / 2
+    return value1 / 2 + value2 / 2
 }
 
 /**
@@ -111,12 +111,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    const angle = (anchor, point) => (Math.atan2(anchor.y - point.y, anchor.x - point.x) * 180 / Math.PI + 180) % 180;
-    const zero = { x: 0, y: 0 }
+    const angle = (anchor, point) => Math.atan2(point.y, point.x)
     const a = { x: x1, y: y1 }
     const b = { x: x2, y: y2 }
 
-    return Math.PI * Math.abs(angle(zero, a) - angle(zero, b)) / 180
+    return Math.abs(angle(a) - angle(b))
 }
 
 /**
