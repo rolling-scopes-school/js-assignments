@@ -111,11 +111,7 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    const angle = (anchor, point) => Math.atan2(point.y, point.x)
-    const a = { x: x1, y: y1 }
-    const b = { x: x2, y: y2 }
-
-    return Math.abs(angle(a) - angle(b))
+    return Math.abs(Math.atan2(y1, x1) - Math.atan2(y2, x2))
 }
 
 /**
@@ -186,7 +182,7 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    return Math.round(num / Math.pow(10, pow))
+    return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow)
 }
 
 /**
