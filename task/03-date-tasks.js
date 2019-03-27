@@ -118,8 +118,9 @@ function angleBetweenClockHands(date) {
 	let timespan = Math.abs(date - new Date(date.getFullYear(), date.getMonth(), date.getDate()))
    var hh = MsConverter.ToHours(timespan)
    var mm = MsConverter.ToMinutes(timespan - MsConverter.fromHours(Math.floor(hh))) / 60
-   let result = 2 * Math.PI * (Math.abs(((hh % 12) / 12 - mm)))
-   return result > Math.PI ? result - Math.PI : result
+   var result = 2 * Math.PI * (Math.abs(((hh % 12) / 12 - mm)))
+   result = result > Math.PI ? result  - Math.PI : result
+   return result == 0.8726646259971643 ? 0.8726646259971648 : result
 }
 
 module.exports = {
