@@ -82,7 +82,7 @@ function timeSpanToString(startDate, endDate) {
    timespan -= MsConverter.fromMinutes(mm)
    let ss = Math.floor(MsConverter.ToSeconds(timespan))
    timespan -= MsConverter.fromSeconds(ss)
-   return `${hh.padLeading(2)}:${mm.padLeading(2)}:${ss.padLeading(2)}:${timespan.roundingClipToString(3)}`
+   return `${hh.padLeading(2)}:${mm.padLeading(2)}:${ss.padLeading(2)}.${timespan.roundingClipToString(3)}`
 }
 
 Number.prototype.roundingClipToString = function(pow) {
@@ -118,7 +118,7 @@ function angleBetweenClockHands(date) {
    let timespan = date - new Date(date.getFullYear(), date.getMonth(), date.getDay())
    var hh = MsConverter.ToHours(timespan) / 24
    var mm = MsConverter.ToMinutes(timespan - MsConverter.fromHours(Math.floor(hh))) / 60
-   return `${hh}:${mm}`
+   return Math.abs(hh - mm)
 }
 
 module.exports = {
