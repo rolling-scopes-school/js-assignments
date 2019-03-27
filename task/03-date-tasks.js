@@ -86,7 +86,7 @@ function timeSpanToString(startDate, endDate) {
 }
 
 Number.prototype.roundingClipToString = function(pow) {
-   return Math.round(this / Math.pow(10, pow)).padTrailing(pow)
+   return (Math.round(this * Math.pow(10, pow)) / Math.pow(10, pow)).padTrailing(pow)
 }
 
 Number.prototype.padLeading = function(size) {
