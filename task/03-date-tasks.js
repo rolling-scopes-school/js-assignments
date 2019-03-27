@@ -115,7 +115,7 @@ Number.prototype.padTrailing = function(size) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-   let timespan = date - new Date(date.getFullYear(), date.getMonth(), date.getDay())
+	let timespan = Math.abs(date - new Date(date.getFullYear(), date.getMonth(), date.getDate()))
    var hh = MsConverter.ToHours(timespan) / 24
    var mm = MsConverter.ToMinutes(timespan - MsConverter.fromHours(Math.floor(hh))) / 60
    return Math.abs(hh - mm)
