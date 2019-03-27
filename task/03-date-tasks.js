@@ -59,7 +59,6 @@ function isLeapYear(date) {
    return Boolean(new Date(date.getFullYear(), 1, 29).getDate() === 29);
 }
 
-
 /**
  * Returns the string represention of the timespan between two dates.
  * The format of output string is "HH:mm:ss.sss"
@@ -76,9 +75,31 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   var timespan = Math.abs(endDate - startDate)
+   let hh = Math.floor(MsConverter.ToHours(timespan))
+   timespan -= MsConverter.fromHours(hh)
+   let mm = Math.floor(MsConverter.ToMinutes(timespan))
+   timespan -= MsConverter.fromMinutes(mm)
+   let ss = Math.floor(MsConverter.ToSeconds(timespan))
+   timespan -= MsConverter.fromSeconds(ss)
+   return `${hh.padLeading(2)}:${mm.padLeading(2)}:${ss.padLeading(2)}:${timespan.roundingClipToString(3)}`
 }
 
+Number.prototype.roundingClipToString = function(pow) {
+   return Math.round(this / Math.pow(10, pow)).padTrailing(pow)
+}
+
+Number.prototype.padLeading = function(size) {
+   var s = String(this)
+   while (s.length < (size || 2)) {s = "0" + s}
+   return s
+}
+
+Number.prototype.padTrailing = function(size) {
+   var s = String(this)
+   while (s.length < (size || 2)) {s = s + "0"}
+   return s
+}
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
@@ -94,9 +115,11 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   let timespan = date - new Date(date.getFullYear(), date.getMonth(), date.getDay())
+   var hh = MsConverter.ToHours(timespan) / 24
+   var mm = MsConverter.ToMinutes(timespan - MsConverter.fromHours(Math.floor(hh))) / 60
+   return `${hh}:${mm}`
 }
-
 
 module.exports = {
     parseDataFromRfc2822: parseDataFromRfc2822,
@@ -105,3 +128,62 @@ module.exports = {
     timeSpanToString: timeSpanToString,
     angleBetweenClockHands: angleBetweenClockHands
 };
+
+class MsConverter {
+
+	static ToSeconds(ms) {
+		return (ms / 1000);
+   }
+
+	static ToMinutes(ms) {
+		return (this.ToSeconds(ms) / 60);
+	}
+
+	static ToHours(ms) {
+		return (this.ToMinutes(ms) / 60);
+	}
+
+	static ToDays(ms) {
+		return (this.ToHours(ms) / 24);
+	}
+
+	static ToYearPercentage(ms, isLeap) {
+		if (isLeap) {
+			return (this.ToDays(ms) / 3.65);
+		} else {
+			return (this.ToDays(ms) / 3.66);
+		}
+	}
+
+	static ToDayPercentage(ms) {
+		return ((1 - this.ToDays(ms)) * 100);
+   }
+   
+   static fromSeconds(s) {
+      return s * 1000
+   }   
+   
+   static fromMinutes(m) {
+      return this.fromSeconds(m * 60)
+   }
+
+   static fromHours(h) {
+      return this.fromMinutes(h * 60)
+   }
+   
+   static fromDays(d) {
+      return this.fromHours(d * 24)
+   }
+
+   static fromYearPercentage(percentage, isLeap) {
+      if (isLeap) {
+         return this.fromDays(percentage * 3.65)
+		} else {
+         return this.fromDays(percentage * 3.66)
+		}
+   }
+
+   static fromDayPercentage(percentage) {
+      return this.fromDays(percentage / 100)
+   }
+}
