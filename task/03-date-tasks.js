@@ -116,9 +116,9 @@ Number.prototype.padTrailing = function(size) {
  */
 function angleBetweenClockHands(date) {
 	let timespan = Math.abs(date - new Date(date.getFullYear(), date.getMonth(), date.getDate()))
-   var hh = MsConverter.ToHours(timespan) / 24
+   var hh = MsConverter.ToHours(timespan)
    var mm = MsConverter.ToMinutes(timespan - MsConverter.fromHours(Math.floor(hh))) / 60
-   return Math.abs(hh - mm)
+   return Math.abs(((hh % 12) / 12 - mm))
 }
 
 module.exports = {
@@ -132,26 +132,26 @@ module.exports = {
 class MsConverter {
 
 	static ToSeconds(ms) {
-		return (ms / 1000);
+		return (ms / 1000)
    }
 
 	static ToMinutes(ms) {
-		return (this.ToSeconds(ms) / 60);
+		return (this.ToSeconds(ms) / 60)
 	}
 
 	static ToHours(ms) {
-		return (this.ToMinutes(ms) / 60);
+		return (this.ToMinutes(ms) / 60)
 	}
 
 	static ToDays(ms) {
-		return (this.ToHours(ms) / 24);
+		return (this.ToHours(ms) / 24)
 	}
 
 	static ToYearPercentage(ms, isLeap) {
 		if (isLeap) {
-			return (this.ToDays(ms) / 3.65);
+			return (this.ToDays(ms) / 3.65)
 		} else {
-			return (this.ToDays(ms) / 3.66);
+			return (this.ToDays(ms) / 3.66)
 		}
 	}
 
