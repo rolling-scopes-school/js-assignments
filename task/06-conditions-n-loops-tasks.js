@@ -30,7 +30,9 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    var result = num % 3 ? "" : "Fizz"
+    result += num % 5 ? "" : "Buzz"
+    return result ? result : num
 }
 
 
@@ -46,7 +48,8 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    for (var i = n; i > 2; n *= --i);
+    return n
 }
 
 
@@ -63,7 +66,8 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    for (var i = n1 ; i < n2; n1 += ++i);
+    return n1
 }
 
 
@@ -82,7 +86,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    return (a + b > c) && (b + c > a)
 }
 
 
@@ -118,8 +122,15 @@ function isTriangle(a,b,c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *  
  */
-function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) { 
+    if (rect1.top < rect2.top && rect1.left > rect2.left) return (rect1.top + rect1.height < rect2.top && rect2.left + rect2.width < rect1.left)
+    if (rect1.top > rect2.top && rect1.left < rect2.left) return (rect2.top + rect2.height < rect1.top && rect1.left + rect1.width < rect2.left)
+    if (rect1.top < rect2.top && rect1.left < rect2.left) return (rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left)
+    if (rect1.top > rect2.top && rect1.left > rect2.left) return (rect2.top + rect2.height > rect1.top && rect2.left + rect2.width > rect1.left)
+    // return (rect1.top < rect2.top && rect1.left > rect2.left) && (rect1.top + rect1.height < rect2.top && rect2.left + rect2.width < rect1.left) ||
+    //        (rect1.top > rect2.top && rect1.left < rect2.left) && (rect2.top + rect2.height < rect1.top && rect1.left + rect1.width < rect2.left) ||
+    //        (rect1.top < rect2.top && rect1.left < rect2.left) && (rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left) ||
+    //        (rect1.top > rect2.top && rect1.left > rect2.left) && (rect2.top + rect2.height > rect1.top && rect2.left + rect2.width > rect1.left)   
 }
 
 
@@ -150,7 +161,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.sqrt(Math.pow(point.x - circle.center.x, 2) + Math.pow(point.y - circle.center.y, 2)) < circle.radius
 }
 
 
@@ -166,7 +177,11 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    while(str) {
+        if (!str.lastIndexOf(str[0])) return str[0]
+        str = str.split('').filter(item => item != str[0]).join('')
+    }
+    return null
 }
 
 
@@ -192,7 +207,12 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    if (a > b) {
+		let c = a
+		a = b
+		b = c
+	}
+    return (isStartIncluded ? "[" : "(") + `${a}, ${b}` + (isEndIncluded ? "]" : ")")
 }
 
 
@@ -209,7 +229,10 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+	var result = ""
+	str = str.split('')
+	while (str.length) result += str.pop()
+	return result
 }
 
 
@@ -226,7 +249,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return Number(reverseString(String(num)))
 }
 
 
@@ -270,9 +293,15 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    return sumDigits(sumDigits(num))
 }
 
+function sumDigits(num) {
+	var result = 0
+	String(num).split('').forEach(function(item) { 
+	result += Number(item) })
+	return result
+}
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
@@ -296,7 +325,25 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let unBalancedBrackets = {
+        "(" : 0,
+        "[" : 0,
+        "{" : 0,
+        "<" : 0        
+    }
+    let closeBrackets = {
+        ")" : "(",
+        "]" : "[",
+        "}" : "{",
+        ">" : "<"       
+    }
+   	str = str.split('')
+	for (var i = 0; i < str.length; i++) {
+		if (Object.keys(unBalancedBrackets).includes(str[i])) unBalancedBrackets[str[i]]++
+		if (Object.keys(closeBrackets).includes(str[i])) 
+			if (!unBalancedBrackets[closeBrackets[str[i]]]--) return unBalancedBrackets
+		}
+	return true
 }
 
 
