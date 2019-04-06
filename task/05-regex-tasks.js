@@ -117,7 +117,7 @@ function getRegexForSSN() {
  */
 function getPasswordValidator(minLength) {
    let num = minLength-1;
-   let exp =  new RegExp('^([A-Z](?=\\w{'+num+',})\\w*(([a-z]\\w*\\d\\w*)|(\\d\\w*[a-z]\\w*)))|(([a-z](?=\\w{'+num+',})\\w*(([A-Z]\\w*\\d\\w*)|(\\d\\w*[A-Z]\\w*))))|((\\d(?=\\w{'+num+',})\\w*(([a-z]\\w*[A-Z]\\w*)|([A-Z]\\w*[a-z]\\w*))))$');
+   let exp =  new RegExp('^(([A-Z](?=\\w{'+num+',})\\w*(([a-z]\\w*\\d\\w*)|(\\d\\w*[a-z]\\w*)))|(([a-z](?=\\w{'+num+',})\\w*(([A-Z]\\w*\\d\\w*)|(\\d\\w*[A-Z]\\w*))))|((\\d(?=\\w{'+num+',})\\w*(([a-z]\\w*[A-Z]\\w*)|([A-Z]\\w*[a-z]\\w*))))|(_(?=\\w{'+num+',})\\w*(([a-z]\\w*[A-Z]\\w*\\d\\w*)|([A-Z]\\w*[a-z]\\w*\\d\\w*)|([a-z]\\w*\\d\\w*[A-Z]\\w*)|([A-Z]\\w*\\d\\w*[a-z]\\w*)|(\\d\\w*[a-z]\\w*[A-Z]\\w*)|(\\d\\w*[A-Z]\\w*[a-z]\\w*))))$');
 	return exp;
 }
 
