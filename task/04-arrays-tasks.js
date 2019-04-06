@@ -23,8 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   var pos = -1;
-   pos = arr.indexOf(value);
+   var pos = arr.indexOf(value);
    return pos;
 }
 

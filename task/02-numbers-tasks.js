@@ -112,10 +112,10 @@ function getLinearEquationRoot(a, b) {
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
     
-    var mult = x1*x2 + y1*y2;
-    var deltaX = Math.sqrt(x1*x1 + y1*y1);
-    var deltaY = Math.sqrt(x2*x2 + y2*y2);
-    var rad = Math.acos(mult / (deltaX * deltaY)); 
+    let mult = x1*x2 + y1*y2;
+    let deltaX = Math.sqrt(x1*x1 + y1*y1);
+    let deltaY = Math.sqrt(x2*x2 + y2*y2);
+    let rad = Math.acos(mult / (deltaX * deltaY)); 
     return rad; 
 }
 
@@ -132,9 +132,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    var dev1 = 0;
-    dev1 = value % 10;
-    return dev1;
+    return (value % 10);
 }
 
 
@@ -150,7 +148,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    var Num = Number.parseFloat(value);
+    let Num = Number.parseFloat(value);
     return Num;
 }
 
@@ -189,7 +187,7 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    var power = Math.pow(10, -pow);
+    let power = Math.pow(10, -pow);
     return Math.round(num * power) / power;
 }
 
@@ -211,14 +209,17 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    var isPrime = true;
+    let isPrime = true;
     for (var i = 2; i <= Math.sqrt(n); i++) {
         if (n % i == 0) {
             isPrime = false;
             break;
         }
     }
-    return isPrime && (n > 1);   
+    if (isPrime && (n > 1))
+        return true;
+    else
+        return false;      
 }
 
 /**
@@ -237,13 +238,6 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    /*
-    var tryNumber = Number.parseInt(value, 10);
-    if (tryNumber != NaN) 
-        return tryNumber;
-    else
-        return def; 
-        */ 
     if (Number.parseInt(value))
         return value;
     else 

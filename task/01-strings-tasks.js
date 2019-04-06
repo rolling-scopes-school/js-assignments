@@ -55,9 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    var str1 = firstName;
-    var str2 = lastName;
-    return `Hello, ${str1} ${str2}!`;
+    return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -71,7 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    return (value.slice(7, value.length-1));  
+    return (value.slice(7, value.length - 1));  
 }
 
 
@@ -86,7 +84,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    return value.charAt(0);
+    return value[0];
 }
 
 /**
@@ -151,7 +149,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    return str.slice(1, -1);
+    return str.slice(1, str.length - 1);
 }
 
 
@@ -234,14 +232,11 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    const lettersCount = 26;
-    const offset = 13;
-    const lowercaseZ = 'z'.charCodeAt(0);
-    const uppercaseZ = 'Z'.charCodeAt(0);
-    return str.replace(/[a-zA-Z]/g,function(str){ 
-        // Статический метод String.fromCharCode() возвращает строку, созданную из указанной последовательности значений Юникода.
-        return String.fromCharCode((str <= "Z"? uppercaseZ : lowercaseZ) >= (str = str.charCodeAt(0) + offset)
-            ? str : str - lettersCount);});
+    let input     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let output    = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+    let index     = x => input.indexOf(x);
+    let translate = x => index(x) > -1 ? output[index(x)] : x;
+    return str.split('').map(translate).join('');
 }
 
 /**
@@ -258,6 +253,9 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
+    // Во всех встроенных объектах есть специальное свойство [[Class]], в котром хранится информация
+    // о его типе или конструкторе
+    // его можно получить воспользовавшись методом toString, который можно полуичить через Object.protorype
     return Object.prototype.toString.call(value) === "[object String]";
 }
 

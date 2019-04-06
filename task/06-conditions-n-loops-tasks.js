@@ -293,7 +293,7 @@ function isCreditCardNumber(ccn) {
     var isEvenTurn = false;
 
 	for (let i = strnum.length - 1; i >= 0; i--) {
-		var digit = Number.parseInt(strnum[i]);
+		var digit = parseInt(strnum[i]);
 
 		if (isEvenTurn) {
 			if ((digit *= 2) > 9) {
@@ -325,7 +325,6 @@ function isCreditCardNumber(ccn) {
  */
 function getDigitalRoot(num) {
     const getDigitSum = (num) => num.toString().split('').map(Number).reduce((acc, elem) => acc + elem);
-
     do {
         num = getDigitSum(num);
     } while (num > 9);

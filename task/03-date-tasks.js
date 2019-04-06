@@ -56,8 +56,8 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   var d = new Date(date);
-   var year = d.getFullYear();
+   let d = new Date(date);
+   let year = d.getFullYear();
    if(year % 400 == 0){
       return true;
    }
@@ -87,40 +87,40 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   var dateFirst = new Date(startDate);
-   var dateLast = new Date(endDate);
+   let dateFirst = new Date(startDate);
+   let dateLast = new Date(endDate);
    
-   var dateFirstHour = dateFirst.getHours();
-   var dateLastHour = dateLast.getHours();
-   var difHour = dateLastHour - dateFirstHour;
-   var difHourStr = difHour.toString();
+   let dateFirstHour = dateFirst.getHours();
+   let dateLastHour = dateLast.getHours();
+   let difHour = dateLastHour - dateFirstHour;
+   let difHourStr = difHour.toString();
    while (difHourStr.length < 2)
       difHourStr = '0' + difHourStr;
 
-   var dateFirstMinutes = dateFirst.getMinutes();
-   var dateLastMinutes = dateLast.getMinutes();
-   var difMin = dateLastMinutes - dateFirstMinutes;
-   var difMinStr = difMin.toString();
+   let dateFirstMinutes = dateFirst.getMinutes();
+   let dateLastMinutes = dateLast.getMinutes();
+   let difMin = dateLastMinutes - dateFirstMinutes;
+   let difMinStr = difMin.toString();
    while (difMinStr.length < 2)
       difMinStr = '0' + difMinStr;
 
-   var dateFirstSeconds = dateFirst.getSeconds();
-   var dateLastSeconds = dateLast.getSeconds();
-   var difSec = dateLastSeconds - dateFirstSeconds;
-   var difSecStr = difSec.toString();
+   let dateFirstSeconds = dateFirst.getSeconds();
+   let dateLastSeconds = dateLast.getSeconds();
+   let difSec = dateLastSeconds - dateFirstSeconds;
+   let difSecStr = difSec.toString();
    while(difSecStr.length < 2)
       difSecStr = '0' + difSecStr;
 
 
-   var dateFirstMiliSeconds = dateFirst.getMilliseconds();
-   var dateLastMiliSeconds = dateLast.getMilliseconds();
-   var difMiliSec = dateLastMiliSeconds - dateFirstMiliSeconds;
-   var difMiliSecStr = difMiliSec.toString();
+   let dateFirstMiliSeconds = dateFirst.getMilliseconds();
+   let dateLastMiliSeconds = dateLast.getMilliseconds();
+   let difMiliSec = dateLastMiliSeconds - dateFirstMiliSeconds;
+   let difMiliSecStr = difMiliSec.toString();
    while(difMiliSecStr.length < 3)
    difMiliSecStr = '0' + difMiliSecStr; 
 
 
-    return (difHourStr) + ":" + (difMinStr) + ":" + (difSecStr) + "." + (difMiliSecStr);
+   return (difHourStr) + ":" + (difMinStr) + ":" + (difSecStr) + "." + (difMiliSecStr);
 }
 
 
