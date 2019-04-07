@@ -366,32 +366,34 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-   let br = {
-    "[" : 0,
-    "(" : 0,
-    "{" : 0,
-    "<" : 0,
-  };
-  for (let i = 0; i < str.length; i++)
+  function IsPop(br1,br2)
   {
-    switch(str[i])
+    switch(br1)
     {
-        case "<":{br["<"] ++; break;};
-        case "[":{br["["] ++; break;};
-        case "(":{br["("] ++; break;};
-        case "{":{br["{"] ++; break;};
-        case ">":{if (br["<"] == 0) return false; br["<"]--; break;};
-        case "]":{if (br["["] == 0) return false; br["["]--; break;};
-        case ")":{if (br["("] == 0) return false; br["("]--; break;};
-        case "}":{if (br["{"] == 0) return false; br["{"]--; break;};
+      case ">" : {if (br2 == "<") return true; break;};
+      case ")" : {if (br2 == "(") return true; break;};
+        case "}" : {if (br2 == "{") return true; break;};
+        case "]" : {if (br2 == "[") return true; break;};
+    }
+    return false;
+  }
+  let tmpArr = [];
+  for (let i = 0; i < str.length; i ++)
+  {
+    if ((str[i] == "<") || (str[i] == "(") || (str[i] == "{") || (str[i] == "["))
+      tmpArr.push(str[i]);
+    else
+    {
+      if (tmpArr.length == 0)
+        return false;
+      if (!IsPop(str[i], tmpArr[tmpArr.length - 1]))
+        return false;
+      tmpArr.pop();
     }
   }
-  for (let brac in br)
-    {
-      if (br[brac] != 0)
-      	return false;
-    }
-    return true;
+  if (tmpArr.length != 0)
+  	return false;
+  return true;
 }
 
 
