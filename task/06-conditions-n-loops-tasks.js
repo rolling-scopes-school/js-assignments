@@ -135,12 +135,24 @@ function isTriangle(a,b,c) {
  */
 function doRectanglesOverlap(rect1, rect2) {
    let x1 = rect1.left + rect1.width;
-   let x2 = rect2.left + rect2.width;
-   let y1 = rect2.top + rect1.height;
-   let y2 = rect2.top + rect2.height;
-   let IsX = ((Math.max(x2,x1) - Math.min(rect1.left, rect2.left)) < (rect1.width + rect2.width));
-   let IsY = ((Math.max(y2,y1) - Math.min(rect1.top, rect2.top)) < (rect1.height + rect2.height));
-   return (IsX && IsY);
+  let x2 = rect2.left + rect2.width;
+  let y1 = rect2.top + rect1.height;
+  let y2 = rect2.top + rect2.height;
+  let IsX = false;
+  let IsY = false;
+  if (rect1.width >= rect2.width){
+    if (((rect2.left > rect1.left) && (rect2.left < x1)) || ((x2 > rect1.left) && (x2 < x1)))
+      IsX = true;}
+  else{
+  	if (((rect1.left > rect2.left) && (rect1.left < x2)) || ((x1 > rect2.left) && (x1 < x2)))
+      IsX = true;}
+  if (rect1.height >= rect2.height){
+    if (((rect2.top > rect1.top) && (rect2.top < y1)) || ((y2 > rect1.top) && (y2 < y1)))
+      IsY = true;}
+  else{
+  if (((rect1.top > rect2.top) && (rect1.top < y2)) || ((y1 > rect2.top) && (y1 < y2)))
+      IsY = true;}
+  return IsY && IsX;
 }
 
 
