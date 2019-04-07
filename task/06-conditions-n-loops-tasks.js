@@ -336,9 +336,9 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-      if (n <= 9)
-        return n;
-      let nums = n.toString().split('').map(num => parseInt(num));
+      if (num <= 9)
+        return num;
+      let nums = num.toString().split('').map(num => parseInt(num));
       let sum = nums.reduce((sum,cur) => sum + cur);
       return getDigitalRoot(sum);
 }
@@ -386,7 +386,7 @@ function isBracketsBalanced(str) {
         case "}":{if (br["{"] == 0) return false; br["{"]--; break;};
     }
   }
-  for (brac in br)
+  for (let brac in br)
     {
       if (br[brac] != 0)
       	return false;
