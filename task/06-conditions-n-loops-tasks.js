@@ -136,7 +136,7 @@ function isTriangle(a,b,c) {
 function doRectanglesOverlap(rect1, rect2) {
    let x1 = rect1.left + rect1.width;
   let x2 = rect2.left + rect2.width;
-  let y1 = rect2.top + rect1.height;
+  let y1 = rect1.top + rect1.height;
   let y2 = rect2.top + rect2.height;
   let IsX = false;
   let IsY = false;
