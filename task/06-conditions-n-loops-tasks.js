@@ -30,7 +30,15 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 15 == 0)
+      return "FizzBuzz";
+    else
+        if(num % 5 == 0)
+            return "Buzz";
+  	    else
+            if (num % 3 == 0)
+                return "Fizz";
+    return num;
 }
 
 
@@ -46,7 +54,10 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    if (n > 1)
+        return n * getFactorial(n-1);
+    else 
+        return 1;
 }
 
 
@@ -63,7 +74,7 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+     return ((n1 + n2) / 2 * (n2-n1+1));
 }
 
 
@@ -82,7 +93,11 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    let max = Math.max(a,b,c);
+    if (a+b+c-max <= max)
+        return false;
+    else
+        return true;
 }
 
 
@@ -119,7 +134,13 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+   let x1 = rect1.left + rect1.width;
+   let x2 = rect2.left + rect2.width;
+   let y1 = rect2.top + rect1.height;
+   let y2 = rect2.top + rect2.height;
+   let IsX = ((Math.max(x2,x1) - Math.min(rect1.left, rect2.left)) < (rect1.width + rect2.width));
+   let IsY = ((Math.max(y2,y1) - Math.min(rect1.top, rect2.top)) < (rect1.height + rect2.height));
+   return (IsX && IsY);
 }
 
 
