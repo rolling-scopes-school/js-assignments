@@ -23,8 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   var pos = arr.indexOf(value);
-   return pos;
+   return arr.indexOf(value);
 }
 
 /**
@@ -86,8 +85,9 @@ function getArrayOfPositives(arr) {
  *    [ 'cat', 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-   // instanceof проверяет принадлежит ли объект к определенному классу
-   return arr.filter(elem => typeof elem == 'string' || elem instanceof  String);
+   // instanceof для custom types
+   // typeof for simple built in types
+   return arr.filter(elem => typeof elem == 'string');
 }
 
 /**
@@ -236,7 +236,7 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   var sum = 0;
+   let sum = 0;
    return arr.map(elem => sum += elem);
 }
 
@@ -271,8 +271,8 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-   return arr.reduce((acc, elem, index) => acc.concat(
-      Array.from({length: index + 1}, () => elem)), []
+   return arr.reduce((accumulator, currentValue, index) => accumulator.concat(
+      Array.from({length: index + 1}, () => currentValue)), []
   );
 }
 
@@ -310,7 +310,8 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   var resArr = arr.filter(elem => (elem > 0) && (Number.parseFloat(elem) === elem));
+   let resArr = arr.filter(currentValue => (currentValue > 0) && 
+      (Number.parseFloat(currentValue) === currentValue));
    return resArr.length;
 }
  
@@ -346,8 +347,8 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   var sum = 0;
-   arr.map(elem => sum += elem);
+   let sum = 0;
+   arr.map(currentValue => sum += currentValue);
    return sum;
 }
  
@@ -364,7 +365,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   return arr.filter(elem => !elem).length;
+   return arr.filter(currentValue => !currentValue).length;
 }
 
 /**
@@ -384,7 +385,7 @@ function getFalsyValuesCount(arr) {
 function findAllOccurences(arr, item) {
    // оператор == сравнивает на равенство и может осуществить приведение типов
    // оператор === сравнивает на идентичность и точно не будет осуществлено приведение типов
-   return arr.filter(elem => elem === item).length;
+   return arr.filter(currentValue => currentValue === item).length;
 }
 
 /**
@@ -451,8 +452,8 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   return Array.from({length: n}, function (elem, index) {
-      var row = new Array(n).fill(0, 0, n);
+   return Array.from({length: n}, function (thisArg, index) {
+      let row = new Array(n).fill(0, 0, n);
       row[index] = 1;
       return row;
   });
@@ -472,7 +473,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   return Array.from({length: end - start + 1}, (elem, index) => start + index);
+   return Array.from({length: end - start + 1}, (thisArg, index) => start + index);
 }
 
 /**
@@ -487,7 +488,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   return arr.filter((elem, index) => arr.indexOf(elem) === index);
+   return arr.filter((currentValue, index) => arr.indexOf(currentValue) === index);
 }
 
 /**
@@ -523,15 +524,15 @@ function distinct(arr) {
 function group(array, keySelector, valueSelector) {
    //Объект Map содержит пары ключ-значение и сохраняет порядок вставки.
    const cityMap = new Map();
-   array.map(function (elem) {
-       const key = keySelector(elem);
-       const value = valueSelector(elem);
+   array.map(function (currentValue) {
+       const key = keySelector(currentValue);
+       const value = valueSelector(currentValue);
        const entry = cityMap.get(key);
 
        if (entry === undefined) {
-         cityMap.set(key, [value]);
+            cityMap.set(key, [value]);
        } else {
-         entry.push(value);
+            entry.push(value);
        }
    });
 
@@ -551,7 +552,6 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-   // ??? why not arr.flat() ??
    return arr.reduce((temp, elem) => temp.concat(childrenSelector(elem)), []);
 }
 
