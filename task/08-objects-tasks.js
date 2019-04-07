@@ -27,6 +27,17 @@ function Rectangle(width, height) {
     this.width = width;
 }
 
+/*
+* Чтобы новым объектам автоматически ставить прототип, конструктору ставится свойство prototype.
+* При создании объекта через new, в его прототип __proto__ записывается ссылка из prototype функции-конструктора.
+* При создании объекта через new Rectangle запиши ему __proto__ = getArea
+* Если один объект имеет специальную ссылку __proto__ на другой объект, 
+* то при чтении свойства из него, если свойство отсутствует в самом объекте, оно ищется в объекте __proto__.
+
+* Свойство __proto__ объекта Object.prototype является свойством доступа (комбинацией геттера и сеттера), 
+* которое расширяет внутренний прототип [[Prototype]] объекта
+*/
+
 Rectangle.prototype.getArea = function () {
     return this.width * this.height;
 }
@@ -43,6 +54,7 @@ Rectangle.prototype.getArea = function () {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
+    // JSON.stringify преобразует передаваемый аргумент в строку
     return JSON.stringify(obj);
 }
 
@@ -59,6 +71,8 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
+    // Первый параметр - объект, которому устанавливается прототип
+    // Второй параметр - новый прототип объекта
     return Object.setPrototypeOf(JSON.parse(json), proto);
 }
 
@@ -110,40 +124,36 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
+
 const cssSelectorBuilder = {
+
     element: function(value) {
-        let builder = new SelectorBuilder();
-        return builder.element(value);
+        throw new Error('Not implemented');
     },
 
     id: function(value) {
-        let builder = new SelectorBuilder();
-        return builder.id(value);
+        throw new Error('Not implemented');
     },
 
     class: function(value) {
-        let builder = new SelectorBuilder();
-        return builder.class(value);
+        throw new Error('Not implemented');
     },
 
     attr: function(value) {
-        let builder = new SelectorBuilder();
-        return builder.attr(value);
+        throw new Error('Not implemented');
     },
 
     pseudoClass: function(value) {
-        let builder = new SelectorBuilder();
-        return builder.pseudoClass(value);
+        throw new Error('Not implemented');
     },
 
     pseudoElement: function(value) {
-        let builder = new SelectorBuilder();
-        return builder.pseudoElement(value);
+        throw new Error('Not implemented');
     },
 
     combine: function(selector1, combinator, selector2) {
-        return selector1.chain(combinator, selector2);
-    }
+        throw new Error('Not implemented');
+    },
 };
 
 
