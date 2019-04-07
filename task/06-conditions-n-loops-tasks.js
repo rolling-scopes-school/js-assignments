@@ -183,7 +183,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return (Math.hypot(circle.center.x - point.x, circle.center.y - point.y) < circle.radius);
 }
 
 
@@ -199,7 +199,13 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+  let Let = str.split('');
+  for (let i = 0; i < str.length; i++)
+  {
+    if (Let.indexOf(str[i]) == Let.lastIndexOf(str[i]))
+        return str[i];
+  }
+  return null;
 }
 
 
