@@ -99,7 +99,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    value.trim();
+    return value.trim();
 }
 
 /**
@@ -225,11 +225,12 @@ function getRectangleString(width, height) {
 function encodeToRot13(str) {
     const input =  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     const output = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+    let res = "";
     for(let i = 0; i < str.length; i++)
     {
-        str[i] = output[input.indexOf(str[i])];
+        res += (input.indexOf(str[i]) == -1 ? str[i] : output[input.indexOf(str[i])]);
     }
-    return str;
+    return res;
 }
 
 /**
@@ -246,7 +247,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return typeof(value) === "string";
+    return (typeof(value) == "string") || (value instanceof String);
 }
 
 
