@@ -88,7 +88,25 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
+    let matrix = Array.from({length: n}, x => Array.from({length: n}));   
+    let i = 1, j = 1;
+
+    for (var e = 0; e < n*n; e++) {
+        matrix[i - 1][j - 1] = e;
+        if ((i + j) % 2 == 0) {
+            // чётная диагональ
+            (j < n) ? j++ : i += 2; 
+            if (i > 1) 
+                i --;
+
+        } else {
+            // нечётная диагональ
+            (i < n) ? i++ : j += 2;
+            if (j > 1) 
+                j --;
+        }
+    }
+    return matrix;
 }
 
 
@@ -113,7 +131,8 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
-    throw new Error('Not implemented');
+    // if sum of all bones is odd return true, otherwise false
+    return dominoes.map(x => x[0] + x[1]).reduce((prev, cur) => prev + cur) %2 != 0;
 }
 
 
@@ -137,7 +156,25 @@ function canDominoesMakeRow(dominoes) {
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    let out = '';
+    
+    for (var i = 0; i <nums.length; i++) {
+        let j = i;
+        
+        while ((nums[j] === nums[j + 1] - 1)) 
+            j++;
+        
+            if (i === j)  
+                out += `${nums[i]},`;       //if there is the next number is not successive
+            else { 
+                if(i === j - 1) 
+                    out += `${nums[i]},${nums[i + 1]},`;   // if there is a range of two successive numbers
+                else 
+                    out += `${nums[i]}-${nums[j]},`;            // if there is a range of 3 or more successive numbers
+                i = j;      
+            }
+    }
+    return out.slice(0, out.length - 1); //remove last comma
 }
 
 module.exports = {
