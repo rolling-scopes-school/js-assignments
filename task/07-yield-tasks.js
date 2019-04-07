@@ -33,7 +33,20 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    for (var i = 99; i > 2; i--)
+    {
+        yield `${i} bottles of beer on the wall, ${i} bottles of beer.`;
+        yield `Take one down and pass it around, ${i - 1} bottles of beer on the wall.`;
+    }
+
+    yield `2 bottles of beer on the wall, 2 bottles of beer.`;
+    yield `Take one down and pass it around, 1 bottle of beer on the wall.`;
+
+    yield "1 bottle of beer on the wall, 1 bottle of beer.";
+    yield "Take one down and pass it around, no more bottles of beer on the wall.";     
+
+    yield "No more bottles of beer on the wall, no more bottles of beer."; 
+    yield "Go to the store and buy some more, 99 bottles of beer on the wall.";
 }
 
 
@@ -47,7 +60,21 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    // Основным методом генератора является next(). 
+    // При вызове он возобновляет выполнение кода до ближайшего ключевого слова yield.
+    yield 0;
+    yield 1;
+
+    let last = 0;
+    let current = 1;
+    let new_val = 1;
+
+    while (true){
+        yield new_val;
+        last = current;
+        current = new_val;
+        new_val = last + current;
+    }
 }
 
 
@@ -82,7 +109,20 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let stack = [root];
+
+    while (stack.length != 0) 
+    {
+        let node = stack.pop();
+        yield node;
+
+        if (node.children !== undefined) {
+            for (let child of node.children.reverse()) {
+                //reverse to pop from right side
+                stack.push(child);
+            }
+        }
+    }
 }
 
 
@@ -108,7 +148,25 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+   let queue = [root];
+
+   while (queue.length != 0) {
+       // Метод shift() удаляет первый элемент из массива и возвращает его значение.
+       let node = queue.shift();
+       yield node;
+
+       if (node.children !== undefined) {
+
+           for (let child of node.children) {
+
+               if (queue.length == 0 && child.children === undefined) {
+                   yield child;
+               } else {
+                   queue.push(child);
+               }
+           }
+       }
+   }
 }
 
 
@@ -126,7 +184,31 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    /*
+    const iterables = [source1(), source2()];
+    let next;
+
+    // Create iterators, with "result" property to hold most recent result.
+    const iterators = iterables.map(iterable => {
+      const iterator = iterable[Symbol.iterator]();
+      iterator.result = iterator.next();
+      return iterator;
+    });
+  
+    // Find the next iterator whose value to use.
+    function findNext() {
+      return iterators
+        .filter(iterator => !iterator.result.done)
+        .reduce((ret, cur) => !ret || cur.result.value < ret.result.value ? cur : ret, null);
+    }
+  
+    // This is the heart of the algorithm.
+    while (next = findNext()) {
+        yield next.result.value;
+        next.result = next.next();
+    }
+    */
+   throw new Error('Not implemented');
 }
 
 
