@@ -22,7 +22,7 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    return value1.concat(value2);
+    // return value1.concat(value2);
 }
 
 
@@ -38,7 +38,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    return value.length;
+    // return value.length;
 }
 
 /**
@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    return `Hello, ${firstName} ${lastName}!`;
+    // return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -69,7 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    return value.substring(7, value.length - 1);
+    // return value.substring(7, value.length - 1);
 }
 
 
@@ -84,7 +84,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    return value[0];
+    // return value[0];
 }
 
 /**
@@ -99,7 +99,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    return value.trim();
+    // return value.trim();
 }
 
 /**
@@ -114,7 +114,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    return value.repeat(count);
+    // return value.repeat(count);
 }
 
 /**
@@ -130,7 +130,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    return str.replace(value, "");
+    // return str.replace(value, "");
 }
 
 /**
@@ -145,7 +145,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    return str.substring(1, str.length - 1);
+    // return str.substring(1, str.length - 1);
 }
 
 
@@ -160,7 +160,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    return str.toUpperCase();
+    // return str.toUpperCase();
 }
 
 /**
@@ -174,7 +174,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    return str.split(';');
+    // return str.split(';');
 }
 
 /**
@@ -201,9 +201,9 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    return "┌" + "─".repeat(width - 2) + "┐\n" +
-          ("│" + " ".repeat(width - 2) + "│\n").repeat(height - 2) +
-           "└" + "─".repeat(width - 2) + "┘\n";
+    // return "┌" + "─".repeat(width - 2) + "┐\n" +
+    //       ("│" + " ".repeat(width - 2) + "│\n").repeat(height - 2) +
+    //        "└" + "─".repeat(width - 2) + "┘\n";
 }
 
 
@@ -230,7 +230,7 @@ function encodeToRot13(str) {
     {
         res += (input.indexOf(str[i]) == -1 ? str[i] : output[input.indexOf(str[i])]);
     }
-    return res;
+    // return res;
 }
 
 /**
@@ -247,7 +247,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return (typeof(value) == "string") || (value instanceof String);
+    // return (typeof(value) == "string") || (value instanceof String);
 }
 
 
@@ -282,7 +282,7 @@ function getCardId(value) {
         'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
         'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'
     ];
-    return deck.indexOf(value);
+    // return deck.indexOf(value);
 }
 
 
