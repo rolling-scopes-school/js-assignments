@@ -476,7 +476,20 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    let ans = '';
+    pathes = pathes.map(path => path.split('/'));
+  
+    while(pathes.length != 0)
+    {
+      let tmp = pathes[0].shift();
+      for (let i = 1; i < pathes.length; i++)
+      {
+         if(pathes[i].shift() != tmp)
+           return ans;
+      }
+      ans += tmp + '/';
+    }
+    return ans;
 }
 
 
