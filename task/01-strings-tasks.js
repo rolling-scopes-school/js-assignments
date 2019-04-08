@@ -130,7 +130,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    var index = str.indexOf(value);
+    let index = str.indexOf(value);
 	if (index === -1) {
 		return str;
 	}
@@ -297,7 +297,7 @@ function getCardId(value) {
     var firstChar = value.charAt(0);
     var secondChar = value.charAt(1);
     */
-    var arr = [
+    let arr = [
          'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
          'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
          'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',

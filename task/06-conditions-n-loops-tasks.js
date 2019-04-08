@@ -506,8 +506,8 @@ function toNaryString(num, n) {
 function getCommonDirectoryPath(pathes) {
     pathes.sort();
 
-    var lastDirDelimiter = -1;
-    for (var lastEqual = 0; lastEqual < pathes[0].length; lastEqual++) {
+    let lastDirDelimiter = -1;
+    for (let lastEqual = 0; lastEqual < pathes[0].length; lastEqual++) {
         if (pathes[0][lastEqual] != pathes[pathes.length - 1][lastEqual]) {
             break;
         }
@@ -542,13 +542,13 @@ function getCommonDirectoryPath(pathes) {
 function getMatrixProduct(m1, m2) {
     let result = [];
 
-    for (var i = 0; i < m1.length; i++) {
+    for (let i = 0; i < m1.length; i++) {
         result[i] = [];
 
-        for (var j = 0; j < m2[0].length; j++) {
+        for (let j = 0; j < m2[0].length; j++) {
             let sum = 0;
 
-            for (var k = 0; k < m1[0].length; k++) {
+            for (let k = 0; k < m1[0].length; k++) {
                 sum += m1[i][k] * m2[k][j];
             }
             result[i][j] = sum;
