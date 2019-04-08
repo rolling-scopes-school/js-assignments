@@ -512,7 +512,21 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+  let rows = m1.length;
+  let cols = m2[0].length;
+  let m = m2.length;
+  let ans = new Array(rows);
+  for (let i = 0; i < rows; i ++)
+    ans[i] = new Array(cols);
+  for (let i = 0; i < rows; i ++)
+   	for (let j = 0; j < cols; j ++)
+    {
+      let tmp = 0;
+      for (let k = 0; k < m; k ++)
+        tmp += m1[i][k] * m2[k][j];
+      ans[i][j] = tmp;
+    }
+  return ans;
 }
 
 
@@ -547,7 +561,33 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+  let IsMain = true;
+  let IsSide = true;
+  for (let i = 0; i < 3; i ++)
+  {
+    let IsRow = true;
+    let IsCol = true;
+    for (let j = 1; j < 3; j ++)
+    {
+      if ((position[i][j-1] != position[i][j]) || position[i][j] == undefined)
+        IsRow = false;
+      if ((position[j-1][i] != position[j][i]) || position[j][i] == undefined)
+        IsCol = false;
+      if ((i == j)&&((position[i][j] != position[i-1][j-1]) || position[i][j] == undefined))
+        IsMain = false; 
+      if ((j == 2 - i)&&((position[i][j] != position[i+1][j-1]) || position[i][j] == undefined))
+        IsSide = false; 
+    }
+    if (IsCol)
+      return position[0][i];
+    if (IsRow)
+      return position[i][0];
+  }
+  if (IsMain)
+      return position[1][1];
+  if (IsSide)
+      return position[1][1];
+  return undefined;
 }
 
 
