@@ -58,7 +58,15 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+  let n1 = 0; let n2 = 1;
+  yield n1;   yield n2;
+  while(true)
+  {
+    let cur = n2 + n1;
+    n1 = n2;
+    n2 = cur;
+    yield cur;
+  }
 }
 
 
@@ -93,7 +101,18 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+   let arr = [];
+   function DFS(Root)
+   {
+      arr.push(Root);
+      if (Root.children != undefined)
+        for(let i = 0; i < (Root.children).length; i ++)
+        DFS(Root.children[i]);
+   }
+   DFS(root);
+  
+   for(let i = 0; i < arr.length; i ++)
+      yield arr[i];
 }
 
 
