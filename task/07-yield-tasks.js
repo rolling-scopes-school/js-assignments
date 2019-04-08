@@ -101,7 +101,7 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-   let arr = [];
+   /*let arr = [];
    function DFS(Root)
    {
       arr.push(Root);
@@ -112,7 +112,35 @@ function* depthTraversalTree(root) {
    DFS(root);
   
    for(let i = 0; i < arr.length; i ++)
-      yield arr[i];
+      yield arr[i];*/
+  let IsSeen = [];
+  let stack = [];
+  yield root;
+  stack.push(root);
+  while (stack.length != 0)
+  {
+    let head = stack[stack.length - 1];
+    if ((IsSeen.indexOf(head) == -1)&&(head.children != undefined))
+    {
+      IsSeen.push(head);
+      yield head.children[0];
+      stack.push(head.children[0]);
+    }
+    else
+    {
+      head = stack.pop();
+      if (stack.length != 0)
+      {
+        let idx = stack[stack.length - 1].children.indexOf(head);
+        if (idx < stack[stack.length - 1].children.length - 1)
+        {
+        	let brother = stack[stack.length-1].children[idx+1];
+      		yield brother;
+      		stack.push(brother);
+        }
+      }
+    }
+  }
 }
 
 
