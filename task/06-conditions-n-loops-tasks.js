@@ -438,7 +438,7 @@ function timespanToHumanString(startDate, endDate) {
   if (min <= 45)
     return ((min - Math.floor(min) == 0.5) ? Math.floor(min) : Math.round(min)) + ' minutes ago';
   else
-    if (min <= 60)
+    if (min <= 90)
       return 'an hour ago';
   let hours = min/60;
   if (hours <= 22)
