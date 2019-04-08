@@ -36,7 +36,7 @@ function* get99BottlesOfBeer() {
 	let bottles = 99;
     while(bottles >= 2)
     {
-      yield bottles + ' bottles of beer on the wall,' + bottles + 'bottles of beer.';
+      yield bottles + ' bottles of beer on the wall,' + bottles + ' bottles of beer.';
       yield 'Take one down and pass it around, ' + --bottles + ' bottles of beer on the wall.';
     }
     yield '1 bottle of beer on the wall, 1 bottle of beer.';
