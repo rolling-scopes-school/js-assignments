@@ -232,11 +232,22 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    let input     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    let output    = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
-    let index     = x => input.indexOf(x);
-    let translate = x => index(x) > -1 ? output[index(x)] : x;
-    return str.split('').map(translate).join('');
+    let cipherText = '';
+    for (let i = 0; i < str.length; i++) {
+        if ((str.charCodeAt(i) > 64 && str.charCodeAt(i) < 78) || 
+            (str.charCodeAt(i) > 96 && str.charCodeAt(i) < 110)) {
+            cipherText += String.fromCharCode(str.charCodeAt(i) + 13);
+        }
+        else if ((str.charCodeAt(i) > 77 && str.charCodeAt(i) < 91) || (str.charCodeAt(i) > 109 && str.charCodeAt(i) < 123))
+		{
+            cipherText += String.fromCharCode(str.charCodeAt(i) - 13);
+        }
+        else
+		{
+            cipherText += str[i];
+		}
+    }
+    return cipherText;
 }
 
 /**
@@ -253,10 +264,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    // Во всех встроенных объектах есть специальное свойство [[Class]], в котром хранится информация
-    // о его типе или конструкторе
-    // его можно получить воспользовавшись методом toString, который можно полуичить через Object.protorype
-    return Object.prototype.toString.call(value) === "[object String]";
+   return (value instanceof String || typeof value === "string");
 }
 
 
