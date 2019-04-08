@@ -436,28 +436,28 @@ function timespanToHumanString(startDate, endDate) {
       return 'a minute ago';
   let min = sec / 60;
   if (min < 45)
-    return Math.round(min) + ' minutes ago';
+    return ((min - Math.floor(min) == 0.5) ? Math.floor(min) : Math.round(min)) + ' minutes ago';
   else
     if (min < 60)
       return 'an hour ago';
   let hours = min/60;
   if (hours < 22)
-    return Math.round(hours) + ' hours ago';
+    return ((hours - Math.floor(hours) == 0.5) ? Math.floor(hours) : Math.round(hours)) + ' hours ago';
   else
     if (hours < 36)
       return 'a day ago';
   let days = hours / 24;
   if (days < 25)
-    return Math.round(days) + ' days ago';
+    return ((days - Math.floor(days) == 0.5) ? Math.floor(days) : Math.round(days)) + ' days ago';
   else
     if(days < 45)
       return 'a month ago';
   if (days < 345)
-    return Math.round(345/30) + ' months ago';
+    return ((days/30 - Math.floor(days/30) == 0.5)? Math.floor(days/30):Math.round(days/30)) + ' months ago';
   else
     if(days < 545)
       return 'a year ago';
-  return Math.round(days/365) + ' years ago';
+  return ((days/365 - Math.floor(days/365) == 0.5)? Math.floor(days/365):Math.round(days/365)) + ' years ago';
 }
 
 
