@@ -149,7 +149,7 @@ function* depthTraversalTree(root) {
         	let it = depthTraversalTree(root.children[i]);
           while(true)
           {
-            val = it.next().value;
+            let val = it.next().value;
             if (val != undefined)
               yield val;
             else
