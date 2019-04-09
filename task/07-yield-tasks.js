@@ -141,6 +141,7 @@ function* depthTraversalTree(root) {
       }
     }
   }*/
+	throw new Error('Not implemented');
 }
 
 
@@ -199,9 +200,7 @@ function* mergeSortedSequences(source1, source2) {
       break;
     tmp.push(val);
   }
-  console.log(tmp);
   tmp = tmp.sort((a,b) => a-b);
-  console.log(tmp);
   yield* tmp;
 }
 
