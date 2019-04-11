@@ -241,10 +241,8 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   for (var i = 1; i < arr.length; i++) {
-      arr[i] += arr[i - 1]
-   }
-   return arr
+   var sum = 0
+   return arr.map(elem => sum += elem)
 }
 
 /**
@@ -279,9 +277,11 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
+   var result = []
    for(var i = 1; i < arr.length; i++) {
-      arr.splice(i, 0, item)
+      for(var j = 0; j < i; j++) result.push(arr[i])
    }
+   return result
 }
 
 
@@ -375,6 +375,7 @@ function getDigitByName(digitName) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
+   if (arr.length == 0) return 0
    return arr.reduce((buffer, item) => buffer + item)
 }
  
