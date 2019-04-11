@@ -23,8 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   for (var i = 0; i < arr.length; i ++) if (arr[i] == value) return i
-   return -1
+   return arr.indexOf(value)
 }
 
 /**
@@ -300,18 +299,16 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   function get3TopItems(arr) {
-      var result = arr.splice(0, 3).sort()
-      for (var i = 0; i < arr.length; i++) {
-         if (arr[i] > result[0])
-         {
-            result.splice(0, 1, arr[i])
-            result.sort()
-         }
+   var result = arr.splice(0, 3).sort()
+   for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > result[0])
+      {
+         result.splice(0, 1, arr[i])
+         result.sort()
       }
-      return result
-   }   
-}
+   }
+   return result
+}   
  
  
 /**  
@@ -378,7 +375,7 @@ function getDigitByName(digitName) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   arr.reduce((buffer, item) => buffer + item)
+   return arr.reduce((buffer, item) => buffer + item)
 }
  
 /** 
@@ -412,7 +409,8 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   return arr.filter(element => element == item).length
+   let reducer = (acc, elem) => acc + (elem === item ? 1 : 0)
+   return arr.reduce(reducer, 0)
 }
 
 /**
@@ -509,7 +507,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+   return Array.from({length: end - start + 1}, (elem, index) => start + index);
 }
 
 /**
@@ -524,7 +522,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+   return arr.filter((elem, index) => arr.indexOf(elem) === index);
 }
 
 /**
@@ -614,11 +612,10 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-   let len = Math.floor(arr.length / 2)
-   let temp = arr[len]
-   let result = arr.splice(0, len).concat(arr.splice(arr.length - len, len))
-   if (arr.length % 2 == 1) result.splice(len, 0, temp)
-   return result
+   let tail = arr.slice(Math.ceil(arr.length / 2), arr.length)
+   let mid = arr.slice(Math.floor(arr.length / 2), Math.ceil(arr.length / 2))
+   let head = arr.slice(0, Math.floor(arr.length / 2))
+   return tail.concat(mid).concat(head)
 }
 
 

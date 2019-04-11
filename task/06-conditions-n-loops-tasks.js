@@ -86,7 +86,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    return (a + b > c) && (b + c > a)
+    return (a + b > c) && (a + c > b) && (b + c > a)
 }
 
 
@@ -123,14 +123,11 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) { 
-    if (rect1.top < rect2.top && rect1.left > rect2.left) return (rect1.top + rect1.height < rect2.top && rect2.left + rect2.width < rect1.left)
-    if (rect1.top > rect2.top && rect1.left < rect2.left) return (rect2.top + rect2.height < rect1.top && rect1.left + rect1.width < rect2.left)
-    if (rect1.top < rect2.top && rect1.left < rect2.left) return (rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left)
-    if (rect1.top > rect2.top && rect1.left > rect2.left) return (rect2.top + rect2.height > rect1.top && rect2.left + rect2.width > rect1.left)
-    // return (rect1.top < rect2.top && rect1.left > rect2.left) && (rect1.top + rect1.height < rect2.top && rect2.left + rect2.width < rect1.left) ||
-    //        (rect1.top > rect2.top && rect1.left < rect2.left) && (rect2.top + rect2.height < rect1.top && rect1.left + rect1.width < rect2.left) ||
-    //        (rect1.top < rect2.top && rect1.left < rect2.left) && (rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left) ||
-    //        (rect1.top > rect2.top && rect1.left > rect2.left) && (rect2.top + rect2.height > rect1.top && rect2.left + rect2.width > rect1.left)   
+    return !(
+        rect1.left > rect2.left + rect2.width || 
+        rect2.left > rect1.left + rect1.width || 
+        rect1.top > rect2.top + rect2.height || 
+        rect2.top > rect1.top + rect1.height)    
 }
 
 
@@ -342,7 +339,8 @@ function isBracketsBalanced(str) {
 		if (Object.keys(unBalancedBrackets).includes(str[i])) unBalancedBrackets[str[i]]++
 		if (Object.keys(closeBrackets).includes(str[i])) 
 			if (!unBalancedBrackets[closeBrackets[str[i]]]--) return unBalancedBrackets
-		}
+    }
+    if (Object.values(unBalancedBrackets).reduce((buffer, item) => buffer + item)) return false
 	return true
 }
 

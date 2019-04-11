@@ -115,14 +115,11 @@ Number.prototype.padTrailing = function(size) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-	let timespan = Math.abs(date - new Date(date.getFullYear(), date.getMonth(), date.getDate()))
-   var hh = MsConverter.ToHours(timespan)
-   var mm = MsConverter.ToMinutes(timespan - MsConverter.fromHours(Math.floor(hh))) / 60
-   var result = 2 * Math.PI * (Math.abs(((hh % 12) / 12 - mm)))
-   result = result > Math.PI ? result  - Math.PI : result
-   if (result == 0.4799655442984417) return 0.4799655442984406
-   if (result == 0.8726646259971643) return 0.8726646259971648
-   result
+   let hours = date.getUTCHours() % 12;
+   let minutes = date.getUTCMinutes();
+   let angle = Math.abs(0.5 * (60 * hours - 11 * minutes)) / 180 * Math.PI;
+
+   return angle > Math.PI ? angle - Math.PI : angle;
 }
 
 module.exports = {
