@@ -419,18 +419,26 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath(pathes) {
     var result = ""
+	var j = 0
     var flag = true
     while (flag) {
-        var temp = pathes[0].slice(0,1)
-        pathes.forEach(item => {
-            if (temp != item.slice(0,1)) {
+        var temp = pathes[0].slice(j, j + 1)
+		for (var i = 0; i < pathes.length; i++) {
+			if (temp != pathes[i].slice(j, j + 1)) {
                 flag = false
-                return result
+                return trimLastPathComponent(result)
             }
-        })
+		}
+		j++
         if (flag) result += temp
     }
-    return result
+    return trimLastPathComponent(result)
+}
+
+function trimLastPathComponent(path) {
+    let pos = path.lastIndexOf('/')
+    if (pos == -1) return ""
+    return path.slice(0, pos + 1)
 }
 
 
