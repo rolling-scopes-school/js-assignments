@@ -426,7 +426,8 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   return arr.join(",")
+   return arr.toString();
+   //return arr.join(",")
 }
 
 
@@ -573,7 +574,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-   throw new Error('Not implemented');
+   return arr.reduce((buffer, item) => buffer.concat(childrenSelector(item)), [])
 }
 
 
@@ -590,7 +591,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+   return indexes.map(item => arr = arr[item])[indexes.length - 1]
 }
 
 
