@@ -401,7 +401,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
@@ -418,7 +418,19 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    var result = ""
+    var flag = true
+    while (flag) {
+        var temp = pathes[0].slice(0,1)
+        pathes.forEach(item => {
+            if (temp != item.slice(0,1)) {
+                flag = false
+                return result
+            }
+        })
+        if (flag) result += temp
+    }
+    return result
 }
 
 
