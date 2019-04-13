@@ -11,7 +11,7 @@
 
  
 /**
- * Returns an index of the specified element in array or -1 if element is not found
+ * Returns an index of the specified itement in array or -1 if itement is not found
  * 
  * @param {array} arr
  * @param {any} value
@@ -22,7 +22,7 @@
  *    ['Array', 'Number', 'string'], 'Date'    => -1 
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
-function findElement(arr, value) {
+function finditement(arr, value) {
    return arr.indexOf(value)
 }
 
@@ -45,7 +45,7 @@ function generateOdds(len) {
 
 
 /**
- * Returns the doubled array - elements of the specified array are repeated twice using original order
+ * Returns the doubled array - itements of the specified array are repeated twice using original order
  * 
  * @param {array} arr
  * @return {array}
@@ -257,7 +257,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-   return arr.filter((item, index) => index % 2);
+   return arr.filter((item, index) => index % 2)
 }
 
 
@@ -298,15 +298,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   var result = arr.splice(0, 3).sort()
-   for (var i = 0; i < arr.length; i++) {
-      if (arr[i] > result[0])
-      {
-         result.splice(0, 1, arr[i])
-         result.sort()
-      }
-   }
-   return result
+   return arr.sort((a, b) => b - a).slice(0, 3)
 }   
  
  
@@ -324,7 +316,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   return arr.filter(item => item > 0).length
+   return arr.filter(item => (Number(parseFloat(item)) === item) && item > 0).length
 }
  
 /** 
@@ -409,12 +401,12 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   let reducer = (acc, elem) => acc + (elem === item ? 1 : 0)
+   let reducer = (acc, item) => acc + (item === item ? 1 : 0)
    return arr.reduce(reducer, 0)
 }
 
 /**
- * Concatenates all elements from specified array into single string with ',' delimeter  
+ * Concatenates all itements from specified array into single string with ',' delimeter  
  * 
  * @param {array} arr 
  * @return {string}
@@ -427,7 +419,7 @@ function findAllOccurences(arr, item) {
 function toStringList(arr) {
    return arr.toString();
    //return arr.join(",")
-}
+}return arr.filter(item => (Number(parseFloat(item)) === item) && item > 0).length;
 
 
 /**
@@ -508,7 +500,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   return Array.from({length: end - start + 1}, (elem, index) => start + index);
+   return Array.from({length: end - start + 1}, (item, index) => start + index);
 }
 
 /**
@@ -523,12 +515,12 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   return arr.filter((elem, index) => arr.indexOf(elem) === index);
+   return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
 /**
- * Groups elements of the specified array by key.
- * Returns multimap of keys extracted from array elements via keySelector callback
+ * Groups itements of the specified array by key.
+ * Returns multimap of keys extracted from array itements via keySelector callback
  * and values extracted via valueSelector callback.
  * See: https://en.wikipedia.org/wiki/Multimap
  *
@@ -562,10 +554,10 @@ function group(array, keySelector, valueSelector) {
 
 
 /**
- * Projects each element of the specified array to a sequence and flattens the resulting sequences into one array.
+ * Projects each itement of the specified array to a sequence and flattens the resulting sequences into one array.
  *
  * @param {array} arr
- * @param {Function} childrenSelector, a transform function to apply to each element that returns an array of children
+ * @param {Function} childrenSelector, a transform function to apply to each itement that returns an array of children
  * @return {array}
  * 
  * @example
@@ -578,18 +570,18 @@ function selectMany(arr, childrenSelector) {
 
 
 /**
- * Returns an element from the multidimentional array by the specified indexes.
+ * Returns an itement from the multidimentional array by the specified indexes.
  *
  * @param {array} arr
  * @param {array} indexes
- * @return {any} element from array
+ * @return {any} itement from array
  * 
  * @example
  *   [[1, 2], [3, 4], [5, 6]], [0,0]  => 1        (arr[0][0]) 
  *   ['one','two','three'], [2]       => 'three'  (arr[2]) 
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(arr, indexes) {
+function getitementByIndexes(arr, indexes) {
    return indexes.map(item => arr = arr[item])[indexes.length - 1]
 }
 
@@ -597,7 +589,7 @@ function getElementByIndexes(arr, indexes) {
 /**
  * Swaps the head and tail of the specified array:
  * the head (first half) of array move to the end, the tail (last half) move to the start. 
- * The middle element (if exists) leave on the same position.
+ * The middle itement (if exists) leave on the same position.
  * 
  *  
  * @param {array} arr
@@ -621,7 +613,7 @@ function swapHeadAndTail(arr) {
 
 
 module.exports = {
-    findElement: findElement,
+    finditement: finditement,
     generateOdds: generateOdds,
     doubleArray: doubleArray,
     getArrayOfPositives: getArrayOfPositives,
@@ -650,6 +642,6 @@ module.exports = {
     distinct: distinct,
     group: group,
     selectMany: selectMany,
-    getElementByIndexes: getElementByIndexes,
+    getitementByIndexes: getitementByIndexes,
     swapHeadAndTail: swapHeadAndTail
 };
