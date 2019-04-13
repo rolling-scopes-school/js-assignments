@@ -338,7 +338,7 @@ function isBracketsBalanced(str) {
 	for (var i = 0; i < str.length; i++) {
 		if (Object.keys(unBalancedBrackets).includes(str[i])) unBalancedBrackets[str[i]]++
 		if (Object.keys(closeBrackets).includes(str[i])) 
-			if (!unBalancedBrackets[closeBrackets[str[i]]]--) return unBalancedBrackets
+			if (!unBalancedBrackets[closeBrackets[str[i]]]--) return false
     }
     if (Object.values(unBalancedBrackets).reduce((buffer, item) => buffer + item)) return false
 	return true
@@ -461,8 +461,8 @@ function trimLastPathComponent(path) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    var product = new Array(m1.length).fill(0).map(row => new Array(m2[0].length).fill(0));
-    return product.map((row, i) => row.map((elem, j) => m1[i].reduce((acc, val, k) => acc + val * m2[k][j], 0)));
+    var product = new Array(m1.length).fill(0).map(row => new Array(m2[0].length).fill(0))
+    return product.map((row, i) => row.map((elem, j) => m1[i].reduce((acc, val, k) => acc + val * m2[k][j], 0)))
 }
 
 
