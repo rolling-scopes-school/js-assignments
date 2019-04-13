@@ -271,7 +271,24 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    var strnum = ccn.toString();
+    var sum = 0;
+    var isEvenTurn = false;
+
+    for (var i = strnum.length - 1; i >= 0; i--) {
+        var digit = parseInt(strnum[i]);
+
+        if (isEvenTurn) {
+            if ((digit *= 2) > 9) {
+                digit -= 9;
+            }
+        }
+
+        sum += digit;
+        isEvenTurn = !isEvenTurn;
+    }
+
+    return !(sum % 10);
 }
 
 
