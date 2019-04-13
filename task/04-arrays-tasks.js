@@ -419,7 +419,7 @@ function findAllOccurences(arr, item) {
 function toStringList(arr) {
    return arr.toString();
    //return arr.join(",")
-}return arr.filter(item => (Number(parseFloat(item)) === item) && item > 0).length;
+}
 
 
 /**
