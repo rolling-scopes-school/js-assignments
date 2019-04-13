@@ -461,7 +461,8 @@ function trimLastPathComponent(path) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    var product = new Array(m1.length).fill(0).map(row => new Array(m2[0].length).fill(0));
+    return product.map((row, i) => row.map((elem, j) => m1[i].reduce((acc, val, k) => acc + val * m2[k][j], 0)));
 }
 
 
