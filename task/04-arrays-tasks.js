@@ -242,7 +242,7 @@ function toArrayOfSquares(arr) {
  */
 function getMovingSum(arr) {
    var sum = 0
-   return arr.map(elem => sum += elem)
+   return arr.map(item => sum += item)
 }
 
 /**
@@ -257,8 +257,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-   for (var i = 0; i < arr.length; arr.splice(i++, 1));
-   return arr
+   return arr.filter((item, index) => index % 2);
 }
 
 
