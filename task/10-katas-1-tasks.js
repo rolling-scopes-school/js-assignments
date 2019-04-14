@@ -102,7 +102,7 @@ function getZigZagMatrix(n) {
  * NOTE that as in usual dominoes playing any pair [i, j] can also be treated as [j, i].
  *
  * @params {array} dominoes
- * @return {bool}
+ * @return {boolean}
  *
  * @example
  *
@@ -127,7 +127,7 @@ function canDominoesMakeRow(dominoes) {
  *     The range syntax is to be used only for, and for every range that expands to more than two values.
  *
  * @params {array} nums
- * @return {bool}
+ * @return {string}
  *
  * @example
  *

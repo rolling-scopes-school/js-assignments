@@ -1,13 +1,13 @@
 'use strict';
 
 /**
- * Returns true if word occurrs in the specified word snaking puzzle.
+ * Returns true if word occurs in the specified word snaking puzzle.
  * Each words can be constructed using "snake" path inside a grid with top, left, right and bottom directions.
  * Each char can be used only once ("snake" should not cross itself).
  *
  * @param {array} puzzle
  * @param {array} searchStr
- * @return {bool}
+ * @return {boolean}
  *
  * @example
  *   var puzzle = [ 
@@ -38,7 +38,7 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
  * The order of permutations does not matter.
  * 
  * @param {string} chars
- * @return {Iterable.<string>} all posible strings constructed with the chars from the specfied string
+ * @return {Iterable.<string>} all possible strings constructed with the chars from the specified string
  *
  * @example
  *    'ab'  => 'ab','ba'

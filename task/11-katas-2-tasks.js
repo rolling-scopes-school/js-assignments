@@ -109,7 +109,7 @@ function getPokerHandRank(hand) {
  * The figure is ASCII multiline string comprised of minus signs -, plus signs +, vertical bars | and whitespaces.
  * The task is to break the figure in the rectangles it is made of.
  *
- * NOTE: The order of rectanles does not matter.
+ * NOTE: The order of rectangles does not matter.
  * 
  * @param {string} figure
  * @return {Iterable.<string>} decomposition to basic parts
