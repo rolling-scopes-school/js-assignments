@@ -158,7 +158,7 @@ function canDominoesMakeRow(dominoes) {
 function extractRanges(nums) {
     let out = '';
     
-    for (var i = 0; i <nums.length; i++) {
+    for (let i = 0; i <nums.length; i++) {
         let j = i;
         
         while ((nums[j] === nums[j + 1] - 1)) 

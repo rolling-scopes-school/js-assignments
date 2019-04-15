@@ -452,7 +452,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   return Array.from({length: n}, function (thisArg, index) {
+   return Array.from({length: n},  (thisArg, index) => {
       let row = new Array(n).fill(0, 0, n);
       row[index] = 1;
       return row;
@@ -524,7 +524,7 @@ function distinct(arr) {
 function group(array, keySelector, valueSelector) {
    //Объект Map содержит пары ключ-значение и сохраняет порядок вставки.
    const cityMap = new Map();
-   array.map(function (currentValue) {
+   array.map( (currentValue) => {
        const key = keySelector(currentValue);
        const value = valueSelector(currentValue);
        const entry = cityMap.get(key);
