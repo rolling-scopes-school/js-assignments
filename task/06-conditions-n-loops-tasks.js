@@ -221,9 +221,9 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    return (isStartIncluded ? '[' : '(') +
-        (a < b ? [a, b].join(', ') : [b, a].join(', ')) +
-        (isEndIncluded ? ']' : ')');    
+    return (isStartIncluded 
+        ? '[' : '(') + (a < b ? [a, b].join(', ') 
+        : [b, a].join(', ')) + (isEndIncluded ? ']' : ')');    
 }
 
 
@@ -243,7 +243,7 @@ function reverseString(str) {
     let tempStr = "";
     for(let i = str.length - 1; i >= 0; i--)
         tempStr += str[i];
-    return tempStr;    
+    return tempStr;
 }
 
 

@@ -33,7 +33,7 @@
  *
  */
 function* get99BottlesOfBeer() {
-    for (var i = 99; i > 2; i--)
+    for (let i = 99; i > 2; i--)
     {
         yield `${i} bottles of beer on the wall, ${i} bottles of beer.`;
         yield `Take one down and pass it around, ${i - 1} bottles of beer on the wall.`;
