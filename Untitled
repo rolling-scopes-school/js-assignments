@@ -1,0 +1,20 @@
+
+
+def Child_process():
+    print("We are in Child_Process")
+    print("My PID: %d"%os.getpid())
+    print("Child_Process is exiting")
+
+def Parent_process():
+    print("-------Parent_process---------")
+    wpid = os.fork()
+    if wpid==0:
+        print("wpid is 0 means We are in Child_process")
+        print("Child :%d"%wpid)
+        Child_process()
+    else:
+        print("Execute Parent_process")
+        print("Parent_process %d"%wpid)
+        Parent_process()
+
+Parent_process()
