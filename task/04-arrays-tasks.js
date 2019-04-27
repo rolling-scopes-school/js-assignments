@@ -22,7 +22,7 @@
  *    ['Array', 'Number', 'string'], 'Date'    => -1 
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
-function finditement(arr, value) {
+function findElement(arr, value) {
    return arr.indexOf(value)
 }
 
@@ -401,7 +401,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   let reducer = (acc, item) => acc + (item === item ? 1 : 0)
+   let reducer = (acc, elem) => acc + (elem === item ? 1 : 0)
    return arr.reduce(reducer, 0)
 }
 
@@ -613,7 +613,7 @@ function swapHeadAndTail(arr) {
 
 
 module.exports = {
-    finditement: finditement,
+    findElement: findElement,
     generateOdds: generateOdds,
     doubleArray: doubleArray,
     getArrayOfPositives: getArrayOfPositives,
