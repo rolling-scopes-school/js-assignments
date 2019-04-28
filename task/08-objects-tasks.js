@@ -23,7 +23,10 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+	this.width = width;
+    this.height = height;
+    Rectangle.prototype.getArea = () => this.width * this.height;
+    //throw new Error('Not implemented');
 }
 
 
@@ -38,7 +41,8 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+     return JSON.stringify(obj); 
+   //throw new Error('Not implemented');
 }
 
 
@@ -54,7 +58,8 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+	return Object.setPrototypeOf(JSON.parse(json), proto);
+    //throw new Error('Not implemented');
 }
 
 
@@ -106,34 +111,148 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
+
+function CssSelector() {
+    this.elements = Array();
+    this.ids = Array();
+    this.classes = Array();
+    this.attrs = Array();
+    this.pseudoClasses = Array();
+    this.pseudoElements = Array();
+    this.PartEnum = {
+        NONE: 0,
+        ELEMENT: 1,
+        ID: 2,
+        CLASS: 3,
+        ATTR: 4,
+        PSEUDOCLASS: 5,
+        PSEUDOELEMENT: 6
+    };
+    this.lastPart = this.PartEnum.NONE;
+}
+
+CssSelector.prototype = {
+
+    checkOrder: function (curPart) {
+        if (curPart < this.lastPart) {
+            throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
+        }
+        return curPart;
+    },
+
+    element: function (value) {
+        if (this.elements.length != 0) {
+            throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+        }
+        this.lastPart = this.checkOrder(this.PartEnum.ELEMENT);
+        this.elements.push(value);
+        return this;
+    },
+
+    id: function (value) {
+        if (this.ids.length != 0) {
+            throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+        }
+        this.lastPart = this.checkOrder(this.PartEnum.ID);
+        this.ids.push('#'.concat(value));
+        return this;
+    },
+
+    class: function (value) {
+        this.lastPart = this.checkOrder(this.PartEnum.CLASS);
+        this.classes.push('.'.concat(value));
+        return this;
+    },
+
+    attr: function (value) {
+        this.lastPart = this.checkOrder(this.PartEnum.ATTR);
+        this.attrs.push('['.concat(value, ']'));
+        return this;
+    },
+
+    pseudoClass: function (value) {
+        this.lastPart = this.checkOrder(this.PartEnum.PSEUDOCLASS);
+        this.pseudoClasses.push(':'.concat(value));
+        return this;
+    },
+
+    pseudoElement: function (value) {
+        if (this.pseudoElements.length != 0) {
+            throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+        }
+        this.lastPart = this.checkOrder(this.PartEnum.PSEUDOELEMENT);
+        this.pseudoElements.push('::'.concat(value));
+        return this;
+    },
+
+    stringify: function () {
+        return this.elements.join('')
+            + this.ids.join('')
+            + this.classes.join('')
+            + this.attrs.join('')
+            + this.pseudoClasses.join('')
+            + this.pseudoElements.join('');
+    }
+};
+
+function CssSelectorCombination() {
+    this.selectors = Array();
+    this.combinators = Array();
+}
+
+CssSelectorCombination.prototype = {
+
+    combine: function (selector1, combinator, selector2) {
+        this.selectors = new Array(0).concat(('selectors' in selector1) ? selector1.selectors : selector1, ('selectors' in selector2) ? selector2.selectors : selector2);
+        this.combinators = new Array(0).concat(('combinators' in selector1) ? selector1.combinators : [], combinator, ('combinators' in selector2) ? selector2.combinators : []);
+        return this;
+    },
+
+    stringify: function () {
+        let result = new String().concat(this.selectors[0].stringify());
+        for (let i = 1; i < this.selectors.length; i++) {
+            result = result.concat(' ', this.combinators[i - 1], ' ', this.selectors[i].stringify());
+        }
+        return result;
+    }
+
+}
+
 const cssSelectorBuilder = {
 
     element: function(value) {
-        throw new Error('Not implemented');
+        return new CssSelector().element(value);
+        //throw new Error('Not implemented');
     },
 
     id: function(value) {
-        throw new Error('Not implemented');
+        return new CssSelector().id(value);
+        //throw new Error('Not implemented');
     },
 
     class: function(value) {
-        throw new Error('Not implemented');
+        return new CssSelector().class(value);
+        //throw new Error('Not implemented');
     },
 
     attr: function(value) {
-        throw new Error('Not implemented');
+        return new CssSelector().attr(value);
+        //throw new Error('Not implemented');
     },
 
     pseudoClass: function(value) {
-        throw new Error('Not implemented');
+        return new CssSelector().pseudoClass(value);
+        //throw new Error('Not implemented');
     },
 
     pseudoElement: function(value) {
-        throw new Error('Not implemented');
+        return new CssSelector().pseudoElement(value);
+        //throw new Error('Not implemented');
     },
 
     combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
+        return new CssSelectorCombination().combine(selector1, combinator, selector2);
+        //throw new Error('Not implemented');
     },
 };
 
