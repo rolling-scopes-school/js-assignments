@@ -9,10 +9,12 @@
   "author": "aorgish",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^6.1.0",
     "mocha": "^2.3.4"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/rolling-scopes-school/js-assignments.git"
-  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rolling-scopes-school/js-assignments.git"
+  },
+  "dependencies": {}
 }
