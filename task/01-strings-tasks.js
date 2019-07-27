@@ -22,7 +22,7 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    throw new Error('Not implemented');
+    return value1.concat(value2).trim();
 }
 
 
@@ -38,7 +38,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    throw new Error('Not implemented');
+    return value.length;
 }
 
 /**
@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+    return 'Hello, ' + firstName + ' ' + lastName + '!';
 }
 
 /**
@@ -69,7 +69,8 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    var str = (value.split(","))[1];
+    return str.slice(0, str.length - 1).trim();
 }
 
 
@@ -84,7 +85,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    return value.charAt(0); //return value[0];
 }
 
 /**
@@ -99,7 +100,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    return value.trim();
 }
 
 /**
@@ -114,7 +115,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    return value.repeat(count);
 }
 
 /**
@@ -130,7 +131,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    return str.replace(value, "");
 }
 
 /**
@@ -145,7 +146,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.slice(1, str.length - 1);
 }
 
 
@@ -160,7 +161,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -174,7 +175,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -201,7 +202,9 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    return '┌' + '─'.repeat(width - 2) + '┐' + '\n' +
+        ('│' + ' '.repeat(width - 2) + '│' + '\n').repeat(height - 2) +
+        '└' + '─'.repeat(width - 2) + '┘' + '\n';
 }
 
 
@@ -221,7 +224,25 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    var ans = "";
+    for (let each of str) {
+        let charCode = each.charCodeAt();
+        let buffer = 0, flag = false;
+        if (charCode >= 65 && charCode <= 90) {
+            buffer = 65;
+            flag = true;
+        } else if (charCode >= 97 && charCode <= 122) {
+            buffer = 97;
+            flag = true;
+        } else {
+            buffer = 0;
+            flag = false
+        }
+        ans += (flag)
+            ? String.fromCharCode((((charCode - buffer) + 13) % 26) + buffer)
+            : each;
+    }
+    return ans;
 }
 
 /**
@@ -238,7 +259,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    return (typeof value) == "string" || value instanceof String;
 }
 
 
@@ -267,7 +288,15 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    var symbols = ['♣', '♦', '♥', '♠'],
+        numbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+        deckOfCards = [];
+    symbols.forEach(function (symbol) {
+        numbers.forEach(function (number) {
+            deckOfCards.push(number.concat(symbol));
+        });
+    });
+    return deckOfCards.indexOf(value);
 }
 
 

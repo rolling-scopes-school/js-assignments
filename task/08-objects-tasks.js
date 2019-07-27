@@ -23,9 +23,12 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
 }
-
+Rectangle.prototype.getArea = function () {
+    return this.width * this.height;
+}
 
 /**
  * Returns the JSON representation of specified object
@@ -38,7 +41,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    return JSON.stringify(obj);
 }
 
 
@@ -54,7 +57,7 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    return Object.setPrototypeOf(JSON.parse(json), proto);
 }
 
 
@@ -105,38 +108,70 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
+const DEFAULT = 'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element';
+const MORE_THAN_ONCE = 'Element, id and pseudo-element should not occur more then one time inside the selector';
 
+class BaseSelector {
+    constructor(value) { this.value = value; }
+    element() { throw new Error(DEFAULT); }
+    id() { throw new Error(DEFAULT); }
+    class() { throw new Error(DEFAULT); }
+    attr() { throw new Error(DEFAULT); }
+    pseudoClass() { throw new Error(DEFAULT); }
+    pseudoElement() { throw new Error(DEFAULT); }
+    combine() { throw new Error(DEFAULT); }
+    stringify() { return this.value; }
+}
+class PseudoElementSelector extends BaseSelector {
+    pseudoElement() {
+        throw new Error(MORE_THAN_ONCE);
+    }
+}
+class PseudoClassSelector extends BaseSelector {
+    pseudoClass(value) {
+        return new PseudoClassSelector(this.value + ':' + value);
+    }
+    pseudoElement(value) {
+        return new PseudoElementSelector(this.value + '::' + value);
+    }
+}
+class AttrSelector extends PseudoClassSelector {
+    attr(value) {
+        return new AttrSelector(this.value + '[' + value + ']');
+    }
+}
+class ClassSelector extends AttrSelector {
+    class(value) {
+        return new ClassSelector(this.value + '.' + value);
+    }
+}
+class IdSelector extends ClassSelector {
+    id() {
+        throw new Error(MORE_THAN_ONCE);
+    }
+}
+class ElementSelector extends ClassSelector {
+    element() {
+        throw new Error(MORE_THAN_ONCE);
+    }
+    id(value) {
+        return new IdSelector(this.value + '#' + value);
+    }
+}
+class CombinationSelector extends BaseSelector {
+    constructor(selector1, combinator, selector2) {
+        super(selector1.stringify() + ' ' + combinator + ' ' + selector2.stringify());
+    }
+}
 const cssSelectorBuilder = {
-
-    element: function(value) {
-        throw new Error('Not implemented');
-    },
-
-    id: function(value) {
-        throw new Error('Not implemented');
-    },
-
-    class: function(value) {
-        throw new Error('Not implemented');
-    },
-
-    attr: function(value) {
-        throw new Error('Not implemented');
-    },
-
-    pseudoClass: function(value) {
-        throw new Error('Not implemented');
-    },
-
-    pseudoElement: function(value) {
-        throw new Error('Not implemented');
-    },
-
-    combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
-    },
+    element: value => new ElementSelector(value),
+    id: value => new IdSelector('#' + value),
+    class: value => new ClassSelector('.' + value),
+    attr: value => new AttrSelector('[' + value + ']'),
+    pseudoClass: value => new PseudoClassSelector(':' + value),
+    pseudoElement: value => new PseudoElementSelector('::' + value),
+    combine: (selector1, combinator, selector2) => new CombinationSelector(selector1, combinator, selector2),
 };
-
 
 module.exports = {
     Rectangle: Rectangle,
