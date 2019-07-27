@@ -53,7 +53,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-    return /(?=.*p[a-z ]t)/;
+    return /\w*p.t\w*/;//return /(?=.*p[a-z ]t)/;
 }
 
 

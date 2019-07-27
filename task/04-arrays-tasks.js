@@ -344,12 +344,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-    return arr.reduce(function (count, value) {
-        if (!isNaN(value) && value > 0) {
-            count++;
-        }
-        return count;
-    }, 0);
+    return arr.reduce((result, number) => typeof number === 'number' && number > 0 ? ++result : result, 0);
 }
  
 /** 
@@ -551,12 +546,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-    return arr.reduce((acc, current) => {
-        if (acc.includes(current) === false) {
-            acc.push(current);
-        }
-        return acc;
-    }, []);
+    return arr.filter((a, b) => arr.indexOf(a) == b);
 }
 
 /**

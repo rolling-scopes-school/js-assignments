@@ -132,13 +132,13 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    let queue = [root];
-
-    while (queue.length != 0) {
-        let node = queue.shift();
+    let stack = [];
+    stack.push(root);
+    while (stack.length) {
+        let node = stack.pop();
         yield node;
         if (node.children) {
-            Array.prototype.push.apply(queue, node.children);
+            stack = node.children.reverse().concat(stack);
         }
     }
 }
