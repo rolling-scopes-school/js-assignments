@@ -111,7 +111,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    return Math.atan2((y2 - y1),(x2 - x1));
+    var y = y2 - y1,
+        x = x2 - x1;
+    return Math.atan2(y, x);
 }
 
 /**
@@ -159,7 +161,7 @@ function parseNumberFromString(value) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelipidedDiagonal(a,b,c) {
+function getParallelipidedDiagonal(a, b, c) {
     return Math.pow(a * a + b * b + c * c, 0.5);
 }
 
