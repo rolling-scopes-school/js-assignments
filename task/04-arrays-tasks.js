@@ -9,21 +9,8 @@
  *                                                                                           *
  *********************************************************************************************/
 
- 
-/**
- * Returns an index of the specified element in array or -1 if element is not found
- * 
- * @param {array} arr
- * @param {any} value
- * @return {number}
- * 
- * @example
- *    ['Ace', 10, true], 10    => 1 
- *    ['Array', 'Number', 'string'], 'Date'    => -1 
- *    [0, 1, 2, 3, 4, 5], 5    => 5
- */
 function findElement(arr, value) {
-   throw new Error('Not implemented');
+   return arr.indexOf(value);
 }
 
 /**
@@ -38,8 +25,9 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   throw new Error('Not implemented');
+  throw new Error('Not implemented');
 }
+
 
 
 /**
@@ -58,20 +46,11 @@ function doubleArray(arr) {
 }
 
 
-/**
- * Returns an array of positive numbers from the specified array in original order
- * 
- * @param {array} arr
- * @return {array}
- * 
- * @example
- *    [ 0, 1, 2, 3, 4, 5 ] => [ 1, 2, 3, 4, 5 ]
- *    [-1, 2, -5, -4, 0] => [ 2 ]
- *    [] => [] 
- */
 function getArrayOfPositives(arr) {
-   throw new Error('Not implemented');
+   let newArr = arr.filter(x => x > 0);
+   return newArr;
 }
+
 
 /**
  * Returns the array with strings only in the specified array (in original order)
@@ -105,62 +84,23 @@ function removeFalsyValues(arr) {
    throw new Error('Not implemented');
 }
 
-/**
- * Returns the array of useprcase strings from the specified array
- * 
- * @param {array} arr
- * @return {array}
- * 
- * @example
- *    [ 'permanent-internship', 'glutinous-shriek', 'multiplicative-elevation' ] => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ]
- *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
- */
+
 function getUpperCaseStrings(arr) {
-   throw new Error('Not implemented');
+   let newArr = arr.map(x => x.toUpperCase());
+   return newArr;
 }
 
-
-/**
- * Returns the array of string lengths from the specified string array.
- * 
- * @param {array} arr
- * @return {array}
- * 
- * @example
- *    [ '', 'a', 'bc', 'def', 'ghij' ]  => [ 0, 1, 2, 3, 4 ]
- *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
- */
 function getStringsLength(arr) {
-   throw new Error('Not implemented');
+   let newArr = arr.map(x => x.length);
+   return newArr;
 }
 
-/**
- * Inserts the item into specified array at specified index
- * 
- * @param {array} arr
- * @param {any} item
- * @param {number} index 
- * 
- * @example
- *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
- *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
- */
 function insertItem(arr, item, index) {
-   throw new Error('Not implemented');
+   return arr.splice(index, 0, item);
 }
 
-/**
- * Returns the n first items of the specified array
- * 
- * @param {array} arr
- * @param {number} n 
- * 
- * @example
- *    [ 1, 3, 4, 5 ], 2  => [ 1, 2 ]
- *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
- */
 function getHead(arr, n) {
-   throw new Error('Not implemented');
+   return arr.slice(0, n);
 }
 
 
@@ -175,7 +115,7 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-   throw new Error('Not implemented');
+   return arr.slice(arr.length - n, arr.length);
 }
 
 
@@ -203,19 +143,9 @@ function toCsvText(arr) {
    throw new Error('Not implemented');
 }
 
-/**
- * Transforms the numeric array into the according array of squares:
- *   f(x) = x * x
- * 
- * @param {array} arr
- * @return {array}
- * 
- * @example
- *   [ 0, 1, 2, 3, 4, 5 ] => [ 0, 1, 4, 9, 16, 25 ]
- *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
- */
 function toArrayOfSquares(arr) {
-   throw new Error('Not implemented');
+   let newArr = arr.map(x => Math.pow(x, 2));
+   return newArr;
 }
 
 
@@ -237,19 +167,9 @@ function getMovingSum(arr) {
    throw new Error('Not implemented');
 }
 
-/**
- * Returns every second item from the specified array:
- * 
- * @param {array} arr
- * @return {array}
- * 
- * Example :
- * [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 2, 4, 6, 8, 10 ]
- * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
- * [ "a" ] => []
- */
 function getSecondItems(arr) {
-   throw new Error('Not implemented');
+  let newArr = arr.filter(x => arr.indexOf(x) % 2 === 1);
+  return newArr;
 }
 
 
@@ -324,21 +244,10 @@ function sortDigitNamesByNumericOrder(arr) {
    throw new Error('Not implemented');
 }
 
-/** 
- * Returns the sum of all items in the specified array of numbers
- * 
- * @param {array} arr
- * @return {number}
- * 
- * @example
- *   [] => 0
- *   [ 1, 2, 3 ]           => 6
- *   [ -1, 1, -1, 1 ]      => 0
- *   [ 1, 10, 100, 1000 ]  => 1111
- */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
-}
+   let newArr = arr.reduce((total, currentValue) => total + currentValue, 0);
+   return newArr;
+ }
  
 /** 
  * Returns the number of all falsy value in the specified array
@@ -536,7 +445,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+     throw new Error('Not implemented');
 }
 
 

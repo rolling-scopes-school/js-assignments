@@ -23,8 +23,9 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+throw new Error('Not implemented');
 }
+
 
 
 /**

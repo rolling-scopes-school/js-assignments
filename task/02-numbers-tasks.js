@@ -9,87 +9,29 @@
  *                                                                                          *
  ********************************************************************************************/
 
-
-/**
- * Returns an area of a rectangle given by width and heigth.
- *
- * @param {numder} width
- * @param {number} height
- * @return {number}
- *
- * @example:
- *   5, 10 => 50
- *   5, 5  => 25
- */
 function getRectangleArea(width, height) {
-    throw new Error('Not implemented');
+   return width * height;
 }
 
-
-/**
- * Returns a circumference of circle given by radius.
- *
- * @param {number} radius
- * @return {number}
- *
- * @example:
- *   5    => 31.41592653589793
- *   3.14 => 19.729201864543903
- *   0    => 0
- */
 function getCicleCircumference(radius) {
-    throw new Error('Not implemented');
+    let c = 2 * radius * Math.PI;
+    return c;
 }
 
-/**
- * Returns an average of two given numbers.
- *
- * @param {numder} value1
- * @param {number} value2
- * @return {number}
- *
- * @example:
- *   5, 5  => 5
- *  10, 0  => 5
- *  -3, 3  => 0
- */
 function getAverage(value1, value2) {
-    throw new Error('Not implemented');
+   return ((value1 / 2) + (value2 / 2)); 
 }
 
-/**
- * Returns a distance beetween two points by cartesian coordinates.
- *
- * @param {number} x1
- * @param {number} y1
- * @param {number} x2
- * @param {number} y2
- *
- * @return {number}
- *
- * @example:
- *   (0,0) (0,1)    => 1
- *   (0,0) (1,0)    => 1
- *   (-5,0) (10,-10) => 18.027756377319946
- */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    let horizontalDistSqrd = Math.pow(x1 - x2, 2);
+    let verticalDistSqrd   = Math.pow(y1 - y2, 2);
+    let distance           = Math.sqrt(horizontalDistSqrd + verticalDistSqrd);
+
+    return distance;
 }
 
-/**
- * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
- *
- * @param {number} a
- * @param {number} b
- * @return {number}
- *
- * @example:
- *   5*x - 10 = 0    => 2
- *   x + 8 = 0       => -8
- *   5*x = 0         => 0
- */
 function getLinearEquationRoot(a, b) {
-    throw new Error('Not implemented');
+    return -(b / a);
 }
 
 
@@ -114,36 +56,12 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
     throw new Error('Not implemented');
 }
 
-/**
- * Returns a last digit of a integer number.
- *
- * @param {number} value
- * @return {number}
- *
- * @example:
- *   100     => 0
- *    37     => 7
- *     5     => 5
- *     0     => 0
- */
 function getLastDigit(value) {
-    throw new Error('Not implemented');
+    return value % 10;
 }
 
-
-/**
- * Returns a number by given string representation.
- *
- * @param {string} value
- * @return {number}
- *
- * @example:
- *    '100'     => 100
- *     '37'     => 37
- * '-525.5'     => -525.5
- */
 function parseNumberFromString(value) {
-    throw new Error('Not implemented');
+    return  Number(value);
 }
 
 /**
@@ -184,44 +102,23 @@ function roundToPowerOfTen(num, pow) {
     throw new Error('Not implemented');
 }
 
-/**
- * Returns true is the number is prime; otherwise false.
- * See: https://en.wikipedia.org/wiki/Primality_test
- *
- * @param {number} n
- * @return {bool}
- * 
- * @example:
- *   4 => false
- *   5 => true
- *   6 => false
- *   7 => true
- *   11 => true
- *   12 => false
- *   16 => false
- *   17 => true
- */
 function isPrime(n) {
-    throw new Error('Not implemented');
+    let i = 2;
+    let lowerLimit = Math.sqrt(n); 
+    /*the iterator runs till the sqrt of n*/
+
+    for(; i <= lowerLimit; i++) {
+        if(n % i === 0) 
+            return false; 
+    }
+    return n > 1; 
 }
 
-/**
- * Tries to convert value to number and returns it if conversion was successfull;
- * otherwise returns default value passed as a second argument.
- *
- * @param {any} value
- * @param {any} def
- * @return {number}
- *
- * @example
- *   toNumber(null, 0) => 0
- *   toNumber('test', 0) => 0
- *   toNumber('1', 0) => 1
- *   toNumber(42, 0) => 42
- *   toNumber(new Number(42), 0) => 42
- */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    if (!!Number(value))
+        return Number(value);
+    
+    return def;
 }
 
 module.exports = {
