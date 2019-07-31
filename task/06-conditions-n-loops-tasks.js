@@ -46,7 +46,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    return n * (n == 1 ? 1 : getFactorial(n - 1));
 }
 
 
@@ -81,7 +81,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(a,b,c) {
+function isTriangle(a, b, c) {
     throw new Error('Not implemented');
 }
 
@@ -209,7 +209,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split("").reverse().join("");
 }
 
 
@@ -226,7 +226,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return +(num.toString().split("").reverse().join(""));
 }
 
 
@@ -270,7 +270,11 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    if (num < 9) {
+        return num;
+    }
+
+    return getDigitalRoot((num + "").split("").reduce((acc, v) => +acc + (+v), 0));
 }
 
 
@@ -348,15 +352,27 @@ function timespanToHumanString(startDate, endDate) {
  * @return {string}
  *
  * @example:
- *   1024, 2  => '10000000000'
- *   6561, 3  => '100000000'
+ *   1024, 2  => '10000000000'10000000000
+ *   6561, 3  => '100000000'100000000
  *    365, 2  => '101101101'
  *    365, 3  => '111112'
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    const SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if (n != 10) {
+        let res = [];
+        while (num > 0) {
+            let mod = num % n;
+            res.push(SYMBOLS[mod]);
+            num = parseInt(num / n);
+        }
+
+        return res.reverse().toString().replace(/,/g, '');
+    }
+
+    return num.toString();
 }
 
 
@@ -443,15 +459,15 @@ module.exports = {
     doRectanglesOverlap: doRectanglesOverlap,
     isInsideCircle: isInsideCircle,
     findFirstSingleChar: findFirstSingleChar,
-    getIntervalString : getIntervalString,
+    getIntervalString: getIntervalString,
     reverseString: reverseString,
     reverseInteger: reverseInteger,
     isCreditCardNumber: isCreditCardNumber,
     getDigitalRoot: getDigitalRoot,
     isBracketsBalanced: isBracketsBalanced,
-    timespanToHumanString : timespanToHumanString,
+    timespanToHumanString: timespanToHumanString,
     toNaryString: toNaryString,
     getCommonDirectoryPath: getCommonDirectoryPath,
     getMatrixProduct: getMatrixProduct,
-    evaluateTicTacToePosition : evaluateTicTacToePosition
+    evaluateTicTacToePosition: evaluateTicTacToePosition
 };
