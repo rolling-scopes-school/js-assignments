@@ -9,80 +9,43 @@
  **************************************************************************************************/
 
 
-/**
- * Returns the 'Fizz','Buzz' or an original number using the following rules:
- * 1) return original number
- * 2) but if number multiples of three return 'Fizz'
- * 3) for the multiples of five return 'Buzz'
- * 4) for numbers which are multiples of both three and five return 'FizzBuzz'
- *
- * @param {number} num
- * @return {any}
- *
- * @example
- *   2 =>  2
- *   3 => 'Fizz'
- *   5 => 'Buzz'
- *   4 => 4
- *  15 => 'FizzBuzz'
- *  20 => 'Buzz'
- *  21 => 'Fizz'
- *
- */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 3 === 0 && num % 5 === 0)
+        return "FizzBuzz";
+    else if (num % 3 === 0) 
+        return "Fizz";
+    else if (num % 5 === 0) 
+        return "Buzz";
+    else 
+        return num;
 }
 
-
-/**
- * Returns the factorial of the specified integer n.
- *
- * @param {number} n
- * @return {number}
- *
- * @example:
- *   1  => 1
- *   5  => 120
- *   10 => 3628800
- */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    if (n <= 1)
+        return 1;
+    else 
+        return n * getFactorial(n - 1);
 }
 
-
-/**
- * Returns the sum of integer numbers between n1 and n2 (inclusive).
- *
- * @param {number} n1
- * @param {number} n2
- * @return {number}
- *
- * @example:
- *   1,2   =>  3  ( = 1+2 )
- *   5,10  =>  45 ( = 5+6+7+8+9+10 )
- *   -1,1  =>  0  ( = -1 + 0 + 1 )
- */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sum = 0;
+
+    for (; n1 <= n2; n1++) {
+        sum += n1;
+    }
+
+    return sum;
 }
 
 
-/**
- * Returns true, if a triangle can be built with the specified sides a,b,c and false in any other ways.
- *
- * @param {number} a
- * @param {number} b
- * @param {number} c
- * @return {bool}
- *
- * @example:
- *   1,2,3    =>  false
- *   3,4,5    =>  true
- *   10,1,1   =>  false
- *   10,10,10 =>  true
- */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    if (a + b <= c ||
+        b + c <= a || 
+        a + c <= b) {
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -150,23 +113,21 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
+    
     throw new Error('Not implemented');
+
 }
 
-
-/**
- * Returns the first non repeated char in the specified strings otherwise returns null.
- *
- * @param {string} str
- * @return {string}
- *
- * @example:
- *   'The quick brown fox jumps over the lazy dog' => 'T'
- *   'abracadabra'  => 'c'
- *   'entente' => null
- */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    let chars = str.split('');
+
+    for (let i = 0; i < chars.length; i++) {
+        if (chars.filter(function(j) {
+            return j == str.charAt(i);
+            }).length == 1)
+                 return str.charAt(i);
+    }
+    return null;
 }
 
 
@@ -195,39 +156,19 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
     throw new Error('Not implemented');
 }
 
-
-/**
- * Reverse the specified string (put all chars in reverse order)
- *
- * @param {string} str
- * @return {string}
- *
- * @example:
- * 'The quick brown fox jumps over the lazy dog' => 'god yzal eht revo spmuj xof nworb kciuq ehT'
- * 'abracadabra' => 'arbadacarba'
- * 'rotator' => 'rotator'
- * 'noon' => 'noon'
- */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    let arr = str.split("");
+    return arr.reverse().join("");
 }
 
-
-/**
- * Reverse the specified integer number (put all digits in reverse order)
- *
- * @param {number} num
- * @return {number}
- *
- * @example:
- *   12345 => 54321
- *   1111  => 1111
- *   87354 => 45378
- *   34143 => 34143
- */
-function reverseInteger(num) {
-    throw new Error('Not implemented');
-}
+const reverseInteger = num =>
+    parseFloat(
+           num
+                .toString()
+                .split("")
+                .reverse()
+                .join("")
+        ) * Math.sign(num)
 
 
 /**
@@ -251,28 +192,45 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
+ /* let intValue;           // stores value of every digit
+    let isSecond = false;   // checks whether second digit from right
+    let digitSum = 0;       // collects intValues
+    ccn.toString();         // algorithm requires string format
+
+    for(let i = ccn.length - 1; i >= 0; i--) {
+        intValue = ccn.charAt(i) - '0';
+
+        if (isSecond === true)
+            intValue *= 2;    // doubles every second from right
+
+
+        digitSum += intValue / 10; // intValue is greater than 9
+        digitSum += intValue % 10; // intValue is less than 9
+
+        isSecond = !isSecond;
+    }
+
+    if(digitSum % 10 === 0)
+        return true;
+
+    return false; */
+    /* Dear Mentor please explain the problem with the above solution*/
     throw new Error('Not implemented');
 }
 
-
-/**
- * Returns the digital root of integer:
- *   step1 : find sum of all digits
- *   step2 : if sum > 9 then goto step1 otherwise return the sum
- *
- * @param {number} n
- * @return {number}
- *
- * @example:
- *   12345 ( 1+2+3+4+5 = 15, 1+5 = 6) => 6
- *   23456 ( 2+3+4+5+6 = 20, 2+0 = 2) => 2
- *   10000 ( 1+0+0+0+0 = 1 ) => 1
- *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
- */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
-}
+    let intValue = num.toString();
+    let sum = 0;
 
+    if (intValue.length === 1) 
+            return +intValue;
+
+    for (let i = 0; i < intValue.length; i++) {
+        sum += +intValue.charAt(i);
+    }
+
+    return getDigitalRoot(sum);
+}
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
@@ -295,6 +253,7 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true 
  */
+
 function isBracketsBalanced(str) {
     throw new Error('Not implemented');
 }
@@ -398,7 +357,6 @@ function getCommonDirectoryPath(pathes) {
 function getMatrixProduct(m1, m2) {
     throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
