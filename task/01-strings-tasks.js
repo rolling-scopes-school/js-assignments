@@ -22,7 +22,8 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    throw new Error('Not implemented');
+    
+    return(value1 + value2);
 }
 
 
@@ -38,7 +39,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    throw new Error('Not implemented');
+    return(value.length)
 }
 
 /**
@@ -55,7 +56,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+    return(`Hello, ${firstName} ${lastName}!`)
 }
 
 /**
@@ -69,7 +70,11 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    let values=value.split(' ');
+    let name = values[1];
+    let surname = values[2];
+    surname = surname.substring(0,surname.length-1);
+    return(`${name} ${surname}`);
 }
 
 
@@ -84,7 +89,8 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    let result = value[0];
+    return(result);
 }
 
 /**
@@ -99,7 +105,8 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    var wsr = value.replace(/^\s+|\s+$/g, '');
+    return(wsr);
 }
 
 /**
@@ -114,7 +121,8 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    let result = value.repeat(count);
+    return(result);
 }
 
 /**
@@ -130,7 +138,11 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    var index = str.indexOf(value);
+    if(index === -1){
+        return str;
+    }
+    return str.slice(0,index) + str.slice(index + value.length);
 }
 
 /**
@@ -145,7 +157,8 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    let result = str.substring(1,str.length-1);
+    return(result);
 }
 
 
@@ -160,7 +173,8 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    let res = str.toUpperCase();
+    return(res);
 }
 
 /**
@@ -174,7 +188,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
 }
 
 /**
@@ -201,7 +215,26 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    var cornerCharl = "┌";
+    var cornerCharr = "┐";
+    var horizontalChar = "─";
+    var verticalChar = "│";
+    var innerChar = " ";
+    var breakChar = "\n";
+
+    var str = "";
+
+    for(var h = 1; h <= height; h++) {
+        switch (h) {
+            case 1:
+            case height:
+                str += cornerCharl + horizontalChar.repeat(width-2) + cornerCharr + breakChar;
+                break; 
+            default: 
+                str += verticalChar + innerChar.repeat(width-2) + verticalChar + breakChar;
+        }        
+    }
+    return str;
 }
 
 
@@ -221,8 +254,32 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    var arr=str.split("");
+ 
+  var arr1=[];
+  var arr2=[];
+ 
+  for (i=0;i<arr.length;i++){    
+   
+   var item=arr[i];
+   
+   if (item.match(/[A-Z]/)) {   
+   
+     if ( item.charCodeAt() >=65 && item.charCodeAt() <=77 ) {
+    
+       arr1.push(item.charCodeAt()+13);
+    
+      }
+      else {
+            
+        arr1.push(item.charCodeAt()-13);
+      }
+  }
+    
+  }
 }
+  
+
 
 /**
  * Returns true if the value is string; otherwise false.
@@ -238,7 +295,13 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    if (value === value + '') {
+        //its string
+        return true;
+     } else {
+        //its something else
+        return false;
+     }
 }
 
 
