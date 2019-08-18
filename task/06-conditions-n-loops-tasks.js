@@ -30,7 +30,7 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    return num >0 && num%3===0 && num%5===0 ? 'FizzBuzz' : num >0 && num%3===0 ? 'Fizz' : num >0 && num%5===0 ? 'Buzz' : num;
 }
 
 
@@ -45,8 +45,14 @@ function getFizzBuzz(num) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(n) {
-    throw new Error('Not implemented');
+function getFactorial(num) {
+    if (num < 0) 
+    return -1;
+else if (num == 0) 
+  return 1;
+else {
+  return (num * getFactorial(num - 1));
+}
 }
 
 
