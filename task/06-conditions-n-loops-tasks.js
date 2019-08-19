@@ -69,7 +69,7 @@ else {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    return ((n2-n1)+1) * (n2 + n1) / 2
 }
 
 
@@ -87,9 +87,12 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
-}
+function isTriangle (a, b, c) {
+    if (a + b <= c || a + c <= b || b + c <= a) 
+    return false; 
+    else
+    return true; 
+  }
 
 
 /**
@@ -125,7 +128,13 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    if(rect1.top+rect1.width<rect2.top || rect2.top+rect2.width<rect1.top || rect1.left+rect1.height<rect2.left || rect2.left+rect1.height<rect1.left)
+    {
+        return false;
+    }
+    else 
+    return true;
+  
 }
 
 
