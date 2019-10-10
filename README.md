@@ -17,7 +17,7 @@ To start javascript assignments please follow the next steps:
 
 ### How to fork this repo
 * Click the **Fork** button at the top-right corner of this page and the repository will be copied to your own account.
-* Run `git clone https://github.com/anna2990/js-assignments.git` from command line to download the repo.
+* Run `git clone https://github.com/<your account>/js-assignments.git` from command line to download the repo.
 
 ### How to setup travis-ci
 * Open [https://travis-ci.org/](https://travis-ci.org/) and sign in with your github account.
@@ -29,7 +29,7 @@ To start javascript assignments please follow the next steps:
   git commit -m "Update the links"
   git push origin master
 ```
-* Open https://github.com/rolling-scopes-school/js-assignments and test the build icon. Now it will run all tests and update status once you push changes to github. Keep this icon green!
+* Open https://github.com/anna2990/js-assignments and test the build icon. Now it will run all tests and update status once you push changes to github. Keep this icon green!
 
 
 ### How to setup work environment
