@@ -17,7 +17,7 @@ To start javascript assignments please follow the next steps:
 
 ### How to fork this repo
 * Click the **Fork** button at the top-right corner of this page and the repository will be copied to your own account.
-* Run `git clone https://github.com/<your-account>/js-assignments.git` from command line to download the repo.
+* Run `git clone https://github.com/anna2990/js-assignments.git` from command line to download the repo.
 
 ### How to setup travis-ci
 * Open [https://travis-ci.org/](https://travis-ci.org/) and sign in with your github account.
