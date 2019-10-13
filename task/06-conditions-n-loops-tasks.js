@@ -294,9 +294,9 @@ function isCreditCardNumber(ccn) {
         if (temp > 9) {
             temp -= 9;
         }
-        sum += temp;
+        num += temp;
     }
-    return sum % 10 === 0;
+    return num % 10 === 0;
 }
 
 
