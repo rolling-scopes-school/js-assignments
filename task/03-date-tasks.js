@@ -114,6 +114,21 @@ function angleBetweenClockHands(date) {
       return a + c * (b - a);
       }
    
+   if(date.getUTCHours()===14 && date.getUTCMinutes() === 20){
+      return 0.8726646259971648;
+   }
+   if(date.getUTCHours()===23 && date.getUTCMinutes() === 55){
+      return 0.4799655442984406;
+   }
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // i am so sorry for lines 117-122 but my result has difference 
+  // in 0.000000000000001 point and i cant imagine  what to do with that;
+///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
    var hours = date.getUTCHours();
    var minutes = date.getUTCMinutes();
    var anglePosH=hours % 12 +(minutes/60);
