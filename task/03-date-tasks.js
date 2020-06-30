@@ -114,7 +114,7 @@ function angleBetweenClockHands(date) {
       return a + c * (b - a);
       }
    
-   var hours = date.getHours()-3;
+   var hours = date.getHours();
    var minutes = date.getMinutes();
    var anglePosH=hours % 12 +(minutes/60);
    var anglePosM=lerp(0,12,minutes/60);
