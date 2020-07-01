@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return new Date(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return new Date(value);
 }
 
 
@@ -56,7 +56,7 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   return ((date.getFullYear() % 4 == 0) && (date.getFullYear() % 100 != 0)) || (date.getFullYear() % 400 == 0);
 }
 
 
@@ -76,7 +76,24 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   let duration = endDate.valueOf() - startDate.valueOf(),
+      milliseconds = endDate.getMilliseconds() - startDate.getMilliseconds(),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+      hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      if (milliseconds < 10) {
+         milliseconds = `00${milliseconds}`;
+      } else if (milliseconds >= 10 && milliseconds < 100) {
+         milliseconds = `0${milliseconds}`;
+      }
+      
+      return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+
 }
 
 
@@ -94,7 +111,12 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+      let hours = new Date(date).getUTCHours(), 
+         minutes = new Date(date).getUTCMinutes();
+
+      hours %= 12;
+      const angle = (30 * hours - 5.5 * minutes + 360) % 360;
+      return Math.min(angle, 360 - angle) * Math.PI / 180;
 }
 
 
