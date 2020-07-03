@@ -1,5 +1,7 @@
 'use strict';
 
+const { json } = require("mathjs");
+
 /**************************************************************************************************
  *                                                                                                *
  * Plese read the following tutorial before implementing tasks:                                   *
@@ -23,9 +25,13 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
 }
 
+Rectangle.prototype.getArea = function () {
+    return this.width * this.height;
+};
 
 /**
  * Returns the JSON representation of specified object
@@ -38,7 +44,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    return JSON.stringify(obj);
 }
 
 
@@ -54,7 +60,7 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    return Object.setPrototypeOf(JSON.parse(json), proto);
 }
 
 
@@ -108,33 +114,125 @@ function fromJSON(proto, json) {
 
 const cssSelectorBuilder = {
 
-    element: function(value) {
-        throw new Error('Not implemented');
+    element: function (value) {
+        if (this.elValue) {
+            throw new Error(
+                'Element, id and pseudo-element should not occur more then one time inside the selector',
+            );
+        }
+        if (this.idValue) {
+            throw new Error(
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+            );
+        }
+        const copy = { ...this };
+
+        if (!copy.elValue) copy.elValue = value;
+        else copy.elValue += value;
+
+        return copy;
     },
 
-    id: function(value) {
-        throw new Error('Not implemented');
+    id: function (value) {
+        if (this.idValue) {
+            throw new Error(
+                'Element, id and pseudo-element should not occur more then one time inside the selector',
+            );
+        }
+        if (this.classValue || this.pEValue) {
+            throw new Error(
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+            );
+        }
+        const copy = { ...this };
+
+        if (!copy.idValue) copy.idValue = `#${value}`;
+        else copy.idValue += `#${value}`;
+
+        return copy;
     },
 
-    class: function(value) {
-        throw new Error('Not implemented');
+    class: function (value) {
+        if (this.attrValue) {
+            throw new Error(
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+            );
+        }
+        const copy = { ...this };
+
+        if (!copy.classValue) copy.classValue = `.${value}`;
+        else copy.classValue += `.${value}`;
+
+        return copy;
     },
 
-    attr: function(value) {
-        throw new Error('Not implemented');
+    attr: function (value) {
+        if (this.pCValue) {
+            throw new Error(
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+            );
+        }
+        const copy = { ...this };
+
+        if (!copy.attrValue) copy.attrValue = `[${value}]`;
+        else copy.attrValue += `[${value}]`;
+
+        return copy;
     },
 
-    pseudoClass: function(value) {
-        throw new Error('Not implemented');
+    pseudoClass: function (value) {
+        if (this.pEValue) {
+            throw new Error(
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+            );
+        }
+        const copy = { ...this };
+
+        if (!copy.pCValue) copy.pCValue = `:${value}`;
+        else copy.pCValue += `:${value}`;
+
+        return copy;
     },
 
-    pseudoElement: function(value) {
-        throw new Error('Not implemented');
+    pseudoElement: function (value) {
+        if (this.pEValue) {
+            throw new Error(
+                'Element, id and pseudo-element should not occur more then one time inside the selector',
+            );
+        }
+        const copy = { ...this };
+
+        if (!copy.pEValue) copy.pEValue = `::${value}`;
+        else copy.pEValue += `::${value}`;
+
+        return copy;
     },
 
-    combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
+    combine: function (selector1, combinator, selector2) {
+        const copy = { ...this };
+
+        const value = `${selector1.stringify()} ${combinator} ${selector2.stringify()}`;
+
+        if (!copy.value) copy.value = value;
+        else copy.value += value;
+
+        return copy;
     },
+
+    stringify() {
+        if (this.value) return this.value;
+    
+        let value = '';
+    
+        if (this.elValue) value += this.elValue;
+        if (this.idValue) value += this.idValue;
+        if (this.classValue) value += this.classValue;
+        if (this.attrValue) value += this.attrValue;
+        if (this.pCValue) value += this.pCValue;
+        if (this.pEValue) value += this.pEValue;
+    
+        return value;
+      },
 };
 
 
