@@ -1,7 +1,5 @@
 'use strict';
 
-const { json } = require("mathjs");
-
 /**************************************************************************************************
  *                                                                                                *
  * Plese read the following tutorial before implementing tasks:                                   *
