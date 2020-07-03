@@ -115,12 +115,12 @@ const cssSelectorBuilder = {
     element: function (value) {
         if (this.elValue) {
             throw new Error(
-                'Element, id and pseudo-element should not occur more then one time inside the selector',
+                'Element, id and pseudo-element should not occur more then one time inside the selector'
             );
         }
         if (this.idValue) {
             throw new Error(
-                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element'
             );
         }
         const copy = { ...this };
@@ -134,12 +134,12 @@ const cssSelectorBuilder = {
     id: function (value) {
         if (this.idValue) {
             throw new Error(
-                'Element, id and pseudo-element should not occur more then one time inside the selector',
+                'Element, id and pseudo-element should not occur more then one time inside the selector'
             );
         }
         if (this.classValue || this.pEValue) {
             throw new Error(
-                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element'
             );
         }
         const copy = { ...this };
@@ -153,7 +153,7 @@ const cssSelectorBuilder = {
     class: function (value) {
         if (this.attrValue) {
             throw new Error(
-                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element'
             );
         }
         const copy = { ...this };
@@ -167,7 +167,7 @@ const cssSelectorBuilder = {
     attr: function (value) {
         if (this.pCValue) {
             throw new Error(
-                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element'
             );
         }
         const copy = { ...this };
@@ -181,7 +181,7 @@ const cssSelectorBuilder = {
     pseudoClass: function (value) {
         if (this.pEValue) {
             throw new Error(
-                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+                'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element'
             );
         }
         const copy = { ...this };
@@ -195,7 +195,7 @@ const cssSelectorBuilder = {
     pseudoElement: function (value) {
         if (this.pEValue) {
             throw new Error(
-                'Element, id and pseudo-element should not occur more then one time inside the selector',
+                'Element, id and pseudo-element should not occur more then one time inside the selector'
             );
         }
         const copy = { ...this };
