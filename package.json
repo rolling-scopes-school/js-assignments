@@ -9,7 +9,7 @@
   "author": "aorgish",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^2.3.4"
+    "mocha": "^2.5.3"
   },
   "repository": {
     "type": "git",
