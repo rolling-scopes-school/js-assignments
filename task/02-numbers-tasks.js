@@ -93,7 +93,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-  throw new Error("Not implemented");
+  return -b / a;
 }
 
 /**
@@ -114,8 +114,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  throw new Error("Not implemented");
+  return Math.abs(Math.atan2(y2, x2) - Math.atan2(y1, x1));
 }
+console.log(getAngleBetweenVectors(0, -1, 1, 0));
 
 /**
  * Returns a last digit of a integer number.
@@ -130,7 +131,8 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  throw new Error("Not implemented");
+  let a = value + "";
+  return a.substr(-1);
 }
 
 /**
@@ -145,7 +147,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-  throw new Error("Not implemented");
+  return +value;
 }
 
 /**
@@ -162,7 +164,8 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-  throw new Error("Not implemented");
+  const d = Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2);
+  return Math.sqrt(d);
 }
 
 /**
@@ -183,7 +186,8 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  throw new Error("Not implemented");
+  const i = Math.pow(10, pow);
+  return Math.round(num / i) * i;
 }
 
 /**
@@ -204,8 +208,15 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  throw new Error("Not implemented");
+  for (let i = 2; i < n; i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
+
+//console.log(isPrime(16));
 
 /**
  * Tries to convert value to number and returns it if conversion was successfull;
@@ -223,7 +234,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  throw new Error("Not implemented");
+  return +value ? +value : def;
 }
 
 module.exports = {
