@@ -79,20 +79,18 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   let time_p=endDate-startDate
+   let time_period=endDate-startDate;
    let milliseconds = parseInt((time_p % 1000)),
-    seconds = Math.floor((time_p / 1000) % 60),
-    minutes = Math.floor((time_p / (1000 * 60)) % 60),
-    hours = Math.floor((time_p / (1000 * 60 * 60)) % 24);
-    hours = (startDate.getDay()!== endDate.getDay()) ? hours+24 : hours;
-  hours = (hours < 10) ? "0" + hours : hours;
-  minutes = (minutes < 10) ? "0" + minutes : minutes;
-  seconds = (seconds < 10) ? "0" + seconds : seconds;
-  milliseconds = (milliseconds < 100) ? "0" + milliseconds : milliseconds;
-  milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
-
-  return hours + ":" + minutes + ":" + seconds + "." + milliseconds
-//throw new Error('Not implemented');
+   seconds = Math.floor((time_period / 1000) % 60),
+   minutes = Math.floor((time_period / (1000 * 60)) % 60),
+   hours = Math.floor((time_period / (1000 * 60 * 60)) % 24);
+   hours = (startDate.getDay()!== endDate.getDay()) ? hours+24 : hours;
+   hours = (hours < 10) ? "0" + hours : hours;
+   minutes = (minutes < 10) ? "0" + minutes : minutes;
+   seconds = (seconds < 10) ? "0" + seconds : seconds;
+   milliseconds = (milliseconds < 100) ? "0" + milliseconds : milliseconds;
+   milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
+   return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
 }
 
 
@@ -110,8 +108,8 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-   let total = date.getHours()>12? 0.5*(60*(date.getHours()-12)-11*date.getMinutes()):0.5*(60*(date.getHours())-11*date.getMinutes())
-   return Math.abs(total)>180 ? (360-Math.abs(total))*Math.PI/180:Math.abs(total)*Math.PI/180
+   let time = date.getHours()>12? 0.5*(60*(date.getHours()-12)-11*date.getMinutes()):0.5*(60*(date.getHours())-11*date.getMinutes());
+   return Math.abs(time)>180 ? (360-Math.abs(time))*Math.PI/180:Math.abs(time)*Math.PI/180;
 }
 
 
