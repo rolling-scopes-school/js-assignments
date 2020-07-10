@@ -39,10 +39,10 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   let arr=new Array(len), count = 1;
+   let arr=new Array(len).fill(undefined), count = -1;
    return arr.map(elem=>{
-      elem=count;
-      count+=2
+      count+=2;
+      return count;
    })
 }
 
@@ -488,11 +488,11 @@ function sortCitiesArray(arr) {
  */
 function getIdentityMatrix(n) {
    let matrix= new Array(n).fill(undefined), count_row=0;
-   matrix.map(elem=>{
+   matrix = matrix.map(elem=>{
       let newArr=new Array(n).fill(0);
       newArr[count_row]=1;
-      matrix[count_row]=newArr;
       count_row++;
+      return newArr;
    });
    return matrix;
 }
