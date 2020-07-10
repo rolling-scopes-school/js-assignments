@@ -80,7 +80,7 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
    let time_period=endDate-startDate;
-   let milliseconds = parseInt((time_p % 1000)),
+   let milliseconds = parseInt((time_period % 1000)),
    seconds = Math.floor((time_period / 1000) % 60),
    minutes = Math.floor((time_period / (1000 * 60)) % 60),
    hours = Math.floor((time_period / (1000 * 60 * 60)) % 24);
