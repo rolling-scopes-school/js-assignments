@@ -487,12 +487,11 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   let matrix= new Array(n), count_row=0;
+   let matrix= new Array(n).fill(undefined), count_row=0;
    matrix.map(elem=>{
-      let newArr=new Array(n);
-      newArr.fill(0);
+      let newArr=new Array(n).fill(0);
       newArr[count_row]=1;
-      elem = newArr;
+      matrix[count_row]=newArr;
       count_row++;
    });
    return matrix;
@@ -512,7 +511,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   let newArr=new Array(end - start +1), count=start-1;
+   let newArr=new Array(end - start +1).fill(undefined), count=start-1;
    return newArr.map(elem=>{
       count++;
       return count
