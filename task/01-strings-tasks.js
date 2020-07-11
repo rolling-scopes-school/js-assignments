@@ -203,12 +203,9 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
     let str="┌"+"─".repeat(width-2)+"┐"+'\n';
-    let count_height=height-2;
-    while (count_height>0)
-    {
+    for (let count_height = height-2; count_height>0; count_height--){
         str = str.concat("│"+" ".repeat(width-2))+"│\n";
-        count_height--;
-    };
+    }
     return str.concat("└"+"─".repeat(width-2)+"┘\n");
 }
 
@@ -229,9 +226,8 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    let arr=[], count=0;
-    while (count<str.length)
-    {
+    let arr=[];
+    for (let count=0; count<str.length;count++){
         if ((str.charCodeAt(count) >=78 & str.charCodeAt(count) <=90)| (str.charCodeAt(count) >=110 & str.charCodeAt(count)<=122))
         {
             arr.push(str.charCodeAt(count)-13);
@@ -241,7 +237,6 @@ function encodeToRot13(str) {
             arr.push(str.charCodeAt(count)+13);
         }
         else arr.push(str.charCodeAt(count));
-        count++;
     };
     return String.fromCharCode(...arr);
 }
