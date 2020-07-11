@@ -205,16 +205,16 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-   let check=true, count=2;
-   while (count <=n/2){
-       if (n%count===0) 
+    let check=true, count=2;
+    while (count <=n/2){
+        if (n%count===0) 
         {check = false;
          break;
         }
         count++;
-   }
-   if (check===true) return true;
-   else return false;
+    }
+    if (check===true) return true;
+    else return false;
 }
 
 /**
@@ -235,8 +235,6 @@ function isPrime(n) {
 function toNumber(value, def) {
     if (parseInt(value)) return parseInt(value);
     return def;
-    //throw new Error('Not implemented');
-
 }
 
 module.exports = {

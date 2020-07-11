@@ -43,7 +43,7 @@ function generateOdds(len) {
    return arr.map(elem=>{
       count+=2;
       return count;
-   })
+   });
 }
 
 
@@ -146,7 +146,7 @@ function getUpperCaseStrings(arr) {
 function getStringsLength(arr) {
    return arr.map(elem =>{
       return elem.length;
-      });
+   });
 }
 
 /**
@@ -394,8 +394,8 @@ function getItemsSum(arr) {
  */
 function getFalsyValuesCount(arr) {
    return arr.reduce((sum, cur)=>{
-      if (!cur) return sum+=1
-      else return sum
+      if (!cur) return sum+=1;
+      else return sum;
    },0);
 };
 
@@ -415,8 +415,8 @@ function getFalsyValuesCount(arr) {
  */
 function findAllOccurences(arr, item) {
    return arr.reduce((sum, cur)=>{
-      if (cur===item) return sum+=1
-      else return sum
+      if (cur===item) return sum+=1;
+      else return sum;
    },0);
 };
 
@@ -514,7 +514,7 @@ function getIntervalArray(start, end) {
    let newArr=new Array(end - start +1).fill(undefined), count=start-1;
    return newArr.map(elem=>{
       count++;
-      return count
+      return count;
    });
 }
 
@@ -534,7 +534,7 @@ function distinct(arr) {
    arr.reduce((sum, elem) => {
       if (!newArr.includes(elem)) {
       newArr.push(elem);
-   }},0)
+   }},0);
    return newArr;
 }
 

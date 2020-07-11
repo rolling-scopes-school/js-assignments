@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   return Date.parse(value)
+   return Date.parse(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   return Date.parse(value)
+   return Date.parse(value);
 }
 
 
@@ -56,10 +56,10 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   if (date.getFullYear()%4!=0) return false
-   else if (date.getFullYear()%100!=0) return true
-   else if (date.getFullYear()%400!=0) return false
-   else return true
+   if (date.getFullYear()%4!=0) return false;
+   else if (date.getFullYear()%100!=0) return true;
+   else if (date.getFullYear()%400!=0) return false;
+   else return true;
 }
 
 
@@ -80,10 +80,9 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
    let time_period=endDate-startDate;
-   let milliseconds = parseInt((time_period % 1000)),
-   seconds = Math.floor((time_period / 1000) % 60),
-   minutes = Math.floor((time_period / (1000 * 60)) % 60),
-   hours = Math.floor((time_period / (1000 * 60 * 60)) % 24);
+   let milliseconds = parseInt((time_period % 1000)), seconds = Math.floor((time_period / 1000) % 60),
+       minutes = Math.floor((time_period / (1000 * 60)) % 60),
+       hours = Math.floor((time_period / (1000 * 60 * 60)) % 24);
    hours = (startDate.getDay()!== endDate.getDay()) ? hours+24 : hours;
    hours = (hours < 10) ? "0" + hours : hours;
    minutes = (minutes < 10) ? "0" + minutes : minutes;
