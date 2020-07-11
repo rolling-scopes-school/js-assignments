@@ -240,7 +240,6 @@ function encodeToRot13(str) {
     };
     return String.fromCharCode(...arr);
 }
-
 /**
  * Returns true if the value is string; otherwise false.
  * @param {string} value
