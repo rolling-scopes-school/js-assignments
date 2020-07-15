@@ -293,8 +293,8 @@ function propagateItemsByPositionIndex(arr) {
    let newArr=[];
    arr.map(elem=>{
       let position=arr.indexOf(elem)+1;
-      let help_arr = new Array(position).fill(elem)
-      newArr = newArr.concat(help_arr)
+      let helpArr = new Array(position).fill(elem)
+      newArr = newArr.concat(helpArr)
    });
    return newArr;
 }
@@ -332,14 +332,14 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   let count_positive=0;
+   let countPositive=0;
    arr.map(elem=>{
       if (typeof elem ==="number"){
-         if (elem>0) count_positive++;
+         if (elem>0) countPositive++;
       }
       return elem;
    })
-   return count_positive;
+   return countPositive;
 }
  
 /** 
@@ -356,9 +356,9 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   let Newarr=[{"name": "zero","number":0},{"name": "one","number":1}, {"name": "two","number":2}, {"name": "three","number":3}, {"name": "four","number":4}, {"name": "five","number":5}, {"name": "six","number":6}, {"name": "seven","number":7}, {"name": "eight","number":8}, {"name": "nine","number":9}];
+   let newArr=[{"name": "zero","number":0},{"name": "one","number":1}, {"name": "two","number":2}, {"name": "three","number":3}, {"name": "four","number":4}, {"name": "five","number":5}, {"name": "six","number":6}, {"name": "seven","number":7}, {"name": "eight","number":8}, {"name": "nine","number":9}];
    return arr.sort((a,b)=>{
-      return (Newarr.find(x => x.name === a).number-Newarr.find(x => x.name === b).number);
+      return (newArr.find(x => x.name === a).number-newArr.find(x => x.name === b).number);
    });
 }
 
@@ -487,11 +487,11 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   let matrix= new Array(n).fill(undefined), count_row=0;
+   let matrix= new Array(n).fill(undefined), countRow=0;
    matrix = matrix.map(elem=>{
       let newArr=new Array(n).fill(0);
-      newArr[count_row]=1;
-      count_row++;
+      newArr[countRow]=1;
+      countRow++;
       return newArr;
    });
    return matrix;
@@ -637,19 +637,19 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-   const arr_length = arr.length;
-   if (arr_length===1) return arr;
-   if (arr_length%2!=0){
+   const arrLength = arr.length;
+   if (arrLength===1) return arr;
+   if (arrLength%2!=0){
       let newArr=[];
-      newArr=newArr.concat(arr.slice(Math.round(arr_length/2)));
-      newArr.push(arr[Math.floor(arr_length/2)]);
-      newArr=newArr.concat(arr.slice(0, Math.floor(arr_length/2)));
+      newArr=newArr.concat(arr.slice(Math.round(arrLength/2)));
+      newArr.push(arr[Math.floor(arrLength/2)]);
+      newArr=newArr.concat(arr.slice(0, Math.floor(arrLength/2)));
       return newArr;
    }
    else {
       let newArr=[];
-      newArr= newArr.concat(arr.slice(arr_length/2));
-      newArr=newArr.concat(arr.slice(0, arr_length/2));
+      newArr= newArr.concat(arr.slice(arrLength/2));
+      newArr=newArr.concat(arr.slice(0, arrLength/2));
       return newArr;
     }
 }

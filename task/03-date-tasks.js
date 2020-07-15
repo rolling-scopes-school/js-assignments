@@ -79,10 +79,10 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   let time_period=endDate-startDate;
-   let milliseconds = parseInt((time_period % 1000)), seconds = Math.floor((time_period / 1000) % 60),
-       minutes = Math.floor((time_period / (1000 * 60)) % 60),
-       hours = Math.floor((time_period / (1000 * 60 * 60)) % 24);
+   let timePeriod=endDate-startDate;
+   let milliseconds = parseInt((timePeriod % 1000)), seconds = Math.floor((timePeriod / 1000) % 60),
+       minutes = Math.floor((timePeriod / (1000 * 60)) % 60),
+       hours = Math.floor((timePeriod / (1000 * 60 * 60)) % 24);
    hours = (startDate.getDay()!== endDate.getDay()) ? hours+24 : hours;
    hours = (hours < 10) ? "0" + hours : hours;
    minutes = (minutes < 10) ? "0" + minutes : minutes;
@@ -107,8 +107,8 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-   let angle_time=Math.abs((date.getHours()*60+date.getMinutes()+date.getTimezoneOffset()-date.getMinutes()*12)/2)%360;
-   return (angle_time<=180?angle_time:360-angle_time)/180*Math.PI;
+   let angleTime=Math.abs((date.getHours()*60+date.getMinutes()+date.getTimezoneOffset()-date.getMinutes()*12)/2)%360;
+   return (angleTime<=180?angleTime:360-angleTime)/180*Math.PI;
 }
 
 
