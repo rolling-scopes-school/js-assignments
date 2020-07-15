@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return new Date(value)
 }
 
 /**
@@ -37,9 +37,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return new Date(value)
 }
-
 
 /**
  * Returns true if specified date is leap year and false otherwise
@@ -56,9 +55,16 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   const year = date.getFullYear()
+   if (year % 4 === 0 && year % 100 !== 0) {
+      return true
+   } 
+   if (year % 100 === 0 && year % 400 === 0) {
+      return true 
+   } else {
+      return false
+   }
 }
-
 
 /**
  * Returns the string represention of the timespan between two dates.
@@ -76,9 +82,25 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
-}
+   const date  = new Date(endDate - startDate - (3 * 60 * 60 * 1000))
+   const diff = endDate - startDate
+   let hours = Math.floor(diff / (3600 * 1000))
+   let min = date.getMinutes()
+   let sec = date.getSeconds()
+   let millisec = date.getMilliseconds()
 
+   if (hours < 10) {
+    hours = "0" + hours
+   } 
+   if (min < 10) {
+    min = "0" + min
+   }
+   if (sec < 10) {
+    sec = "0" + sec
+   }
+   millisec = String(millisec).padEnd(3, "0")
+   return `${hours}:${min}:${sec}.${millisec}`
+}
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
@@ -94,7 +116,18 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   const d = new Date(date)
+   let hour = d.getUTCHours()
+   const minute = d.getUTCMinutes()
+   if (hour >= 12) {
+      hour-=12;
+   }
+   const time = Math.abs((60 * hour - 11 * minute) * 0.5 * Math.PI / 180)
+   if (time < Math.PI) {
+      return time
+   } else {
+      return Math.PI * 2 - time
+   }
 }
 
 
