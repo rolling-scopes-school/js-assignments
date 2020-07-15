@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = require('assert');
+var lint = require('mocha-eslint');
 var tasks = require('../task/12-katas-3-tasks');
 it.optional = require('../extensions/it-optional');
 
@@ -124,11 +125,25 @@ describe('12-katas-3-tasks', function() {
             var encoded = urlShortener.encode(data);
             var actual = urlShortener.decode(encoded);
             assert.equal(
-                data,
                 actual,
+                data,
                 `urlShortener.encode for "${data}" returns "${encoded}" but decode returns "${actual}"`
             );
         });
     });
 
+    var paths = [
+        'task/12-katas-3-tasks.js'
+    ];
+
+    var options = {
+        formatter: 'compact',  // Defaults to `stylish`
+        alwaysWarn: false,  // Defaults to `true`, always show warnings
+        timeout: 5000,  // Defaults to the global mocha `timeout` option
+        slow: 1000,  // Defaults to the global mocha `slow` option
+        strict: true,  // Defaults to `false`, only notify the warnings
+        contextName: 'eslint',  // Defaults to `eslint`, but can be any string
+    };
+
+    lint(paths, options);
 });
