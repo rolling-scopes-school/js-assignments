@@ -83,6 +83,10 @@ describe('03-date-tasks', function() {
                 startDate: new Date(2000,1,1,10,0,0),
                 endDate:   new Date(2000,1,1,15,20,10,453),
                 expected:  '05:20:10.453'
+            }, {
+                startDate: new Date(2000,1,1,10,0,0),
+                endDate:   new Date(2000,1,2,15,20,10,453),
+                expected:  '29:20:10.453'
             }
         ].forEach(data => {
             assert.equal(

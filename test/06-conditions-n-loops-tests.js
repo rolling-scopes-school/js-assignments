@@ -63,7 +63,8 @@ describe('06-conditions-n-loops-tasks', function() {
         [
             { n:  1, expected:       1 },
             { n:  5, expected:     120 },
-            { n: 10, expected: 3628800 }
+            { n: 10, expected: 3628800 },
+            { n: 41758, expected: Number.POSITIVE_INFINITY }
         ].forEach(data => {
             var actual = tasks.getFactorial(data.n);
             assert.equal(
