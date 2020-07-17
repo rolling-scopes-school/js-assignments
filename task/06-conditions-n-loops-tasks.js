@@ -498,9 +498,6 @@ function getCommonDirectoryPath(pathes) {
   }
   return str;
 }
-console.log(
-  getCommonDirectoryPath(["/web/images/image1.png", "/web/images/image2.png"])
-);
 
 /**
  * Returns the product of two specified matrixes.
