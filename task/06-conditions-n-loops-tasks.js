@@ -207,7 +207,30 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-  throw new Error("Not implemented");
+  let str = "";
+
+  if (isStartIncluded) {
+    str += "[";
+  } else {
+    str += "(";
+  }
+
+  if (a > b) {
+    str += b;
+    str += ", ";
+    str += a;
+  } else {
+    str += a;
+    str += ", ";
+    str += b;
+  }
+
+  if (isEndIncluded) {
+    str += "]";
+  } else {
+    str += ")";
+  }
+  return str;
 }
 
 /**
@@ -223,7 +246,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-  throw new Error("Not implemented");
+  return str.split("").reverse().join("");
 }
 
 /**
@@ -239,7 +262,8 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-  throw new Error("Not implemented");
+  let str = num + " ";
+  return str.split("").reverse().join("");
 }
 
 /**
@@ -263,7 +287,20 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-  throw new Error("Not implemented");
+  let sum = 0;
+  let num = ccn + "";
+
+  for (let i = 1; i <= num.length; i++) {
+    let temp = +num[num.length - i];
+    if (i % 2 === 0) {
+      temp *= 2;
+    }
+    if (temp > 9) {
+      temp -= 9;
+    }
+    sum += temp;
+  }
+  return sum % 10 === 0;
 }
 
 /**
@@ -281,7 +318,22 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  throw new Error("Not implemented");
+  let arr = (num + "").split("");
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += +arr[i];
+  }
+
+  if (sum <= 9) {
+    return sum;
+  } else {
+    let b = 0;
+    sum = (sum + "").split("");
+    for (let i = 0; i < sum.length; i++) {
+      b += +sum[i];
+    }
+    return b;
+  }
 }
 
 /**
@@ -306,7 +358,34 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-  throw new Error("Not implemented");
+  let arr = str.split("");
+  let st = [];
+
+  for (let item of arr)
+    switch (item) {
+      case "{":
+      case "(":
+      case "[":
+      case "<":
+        st.push(item);
+        break;
+
+      case "}":
+        if (st.length == 0 || st.pop() != "{") return false;
+        break;
+      case ")":
+        if (st.length == 0 || st.pop() != "(") return false;
+        break;
+      case "]":
+        if (st.length == 0 || st.pop() != "[") return false;
+        break;
+      case ">":
+        if (st.length == 0 || st.pop() != "<") return false;
+        break;
+    }
+
+  if (st.length == 0) return true;
+  else return false;
 }
 
 /**
@@ -341,7 +420,30 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-  throw new Error("Not implemented");
+  let time = (endDate - startDate) / 1000;
+  return time <= 45
+    ? "a few seconds ago"
+    : time <= 90
+    ? "a minute ago"
+    : time <= 45 * 60
+    ? Math.round((time - 0.001) / 60) + " minutes ago"
+    : time <= 90 * 60
+    ? "an hour ago"
+    : time <= 22 * 60 * 60
+    ? Math.round((time - 0.001) / (60 * 60)) + " hours ago"
+    : time <= 36 * 60 * 60
+    ? "a day ago"
+    : time <= 25 * 24 * 60 * 60
+    ? Math.round((time - 0.001) / (24 * 60 * 60)) + " days ago"
+    : time <= 45 * 24 * 60 * 60
+    ? "a month ago"
+    : time <= 345 * 24 * 60 * 60
+    ? Math.round((time - 0.001) / (30 * 24 * 60 * 60)) + " months ago"
+    : time <= 545 * 24 * 60 * 60
+    ? "a year ago"
+    : time >= 545 * 24 * 60 * 60
+    ? Math.round((time - 0.001) / (365 * 24 * 60 * 60)) + " years ago"
+    : {};
 }
 
 /**
@@ -364,7 +466,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-  throw new Error("Not implemented");
+  return num.toString(n);
 }
 
 /**
@@ -380,8 +482,25 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  throw new Error("Not implemented");
+  let str = "";
+  pathes = pathes.map((item) => item.split("/"));
+
+  for (let i = 0; i < pathes.length + 1; i++) {
+    let b = pathes[0].shift();
+    console.log(b + 1);
+
+    for (let e = 1; e < pathes.length; e++) {
+      if (pathes[e].shift() != b) {
+        return str;
+      }
+    }
+    str += b + "/";
+  }
+  return str;
 }
+console.log(
+  getCommonDirectoryPath(["/web/images/image1.png", "/web/images/image2.png"])
+);
 
 /**
  * Returns the product of two specified matrixes.
@@ -402,7 +521,19 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-  throw new Error("Not implemented");
+  let res = [];
+  for (let a = 0; a < m1.length; a++) {
+    res[a] = [];
+
+    for (let b = 0; b < m2[0].length; b++) {
+      let sum = 0;
+      for (let c = 0; c < m1[0].length; c++) {
+        sum += m1[a][c] * m2[c][b];
+      }
+      res[a][b] = sum;
+    }
+  }
+  return res;
 }
 
 /**
@@ -436,7 +567,31 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-  throw new Error("Not implemented");
+  if (
+    (position[0][0] == "X" && position[1][0] == "X" && position[2][0] == "X") ||
+    (position[0][1] == "X" && position[1][1] == "X" && position[2][1] == "X") ||
+    (position[0][2] == "X" && position[1][2] == "X" && position[2][2] == "X") ||
+    (position[0][0] == "X" && position[0][1] == "X" && position[0][2] == "X") ||
+    (position[1][0] == "X" && position[1][1] == "X" && position[1][2] == "X") ||
+    (position[2][0] == "X" && position[2][1] == "X" && position[2][2] == "X") ||
+    (position[0][0] == "X" && position[1][1] == "X" && position[2][2] == "X") ||
+    (position[0][2] == "X" && position[1][1] == "X" && position[2][0] == "X")
+  ) {
+    return "X";
+  } else if (
+    (position[0][0] == "0" && position[1][0] == "0" && position[2][0] == "0") ||
+    (position[0][1] == "0" && position[1][1] == "0" && position[2][1] == "0") ||
+    (position[0][2] == "0" && position[1][2] == "0" && position[2][2] == "0") ||
+    (position[0][0] == "0" && position[0][1] == "0" && position[0][2] == "0") ||
+    (position[1][0] == "0" && position[1][1] == "0" && position[1][2] == "0") ||
+    (position[2][0] == "0" && position[2][1] == "0" && position[2][2] == "0") ||
+    (position[0][0] == "0" && position[1][1] == "0" && position[2][2] == "0") ||
+    (position[0][2] == "0" && position[1][1] == "0" && position[2][0] == "0")
+  ) {
+    return "0";
+  } else {
+    return undefined;
+  }
 }
 
 module.exports = {
