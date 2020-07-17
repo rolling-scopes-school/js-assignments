@@ -22,6 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
+   return Date.parse(value);
    throw new Error('Not implemented');
 }
 
@@ -37,6 +38,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
+   return Date.parse(value);
    throw new Error('Not implemented');
 }
 
@@ -56,6 +58,12 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
+   let currentDate = new Date(date);
+   let year = currentDate.getFullYear();
+   if (year%4 != 0) return false;
+      else if (year%100 != 0 ) return true;
+      else if (year%400 != 0 ) return false;
+   else return true;
    throw new Error('Not implemented');
 }
 
@@ -76,6 +84,21 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
+   let startDateNew = new Date(startDate);
+   let endDateNew = new Date(endDate);
+   let milisecondLeft = endDateNew.getTime()-startDateNew.getTime();
+   let milliseconds = parseInt((milisecondLeft % 1000) ),
+       seconds = parseInt((milisecondLeft / 1000) % 60),
+       minutes = parseInt((milisecondLeft / (1000 * 60)) % 60),
+       hours = parseInt((milisecondLeft / (1000 * 60 * 60)) % 24);
+   if (startDateNew.getDay() !== endDateNew.getDay()) hours =hours+24;
+   hours =  (hours < 10) ? "0" + hours : hours;
+   minutes = (minutes < 10) ? "0" + minutes : minutes;
+   seconds = (seconds < 10) ? "0" + seconds : seconds;
+   milliseconds = (milliseconds<10) ? "00" + milliseconds : 
+                  (milliseconds<100) ? "0" + milliseconds : 
+                   milliseconds;
+   return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
    throw new Error('Not implemented');
 }
 
@@ -94,6 +117,18 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
+   let newDate = new Date(date);
+   let onehourangle = 30;
+   let oneminuteangle = 6;
+   let endHour = newDate.getUTCHours();
+   (endHour > 12) ? endHour = endHour - 12 : endHour;
+   let hours = endHour + newDate.getUTCMinutes()/60;
+   let hourAngle = hours * onehourangle;
+   let minuteAngle = newDate.getUTCMinutes()*oneminuteangle;
+   let angle = Math.abs(hourAngle - minuteAngle);
+   let radians = angle * Math.PI / 180;
+   let result = (radians > Math.PI) ? radians-Math.PI : radians;
+   return result;
     throw new Error('Not implemented');
 }
 
