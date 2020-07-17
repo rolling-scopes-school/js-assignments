@@ -487,7 +487,6 @@ function getCommonDirectoryPath(pathes) {
 
   for (let i = 0; i < pathes.length + 1; i++) {
     let b = pathes[0].shift();
-    console.log(b + 1);
 
     for (let e = 1; e < pathes.length; e++) {
       if (pathes[e].shift() != b) {
