@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = require('assert');
+var lint = require('mocha-eslint');
 var tasks = require('../task/07-yield-tasks');
 it.optional = require('../extensions/it-optional');
 
@@ -221,8 +222,8 @@ describe('07-yield-tasks', function() {
         }
 
         assert.equal(
-            expected.length,
             lineNo,
+            expected.length,
             'Lines count is incorrect:'
         );
     });
@@ -316,6 +317,7 @@ describe('07-yield-tasks', function() {
     });
 
     it.optional('depthTraversalTree should process a wide tree', () => {
+        this.timeout(30000);
         var root = createWideTree();
         var index = 1;
         for(let node of tasks.depthTraversalTree(root)) {
@@ -446,4 +448,77 @@ describe('07-yield-tasks', function() {
         assert.equal(count, ITEMS_COUNT);
 
     });
+
+    it.optional('async should resolve Promises and take values step by step', () => {
+        return new Promise((resolve, reject)=> {
+            tasks.async(function*() {
+                let a = yield new Promise((resolve)=> setTimeout(()=>resolve(5), 100)),
+                    b = yield Promise.resolve(6);
+                assert.equal(a, 5);
+                assert.equal(b, 6);
+
+                return yield new Promise((resolve)=> resolve(a + b));
+            }).then(value=> {
+                try {
+                    assert.equal(value, 11);
+                    resolve()
+                } catch (err) {
+                    reject(err);
+                }
+            }, (err)=> {
+                reject(err);
+            });
+        });
+    });
+
+    it.optional('async should resolve Promises and take values step by step', () => {
+        return new Promise((resolve, reject)=> {
+            tasks.async(function*() {
+                let a = yield new Promise((resolve)=> setTimeout(()=>resolve(5), 100)),
+                    b = yield Promise.resolve(6),
+                    c = yield Promise.resolve(6);
+                assert.equal(a, 5);
+                assert.equal(b, 6);
+                assert.equal(c, 6);
+                return yield new Promise((resolve)=> resolve(a + b + c));
+            }).then(value=> {
+                try {
+                    assert.equal(value, 17);
+                    resolve()
+                } catch (err) {
+                    reject(err);
+                }
+            }, (err)=> {
+                reject(err);
+            });
+        });
+    });
+
+    it.optional('async should handle exception during generator work', () => {
+        return new Promise((resolve, reject)=> {
+            tasks.async(function*() {
+                yield new Promise(()=> {throw new Error("test error");});
+            }).then(()=> {
+                reject();
+            }, (err)=> {
+                if (err.message === 'test error') resolve();
+                else reject(err);
+            });
+        });
+    });
+
+    var paths = [
+        'task/07-yield-tasks.js'
+    ];
+
+    var options = {
+        formatter: 'compact',  // Defaults to `stylish`
+        alwaysWarn: false,  // Defaults to `true`, always show warnings
+        timeout: 5000,  // Defaults to the global mocha `timeout` option
+        slow: 1000,  // Defaults to the global mocha `slow` option
+        strict: true,  // Defaults to `false`, only notify the warnings
+        contextName: 'eslint',  // Defaults to `eslint`, but can be any string
+    };
+
+    lint(paths, options);
 });
