@@ -22,15 +22,15 @@ To start javascript assignments please follow the next steps:
 ### How to setup travis-ci
 * Open [https://travis-ci.org/](https://travis-ci.org/) and sign in with your github account.
 * Activate your forked repo **js-assignments**.
-* Edit local README.md file and update all links (just replace all occurrences of `'rolling-scopes-school'` with your account name).
+* Edit local README.md file and update all links (just replace all occurrences of `'AisBrestEDU' or 'rolling-scopes-school'` with your account name).
 * Commit and push updated README.md to github:
 ```bash
   git add README.md
   git commit -m "Update the links"
   git push origin master
 ```
-* Open https://github.com/wai81/js-assignments and test the build icon. Now it will run all tests and update status once you push changes to github. Keep this icon green!
 
+* Open https://github.com/wai81/js-assignments and test the build icon. Now it will run all tests and update status once you push changes to github. Keep this icon green!
 
 ### How to setup work environment
 * Download and install the latest [Nodejs](https://nodejs.org/en/download/stable/).
@@ -73,8 +73,8 @@ and run the unit tests again. Find one test failed (red). Now it's time to fix i
 * Implement the function by any way and verify your solution by running tests until the failed test become passed (green).
 * Your solution work, but now time to refactor it. Try to make your code as pretty and simple as possible keeping up the test green.
 * Once you can't improve your code and tests are passed you can commit your solution.
+
 * Push your updates to github server and check if tests passed on [travis-ci](https://travis-ci.org/wai81/js-assignments/builds).
-* If everything is OK you can try to resolve the next task.
 
 ### How to debug tasks
 To debug tests you can use **Node inspector**. To install it just run `npm install -g node-inspector` in your terminal. Then follow next steps:

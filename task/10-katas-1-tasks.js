@@ -17,8 +17,8 @@
  *  ]
  */
 function createCompassPoints() {
+    let sides = ['N','E','S','W'];  // use array of cardinal directions only!
     throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
 }
 
 
