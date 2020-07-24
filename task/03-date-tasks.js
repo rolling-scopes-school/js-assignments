@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 
@@ -56,7 +56,10 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   if (date.getFullYear() % 4 != 0) return false;
+   else if (date.getFullYear() % 100 != 0) return true;
+   else if (date.getFullYear() % 400 != 0) return false;
+   else return true;
 }
 
 
@@ -76,7 +79,17 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   let timePeriod = endDate-startDate;
+   let milliseconds = parseInt((timePeriod % 1000)), seconds = Math.floor((timePeriod / 1000) % 60),
+       minutes = Math.floor((timePeriod / (1000 * 60)) % 60),
+       hours = Math.floor((timePeriod / (1000 * 60 * 60)) % 24);
+   hours = (startDate.getDay()!== endDate.getDay()) ? hours+24 : hours;
+   hours = (hours < 10) ? "0" + hours : hours;
+   minutes = (minutes < 10) ? "0" + minutes : minutes;
+   seconds = (seconds < 10) ? "0" + seconds : seconds;
+   milliseconds = (milliseconds < 100) ? "0" + milliseconds : milliseconds;
+   milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
+   return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
 }
 
 
@@ -94,7 +107,11 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   let hours = date.getHours();
+   let minutes = date.getMinutes();
+   let timeZone = date.getTimezoneOffset();
+   let angleTime = Math.abs((hours * 60 + minutes + timeZone - minutes * 12) / 2) % 360;
+   return (angleTime <= 180 ? angleTime : 360 - angleTime ) / 180 * Math.PI;
 }
 
 
