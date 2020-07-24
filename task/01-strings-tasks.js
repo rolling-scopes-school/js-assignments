@@ -22,7 +22,7 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    return value1+value2;
+    return value1 + value2;
 }
 
 
@@ -69,8 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    let name = value.slice(7);
-    return name.slice(0,-1);
+    return value.slice(7, -1);
 }
 
 
@@ -100,7 +99,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    return value.trim(/\t| |/g,'');
+    return value.trim( /\t| |/g,'' );
 }
 
 /**
@@ -146,7 +145,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    return str.replace(/<|>|/g,'');
+    return str.replace( /<|>|/g,'' );
 }
 
 
@@ -202,11 +201,12 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    let str="┌"+"─".repeat(width-2)+"┐"+'\n';
-    for (let count_height = height-2; count_height>0; count_height--){
-        str = str.concat("│"+" ".repeat(width-2))+"│\n";
+    let str = "┌"+"─".repeat(width-2)+"┐"+'\n';
+
+    for (let countHeight = height - 2; countHeight > 0; countHeight -- ){
+        str = str.concat("│" + " ".repeat(width-2)) + "│\n";
     }
-    return str.concat("└"+"─".repeat(width-2)+"┘\n");
+    return str.concat("└" + "─".repeat(width - 2)+"┘\n");
 }
 
 
@@ -226,19 +226,19 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    let arr=[];
-    for (let count=0; count<str.length;count++){
-        if ((str.charCodeAt(count) >=78 & str.charCodeAt(count) <=90)| (str.charCodeAt(count) >=110 & str.charCodeAt(count)<=122))
+    let finalArr = [];
+
+    for (let count = 0; count < str.length; count ++ ){
+        if ((str.charCodeAt(count) >= 78 & str.charCodeAt(count) <= 90) | (str.charCodeAt(count) >= 110 & str.charCodeAt(count) <= 122))
         {
-            arr.push(str.charCodeAt(count)-13);
-        }
-        else if ((str.charCodeAt(count) >=65 & str.charCodeAt(count) <=77)| (str.charCodeAt(count) >=97 & str.charCodeAt(count)<=109))
+            finalArr.push(str.charCodeAt(count) - 13);
+        } else 
+            if ((str.charCodeAt(count) >= 65 & str.charCodeAt(count) <= 77)| (str.charCodeAt(count) >= 97 & str.charCodeAt(count) <= 109))
         {
-            arr.push(str.charCodeAt(count)+13);
-        }
-        else arr.push(str.charCodeAt(count));
+            finalArr.push(str.charCodeAt(count) + 13);
+        } else finalArr.push(str.charCodeAt(count));
     };
-    return String.fromCharCode(...arr);
+    return String.fromCharCode(...finalArr);
 }
 /**
  * Returns true if the value is string; otherwise false.
@@ -254,8 +254,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    if (typeof value ==="string" || value instanceof String) return true;
-    else return false;
+    return (typeof value ==="string" || value instanceof String);
 }
 
 
@@ -284,7 +283,7 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    let arr=['A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
+    let arr = ['A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
       'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
       'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
       'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'];
