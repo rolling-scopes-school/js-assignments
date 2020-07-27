@@ -2,23 +2,17 @@
   "name": "js-training",
   "version": "0.9.1",
   "description": "JS training tasks",
-  "engines": {
-    "node": "^10.0.0"
-  },
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "test-debug": "./node_modules/.bin/mocha --debug",
-    "eslint-js": "eslint --config ./.eslintrc.js ./task/**/**.js"
+    "test-debug": "./node_modules/.bin/mocha --debug-brk"
   },
   "author": "aorgish",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^7.4.0",
-    "mocha": "^8.0.1",
-    "mocha-eslint": "^6.0.0"
+    "mocha": "^2.3.4"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rolling-scopes-school/js-assignments.git"
+    "url": "https://github.com/Sergey-Starushkim/js-assignments.git"
   }
 }
