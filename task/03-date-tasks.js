@@ -22,7 +22,8 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   let dateres = new Date(value);
+   return dateres;
 }
 
 /**
@@ -37,7 +38,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   let dateres = new Date(value);
+   return dateres;
 }
 
 
@@ -56,7 +58,9 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   let taskDate = new Date(date);
+   let year = taskDate.getFullYear();
+   return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 }
 
 
@@ -76,7 +80,31 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   let date = endDate - startDate;
+   let hours = Math.floor(date / 3600000);
+   date = date - hours * 3600000;
+   let minutes = Math.floor(date / 60000);
+   date = date - minutes * 60000;
+   let seconds = Math.floor(date / 1000);
+   date = date - seconds * 1000;
+   let mseconds = date;
+
+
+   if (hours < 10) hours = '0' + hours;
+   if (minutes > 59 || minutes === 0) {
+      minutes = '00';
+   }
+   // if(minutes==0) minutes = '0' + minutes;
+   if (seconds > 59 || seconds === 0) {
+      seconds = '00';
+   }
+   if (mseconds > 999 || mseconds === 0) {
+      mseconds = '000';
+   }
+
+   let res = hours + ":" + minutes + ":" + seconds + "." + mseconds;
+   return res;
+
 }
 
 
@@ -94,14 +122,19 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   let hour = date.getUTCHours() % 12;
+   let minute = date.getUTCMinutes();
+   let angle = Math.abs(((hour * 30 + minute * 0.5) - (minute * 6)));
+   let totalAngle = Math.abs((Math.min(360 - angle, angle))) * Math.PI / 180;
+
+   return totalAngle;
 }
 
 
 module.exports = {
-    parseDataFromRfc2822: parseDataFromRfc2822,
-    parseDataFromIso8601: parseDataFromIso8601,
-    isLeapYear: isLeapYear,
-    timeSpanToString: timeSpanToString,
-    angleBetweenClockHands: angleBetweenClockHands
+   parseDataFromRfc2822: parseDataFromRfc2822,
+   parseDataFromIso8601: parseDataFromIso8601,
+   isLeapYear: isLeapYear,
+   timeSpanToString: timeSpanToString,
+   angleBetweenClockHands: angleBetweenClockHands
 };
