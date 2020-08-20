@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 /********************************************************************************************
  *                                                                                          *
@@ -86,8 +86,8 @@ function timeSpanToString(startDate, endDate) {
    let m = Math.trunc(rez / 60000 % 60).toString();
    let s = Math.trunc(rez / 1000 % 60).toString();
    let ms = Math.trunc(rez % 1000).toString();
-   return (h.padStart(2, '0') + ':' + m.padStart(2, '0') + ':' + s.padStart(2, '0') + '.' + ms.padStart(3, '0'));
-
+   // return (h.padStart(2, '00') + ':' + m.padStart(2, '0') + ':' + s.padStart(2, '0') + '.' + ms.padStart(3, '0'));
+      return ('00'+h).slice(-2)+ ':' + ('00'+m).slice(-2)+ ':' +('00'+s).slice(-2)+ '.' +('000'+ms).slice(-3);
 }
 
 
