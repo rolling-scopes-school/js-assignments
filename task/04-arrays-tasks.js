@@ -605,10 +605,17 @@ function selectMany(arr, childrenSelector) {
 
  
 function getElementByIndexes(arr, indexes) {
-   let arr2 = arr.flat(Infinity);
-   return arr2[indexes.reduce((a, b) => {
-      return a+b;
-   })];
+   // let arr2 = arr.flat(Infinity);
+   // return arr2[indexes.reduce((a, b) => {
+   //    return a+b;
+   // })];
+   let result = null;
+   indexes.map((dimension, index) => {
+      if (index != indexes.length - 1) arr = arr[dimension];
+      else result = arr[dimension];
+   });
+
+   return result;
 }
 
 
