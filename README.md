@@ -73,7 +73,7 @@ and run the unit tests again. Find one test failed (red). Now it's time to fix i
 * Implement the function by any way and verify your solution by running tests until the failed test become passed (green).
 * Your solution work, but now time to refactor it. Try to make your code as pretty and simple as possible keeping up the test green.
 * Once you can't improve your code and tests are passed you can commit your solution.
-* Push your updates to github server and check if tests passed on [travis-ci](https://travis-ci.org/rolling-scopes-school/js-assignments/builds).
+* Push your updates to github server and check if tests passed on [travis-ci](https://travis-ci.org/kupchic/js-assignments/builds).
 * If everything is OK you can try to resolve the next task.
 
 ### How to debug tasks
