@@ -634,8 +634,8 @@ function swapHeadAndTail(arr) {
       return arr.slice(Math.floor(middle)).concat(arr.slice(0, Math.floor(middle)));
    } else {
       let arr2 = arr.slice(Math.ceil(middle));
-      arr2.push(arr[Math.floor(middle)], arr.slice(0, Math.floor(middle)));
-      return arr2.flat();
+      arr2.push(arr[Math.floor(middle)]);
+      return arr2.concat(arr.slice(0, Math.floor(middle)));
    }
 }
 
