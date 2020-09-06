@@ -23,10 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   let res = arr.indexOf(value);
-   if (res !== -1)
-      return res;
-   return -1;
+   return arr.indexOf(value);
 }
 
 /**
@@ -318,7 +315,7 @@ function get3TopItems(arr) {
 function getPositivesCount(arr) {
    //return arr.filter(element => element > 0).length;
    let arr_rez = [];
-   arr_rez = arr.filter(function (v) { return v > 0 & typeof v !== 'string'; });
+   arr_rez = arr.filter(function (v) { return v > 0 && typeof v !== 'string'; });
    return arr_rez.length;
 }
 
@@ -376,7 +373,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   return arr.filter(a => Boolean(a) === false).length;
+   return arr.filter(a => !a).length;
 }
 
 /**
