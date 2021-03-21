@@ -36,3 +36,5 @@ node_modules
 # Editors crap
 .vscode
 .idea
+
+package-lock.json
