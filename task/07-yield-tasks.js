@@ -33,7 +33,14 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    let bottle = (n => n === 1 ? `1 bottle` : `${n} bottles`);
+    for (let i = 99; i > 0; i--) {
+        yield `${bottle(i)} of beer on the wall, ${bottle(i)} of beer.`;
+        if (i > 1) yield `Take one down and pass it around, ${bottle(i - 1)} of beer on the wall.`;
+        else yield `Take one down and pass it around, no more bottles of beer on the wall.`;
+    }
+    yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
 }
 
 
@@ -47,7 +54,13 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    let a, b, c;
+    yield a = 0;
+    yield b = 1;
+    while(true) {
+        yield c = a + b;
+        a = b; b = c;
+    }
 }
 
 
@@ -82,7 +95,14 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let q1 = [root];
+    while (q1.length) {
+        let node = q1.pop();
+        yield node;
+        if (node.children) {
+            q1.push(...node.children.reverse());
+        }
+    }
 }
 
 
@@ -108,7 +128,13 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let q1 = [root];
+    for (let node of q1) {
+        yield node;
+        if (node.children) {
+            q1.push(...node.children);
+        }
+    }
 }
 
 
@@ -126,7 +152,26 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    const firstSeq = source1(),
+        secondSeq = source2();
+
+    let first = firstSeq.next(),
+        second = secondSeq.next();
+
+    while (true) {
+        if ( first.done || first.value > second.value ) {
+            if ( second.done ) {
+                break;
+            }
+
+            yield second.value;
+            second = secondSeq.next();
+            continue;
+        }
+
+        yield first.value;
+        first = firstSeq.next();
+    }
 }
 
 
