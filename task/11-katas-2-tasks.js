@@ -34,7 +34,21 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+    function transform(str) {
+        let ans = '';
+        let lines = str.split('\n').slice(0, -1);
+        for (let j = 0; j < lines[0].length; j++)
+            for (let i = 0; i < lines.length; i++) {
+                ans += lines[i][j];
+            }
+        return ans.match(/.{1,9}/g);
+    }
+
+    let digits = ' _     _  _     _  _  _  _  _ \n' +
+        '| |  | _| _||_||_ |_   ||_||_|\n' +
+        '|_|  ||_  _|  | _||_|  ||_| _|\n';
+    let map = new Map(transform(digits).map((e, i) => [e, i]));
+    return transform(bankAccount).reduce((p, e) => p * 10 + map.get(e), 0);
 }
 
 
@@ -63,7 +77,10 @@ function parseBankAccount(bankAccount) {
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-    throw new Error('Not implemented');
+    let lines = text.match(new RegExp(`.{1,${columns}}( |$)`, 'g'));
+    for (let line of lines) {
+        yield line.trim();
+    }
 }
 
 
@@ -100,7 +117,28 @@ const PokerRank = {
 }
 
 function getPokerHandRank(hand) {
-    throw new Error('Not implemented');
+    const suites = '♥♠♦♣',
+        numbers = 'A234567891JQK';
+    let suitArr = Array.from(suites, () => 0),
+        numArr = Array.from(numbers, () => 0);
+    for (let card of hand) {
+        suitArr[suites.indexOf(card.slice(-1))]++;
+        numArr[numbers.indexOf(card[0])]++;
+    }
+    numArr.push(numArr[0]); // Ace card
+    let suitStr = suitArr.join(''),
+        numStr = numArr.join('');
+    return (numStr.indexOf('11111') !== -1) &&
+    (suitStr.indexOf('5') !== -1) ? PokerRank.StraightFlush :
+        (numStr.indexOf('4') !== -1) ? PokerRank.FourOfKind :
+            (numStr.indexOf('2') !== -1) &&
+            (numStr.indexOf('3') !== -1) ? PokerRank.FullHouse :
+                (suitStr.indexOf('5') !== -1) ? PokerRank.Flush :
+                    (numStr.indexOf('11111') !== -1) ? PokerRank.Straight :
+                        (numStr.indexOf('3') !== -1) ? PokerRank.ThreeOfKind :
+                            (numStr.match(/2.*2.+/)) ? PokerRank.TwoPairs :
+                                (numStr.indexOf('2') !== -1) ? PokerRank.OnePair :
+                                    PokerRank.HighCard;
 }
 
 
@@ -135,7 +173,40 @@ function getPokerHandRank(hand) {
  *    '+-------------+\n'
  */
 function* getFigureRectangles(figure) {
-   throw new Error('Not implemented');
+    const lines = figure.split('\n').slice(0, -1),
+        dx = [0, 1, 0, -1, 0],
+        dy = [1, 0, -1, 0, 1],
+        reg = /[+|\-]/;
+
+    function getRectangle(h, w) {
+        const edgeLine = '+' + '-'.repeat(w - 2) + '+\n',
+            midLine = '|' + ' '.repeat(w - 2) + '|\n';
+        return edgeLine + midLine.repeat(h - 2) + edgeLine;
+    }
+
+    function getSizes(x0, y0) {
+        let x = x0, y = y0, ind = -1;
+        let w = 1, h = 1;
+        while (1) {
+            let _x = x + dx[ind + 1];
+            let _y = y + dy[ind + 1];
+            if (lines[_x] && lines[_x][_y] && lines[_x][_y].match(reg)) ind++;
+            if (ind === -1 || ind === 4) return;
+            x += dx[ind];
+            y += dy[ind];
+            h = Math.max(h, x + 1 - x0);
+            w = Math.max(w, y + 1 - y0);
+            if (x === x0 && y === y0) return {h, w};
+            if (!lines[x] || !lines[x][y] || !lines[x][y].match(reg)) return;
+        }
+    }
+
+    for (let x = 0; x < lines.length; x++)
+        for (let y = 0; y < lines[0].length; y++) {
+            if (lines[x][y] !== '+') continue;
+            let sizes = getSizes(x, y);
+            if (sizes) yield getRectangle(sizes.h, sizes.w);
+        }
 }
 
 
