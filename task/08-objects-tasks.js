@@ -23,7 +23,12 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
+}
+
+Rectangle.prototype.getArea = function () {
+    return this.width * this.height;
 }
 
 
@@ -38,7 +43,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    return JSON.stringify(obj);
 }
 
 
@@ -54,7 +59,7 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    return Object.setPrototypeOf(JSON.parse(json), proto);
 }
 
 
@@ -105,35 +110,133 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
+let id = {
+    element: 0,
+    id: 1,
+    class: 2,
+    attr: 3,
+    pseudoClass: 4,
+    pseudoElement: 5
+}
+
+class Selector {
+    constructor(selector) {
+        this.selector = selector;
+        this.counter = {
+            element: 0,
+            id: 0,
+            pseudoElement: 0
+        }
+        this.prev_id = -1;
+        this.cur_id = -1;
+    }
+
+    check() {
+        if (this.counter.element === 2 ||
+            this.counter.id === 2 ||
+            this.counter.pseudoElement === 2) {
+            throw new Error('Element, id and pseudo-element should not occur ' +
+                'more then one time inside the selector');
+        }
+        if (this.cur_id < this.prev_id) {
+            throw new Error('Selector parts should be arranged in the following ' +
+                'order: element, id, class, attribute, pseudo-class, pseudo-element');
+        }
+        this.prev_id = this.cur_id;
+    }
+
+    element(value) {
+        this.cur_id = id.element;
+        this.counter.element++;
+        this.check();
+        this.selector += value;
+        return this;
+    }
+
+    id(value) {
+        this.cur_id = id.id;
+        this.counter.id++;
+        this.check();
+        this.selector += '#' + value;
+        return this;
+    }
+
+    class(value) {
+        this.cur_id = id.class;
+        this.check();
+        this.selector += '.' + value;
+        return this;
+    }
+
+    attr(value) {
+        this.cur_id = id.attr;
+        this.check();
+        this.selector += '[' + value + ']';
+        return this;
+    }
+
+    pseudoClass(value) {
+        this.cur_id = id.pseudoClass;
+        this.check();
+        this.selector += ':' + value;
+        return this;
+    }
+
+    pseudoElement(value) {
+        this.cur_id = id.pseudoElement;
+        this.counter.pseudoElement++;
+        this.check();
+        this.selector += '::' + value;
+        return this;
+    }
+
+    combine(selector1, combinator, selector2) {
+        return new Selector(selector1.selector + ' ' + combinator + ' ' + selector2);
+    }
+
+    stringify() {
+        return this.selector;
+    }
+}
 
 const cssSelectorBuilder = {
 
     element: function(value) {
-        throw new Error('Not implemented');
+        let obj = new Selector('');
+        return obj.element(value);
     },
 
     id: function(value) {
-        throw new Error('Not implemented');
+        let obj = new Selector('');
+        return obj.id(value);
     },
 
     class: function(value) {
-        throw new Error('Not implemented');
+        let obj = new Selector('');
+        return obj.class(value);
     },
 
     attr: function(value) {
-        throw new Error('Not implemented');
+        let obj = new Selector('');
+        return obj.attr(value);
     },
 
     pseudoClass: function(value) {
-        throw new Error('Not implemented');
+        let obj = new Selector('');
+        return obj.pseudoClass(value);
     },
 
     pseudoElement: function(value) {
-        throw new Error('Not implemented');
+        let obj = new Selector('');
+        return obj.pseudoElement(value);
     },
 
     combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
+        return new Selector(
+            selector1.stringify() +
+            ' ' + combinator + ' ' +
+            selector2.stringify()
+        );
     },
 };
 
