@@ -28,7 +28,30 @@
  *   'NULL'      => false 
  */
 function findStringInSnakingPuzzle(puzzle, searchStr) {
-    throw new Error('Not implemented');
+    function dfs(x, y, l) { //Depth first search
+        if (puzzle[x][y] !== searchStr[l]) return false;
+        if (l === searchStr.length - 1) return true;
+        used[x][y] = true;
+        for (let i = 0; i < 4; i++) {
+            let _x = x + dx[i],
+                _y = y + dy[i];
+            if (!used[_x] || used[_x][_y]) continue;
+            if (dfs(_x, _y, l + 1)) return true;
+        }
+        return used[x][y] = false; //false
+    }
+
+    let n = puzzle.length,
+        m = puzzle[0].length;
+    // out of recursion
+    let used = Array.from({length: n}, () => new Array(m).fill(false));
+    const dx = [-1, 1, 0, 0],
+        dy = [0, 0, -1, 1];
+    for (let x = 0; x < n; x++)
+        for (let y = 0; y < m; y++) {
+            if (dfs(x, y, 0)) return true;
+        }
+    return false;
 }
 
 
@@ -45,7 +68,29 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
  *    'abc' => 'abc','acb','bac','bca','cab','cba'
  */
 function* getPermutations(chars) {
-    throw new Error('Not implemented');
+    let arr = chars.split(''),
+        l = arr.length;
+    let swapElement = (a, b) => {
+        let tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
+    };
+    arr.sort();
+    while (1) {
+        yield arr.join('');
+        let aInd = l - 2;
+        for (; aInd >= 0 && arr[aInd] > arr[aInd + 1]; aInd--) {
+        }
+        if (aInd === -1) return;
+        let bInd = l - 1;
+        for (; arr[bInd] < arr[aInd]; bInd--) {
+        }
+        swapElement(aInd, bInd);
+        let l2 = (l - aInd) >> 1;
+        for (let i = 1; i <= l2; i++) {
+            swapElement(aInd + i, l - i);
+        }
+    }
 }
 
 
@@ -65,7 +110,11 @@ function* getPermutations(chars) {
  *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
  */
 function getMostProfitFromStockQuotes(quotes) {
-    throw new Error('Not implemented');
+    let max = +quotes.slice(-1);
+    return quotes.reverse().reduce((p, e) => {
+        max = Math.max(max, e);
+        return p + max - e;
+    }, 0);
 }
 
 
@@ -91,13 +140,27 @@ function UrlShortener() {
 
 UrlShortener.prototype = {
 
-    encode: function(url) {
-        throw new Error('Not implemented');
+    encode: function (url) {
+        let ans = '';
+        let l = url.length;
+        for (let i = 1; i < l; i += 2) {
+            ans += String.fromCharCode(
+                url.charCodeAt(i - 1) + (url.charCodeAt(i) << 8)
+            );
+        }
+        return (l % 2 ? ans + url[l - 1] : ans);
     },
-    
-    decode: function(code) {
-        throw new Error('Not implemented');
-    } 
+
+    decode: function (code) {
+        let ans = '';
+        for (let i = 0; i < code.length; i++) {
+            ans += String.fromCharCode(
+                code.charCodeAt(i) & 0xff,
+                code.charCodeAt(i) >> 8
+            );
+        }
+        return (ans.slice(-1) === String.fromCharCode(0) ? ans.slice(0, -1) : ans);
+    }
 }
 
 
