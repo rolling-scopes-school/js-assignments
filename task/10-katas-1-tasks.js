@@ -17,8 +17,58 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    const sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    let azimuth, result = [];
+    const step = 11.25;
+
+    for ( azimuth = 0; azimuth < 360; azimuth += step ) {
+        let leftDirection = sides[ Math.floor( azimuth / 90 ) ],
+          rightDirection = sides[ sides.indexOf( leftDirection ) + 1 ] || sides[ 0 ],
+          semiDirection,
+          abbreviation;
+
+        // South and North is lead directions
+        if ( sides.indexOf( leftDirection ) % 2 )
+            semiDirection = rightDirection + leftDirection;
+        else
+            semiDirection = leftDirection + rightDirection;
+
+        let localAzim = azimuth % 90;
+
+        if ( localAzim >= 45 ) {
+            localAzim = 90 - localAzim;
+
+            const temp = leftDirection;
+            leftDirection = rightDirection;
+            rightDirection = temp;
+        }
+
+        switch ( localAzim / step ) {
+            case 0:
+                abbreviation = leftDirection;
+                break;
+            case 1:
+                abbreviation = leftDirection + 'b' + rightDirection;
+                break;
+            case 2:
+                abbreviation = leftDirection + semiDirection;
+                break;
+            case 3:
+                abbreviation = semiDirection + 'b' + leftDirection;
+                break;
+            case 4:
+                abbreviation = semiDirection;
+                break;
+        }
+
+        result.push( {
+            abbreviation,
+            azimuth
+        } );
+    }
+
+    return result;
+
 }
 
 
@@ -56,7 +106,33 @@ function createCompassPoints() {
  *   'nothing to do' => 'nothing to do'
  */
 function* expandBraces(str) {
-    throw new Error('Not implemented');
+    let stack = [ str ],
+      generated = new Set();
+
+    while ( stack.length ) {
+        const currentStr = stack.pop(),
+          firstCBIndex = currentStr.indexOf( '}' ),
+          suitOBIndex = currentStr.slice( 0, firstCBIndex )
+            .lastIndexOf( '{' );
+
+        if ( firstCBIndex === -1 || suitOBIndex === -1 ) {
+            if ( !generated.has( currentStr ) ) {
+                generated.add( currentStr );
+                yield currentStr;
+            }
+            continue;
+        }
+
+        const expandedValues = currentStr.slice( suitOBIndex + 1, firstCBIndex )
+            .split( ',' ),
+          firstPart = currentStr.slice( 0, suitOBIndex ),
+          lastPart = currentStr.slice( firstCBIndex + 1 );
+
+        let i = expandedValues.length;
+        while ( i-- ) {
+            stack.push( firstPart + expandedValues[ i ] + lastPart );
+        }
+    }
 }
 
 
@@ -88,7 +164,31 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
+    let res = new Array(n),
+      stepX = -1,
+      stepY = 1,
+      currX = 0,
+      currY = 0,
+      count = 0;
+    for (let i = 0; i < n; i++) {
+        res[i] = (new Array(n)).fill(0);
+    }
+    while (count < n * n) {
+        if (currX < 0 || currX >= n || currY < 0 || currY >= n) {
+            currX += stepX;
+            currY += stepY;
+        } else {
+            res[currX][currY] = count++;
+            currX += stepX;
+            currY += stepY;
+            if (currX < 0 || currX >= n || currY < 0 || currY >= n) {
+                currY += 1;
+                stepX *= -1;
+                stepY *= -1;
+            }
+        }
+    }
+    return res;
 }
 
 
@@ -113,7 +213,39 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
-    throw new Error('Not implemented');
+    const dominoesByNum = dominoes.reduce(
+      function ( result, el ) {
+          const i = el[ 0 ],
+            j = el[ 1 ];
+
+          result[ i ].push( j );
+
+          if ( i !== j ) result[ j ].push( i );
+
+          return result;
+      },
+      Array.from( {
+          length: 7
+      }, () => [] ) );
+
+    let i,
+      withoutPair = 0;
+
+    for ( i = 0; i < dominoesByNum.length; i++ ) {
+        if ( !dominoesByNum[ i ].length ) continue;
+
+        const excludeFish = dominoesByNum[ i ].filter( el => ( el !== i ) ),
+          fishCount = dominoesByNum[ i ].length - excludeFish.length;
+
+        if ( excludeFish.length > 0 )
+            withoutPair += excludeFish.length % 2;
+        else if ( fishCount > 0 )
+            return dominoes.length === fishCount;
+
+        if ( withoutPair > 2 ) return false;
+    }
+
+    return true;
 }
 
 
@@ -137,7 +269,16 @@ function canDominoesMakeRow(dominoes) {
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    for(let i = 0; i < nums.length; i++){
+        let j = i;
+        while(nums[j] - nums[j + 1] == -1) {
+            j++;
+        }
+        if(j != i && j - i > 1) {
+            nums.splice(i, j - i + 1, nums[i] + '-' + nums[j]);
+        }
+    }
+    return nums.join();
 }
 
 module.exports = {
