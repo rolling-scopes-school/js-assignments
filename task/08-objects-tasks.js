@@ -23,7 +23,9 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
+    this.getArea = () => this.width * this.height
 }
 
 
@@ -38,7 +40,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    return JSON.stringify(obj)
 }
 
 
@@ -108,33 +110,106 @@ function fromJSON(proto, json) {
 
 const cssSelectorBuilder = {
 
-    element: function(value) {
-        throw new Error('Not implemented');
+    element: function ( value ) {
+        this.checkCantRepeatedAction( 'element' );
+
+        return new MySuperBaseElementSelector( {
+            action: 'element',
+            value,
+            context: this
+        } );
     },
 
-    id: function(value) {
-        throw new Error('Not implemented');
+    id: function ( value ) {
+        this.checkCantRepeatedAction( 'id' );
+
+        return new MySuperBaseElementSelector( {
+            action: 'id',
+            value: '#' + value,
+            context: this
+        } );
     },
 
-    class: function(value) {
-        throw new Error('Not implemented');
+    class: function ( value ) {
+        return new MySuperBaseElementSelector( {
+            action: 'class',
+            value: '.' + value,
+            context: this
+        } );
     },
 
-    attr: function(value) {
-        throw new Error('Not implemented');
+    attr: function ( value ) {
+        return new MySuperBaseElementSelector( {
+            action: 'attribute',
+            value: '[' + value + ']',
+            context: this
+        } );
     },
 
-    pseudoClass: function(value) {
-        throw new Error('Not implemented');
+    pseudoClass: function ( value ) {
+        return new MySuperBaseElementSelector( {
+            action: 'pseudo-class',
+            value: ':' + value,
+            context: this
+        } );
     },
 
-    pseudoElement: function(value) {
-        throw new Error('Not implemented');
+    pseudoElement: function ( value ) {
+        this.checkCantRepeatedAction( 'pseudo-element' );
+
+        return new MySuperBaseElementSelector( {
+            action: 'pseudo-element',
+            value: '::' + value,
+            context: this
+        } );
     },
 
-    combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
+    combine: function ( selector1, combinator, selector2 ) {
+        return new MySuperBaseElementSelector( {
+            action: 'combine',
+            value: `${selector1.stringify()} ${combinator} ${selector2.stringify()}`,
+            context: this
+        } );
     },
+
+    stringify: function () {
+        return this.selector || '';
+    },
+
+    checkCantRepeatedAction: function ( action ) {
+        if ( this.actionsChain && this.actionsChain.indexOf( action ) > -1 )
+            throw new Error( 'Element, id and pseudo-element should not occur more then one time inside the selector' );
+    }
+};
+
+function MySuperBaseElementSelector( options ) {
+    const needActionsSeq = [ 'element', 'id', 'class', 'attribute', 'pseudo-class', 'pseudo-element' ];
+
+    let context = options.context;
+
+    if ( !( 'selector' in context ) ) {
+        this.selector = '';
+        this.actionsChain = [];
+
+        // Extends with cssSelectorBilder methods
+        Object.setPrototypeOf( this, context );
+        // Next chaining method will use this object
+        context = this;
+    }
+
+    let chain = context.actionsChain;
+    if ( context.actionsChain.length &&
+      needActionsSeq.indexOf( options.action ) < needActionsSeq.indexOf( chain[ chain.length - 1 ] ) )
+        throw new Error( `Selector parts should be arranged in the following order: ${needActionsSeq.join(', ')}` );
+
+    if ( options.action === 'combine' )
+        context.selector = options.value;
+    else
+        context.selector += options.value;
+
+    context.actionsChain.push( options.action );
+
+    return context;
 };
 
 
