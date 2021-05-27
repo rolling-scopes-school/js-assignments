@@ -38,13 +38,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   var arr = [];
-   var value = 1;
-   for (let i = 0; i < len; i++) {
-      arr.push(value);
-      value += 2;
-   }
-   return arr;
+   return Array.from({length: len}, (v, i) => i * 2 + 1);
 }
 
 
@@ -137,7 +131,7 @@ function getUpperCaseStrings(arr) {
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-   return arr.map((value) => value.length());
+   return arr.map((value) => value.length);
 }
 
 /**
@@ -314,7 +308,13 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   return arr.filter((value) => value > 0).length;
+   var count = 0;
+   arr.map(val => {
+      if (Number(val) === val && val > 0) {
+         count++;
+      }
+   });
+   return count;
 }
 
 /** 
@@ -348,7 +348,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   return arr.reduce((sum, value) => sum + value);
+   return arr.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 }
 
 /** 
@@ -382,7 +382,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   return arr.reduce((count, value) => count + (value === item ? 1 : 0));
+   return arr.reduce((previousValue, currentValue) => previousValue + (currentValue === item ? 1 : 0), 0);
 }
 
 /**

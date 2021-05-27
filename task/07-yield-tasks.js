@@ -154,7 +154,7 @@ function* depthTraversalTree(root) {
  *   [ 0 ], [ 2, 4, 6, ... ]  => [ 0, 2, 4, 6, ... ]
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
-function* breadthTraversalTree(root) {
+ function* breadthTraversalTree(root) {
     const queue = [root];
     while (queue.length > 0) {
         root = queue.shift();
@@ -162,6 +162,38 @@ function* breadthTraversalTree(root) {
         if (typeof root.children !== 'undefined')
             for (let value of root.children)
                 queue.push(value);
+    }
+}
+
+
+/**
+ * Merges two yield-style sorted sequences into the one sorted sequence.
+ * The result sequence consists of sorted items from source iterators.
+ *
+ * @params {Iterable.<number>} source1
+ * @params {Iterable.<number>} source2
+ * @return {Iterable.<number>} the merged sorted sequence
+ *
+ * @example
+ *   [ 1, 3, 5, ... ], [2, 4, 6, ... ]  => [ 1, 2, 3, 4, 5, 6, ... ]
+ *   [ 0 ], [ 2, 4, 6, ... ]  => [ 0, 2, 4, 6, ... ]
+ *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
+ */
+ function* mergeSortedSequences(source1, source2) {
+    var src1 = source1(),
+        src2 = source2(),
+        val1 = src1.next().value,
+        val2 = src2.next().value;
+    while (true) {
+        if ((val1 < val2 || val2 === undefined) && val1 !== undefined) {
+            yield val1;
+            val1 = src1.next().value;
+        } else if (val2 !== undefined) {
+            yield val2;
+            val2 = src2.next().value;
+        } else {
+            break;
+        }    
     }
 }
 

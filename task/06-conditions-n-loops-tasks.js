@@ -280,17 +280,14 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(ccn) {
+ function isCreditCardNumber(ccn) {
     var summ = 0;
-    var lengthOfccn = ccn.length;
     ccn = ccn.toString();
-    for (var i = 0; i < lengthOfccn; i++) {
-        if (lengthOfccn % 2 !== i % 2) {
+    for (var i = 0; i < ccn.length; i++)
+        if (ccn.length % 2 !== i % 2)
             summ += ccn[i] * 1;
-        } else {
+        else
             summ += ccn[i] * 2 + (ccn[i] > 4 ? -9 : 0);
-        }
-    }
     return summ % 10 === 0;
 }
 

@@ -233,15 +233,15 @@ function getRectangleString(width, height) {
  *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(str) {
-    var str1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    var str2 = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-    var res = "";
-    for (var i = 0; i < str.length; i++) {
-        var temp = str1.indexOf(str.charAt(i));
-        res += str2.charAt(temp);
-    }
-    return res;
+ function encodeToRot13(str) {
+    var zl = 'z'.charCodeAt(0),
+        zu = 'Z'.charCodeAt(0);
+    return str.replace(/[a-zA-Z]/g, (c) => {
+        var c0 = c.charCodeAt(0);
+        return String.fromCharCode(
+            c0 + 13 <= (c > c.toUpperCase() ? zl : zu) ? c0 + 13 : c0 - 13
+        );
+    });
 }
 
 /**
@@ -258,7 +258,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return typeof value === "string" ? true : false;
+    return typeof value === 'string' || value instanceof String;
 }
 
 
