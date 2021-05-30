@@ -1,103 +1,257 @@
 'use strict';
 
-var assert = require('assert');
-var tasks = require('../task/02-numbers-tasks');
-it.optional = require('../extensions/it-optional');
+/********************************************************************************************
+ *                                                                                          *
+ * Plese read the following tutorial before implementing tasks:                             *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates          *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number  *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math    *
+ *                                                                                          *
+ ********************************************************************************************/
 
-describe('02-numbers-tasks', function() {
 
-    it.optional('getRectangleArea should return a square of rectangle', function() {
-        assert.equal(50, tasks.getRectangleArea(5, 10));
-        assert.equal(25, tasks.getRectangleArea(5, 5));
-    });
+/**
+ * Returns an area of a rectangle given by width and heigth.
+ *
+ * @param {numder} width
+ * @param {number} height
+ * @return {number}
+ *
+ * @example:
+ *   5, 10 => 50
+ *   5, 5  => 25
+ */
+function getRectangleArea(width, height) {
+    return width * height;
+}
 
-    it.optional('getCicleCircumference should return a circumference of cicle', function() {
-        assert.equal(31.41592653589793, tasks.getCicleCircumference(5));
-        assert.equal(19.729201864543903, tasks.getCicleCircumference(3.14));
-        assert.equal(0, tasks.getCicleCircumference(0));
-    });
 
-    it.optional('getAverage should return an average of two numbers', function() {
-        assert.equal(5, tasks.getAverage(5, 5));
-        assert.equal(5, tasks.getAverage(10, 0));
-        assert.equal(0, tasks.getAverage(-3, 3));
-        assert.equal(Number.MAX_VALUE-1, tasks.getAverage(Number.MAX_VALUE-2, Number.MAX_VALUE));
-        assert.equal(Number.MAX_VALUE / 4, tasks.getAverage(Number.MAX_VALUE, -Number.MAX_VALUE / 2));
-    });
+/**
+ * Returns a circumference of circle given by radius.
+ *
+ * @param {number} radius
+ * @return {number}
+ *
+ * @example:
+ *   5    => 31.41592653589793
+ *   3.14 => 19.729201864543903
+ *   0    => 0
+ */
+function getCicleCircumference(radius) {
+    return 2 * Math.PI * radius;
+}
 
-    it.optional('getDistanceBetweenPoints should return a distance between points', function() {
-        assert.equal(1, tasks.getDistanceBetweenPoints(0, 0, 0, 1));
-        assert.equal(1, tasks.getDistanceBetweenPoints(0, 0, 1, 0));
-        assert.equal(18.027756377319946, tasks.getDistanceBetweenPoints(-5, 0, 10, -10));
-    });
+/**
+ * Returns an average of two given numbers.
+ *
+ * @param {numder} value1
+ * @param {number} value2
+ * @return {number}
+ *
+ * @example:
+ *   5, 5  => 5
+ *  10, 0  => 5
+ *  -3, 3  => 0
+ */
+function getAverage(value1, value2) {
+    return value1 / 2 + value2 / 2;
+}
 
-    it.optional('getLinearEquationRoot should return a root of linear equation', function() {
-        assert.equal(2, tasks.getLinearEquationRoot(5, -10));
-        assert.equal(-8, tasks.getLinearEquationRoot(1, 8));
-        assert.equal(0, tasks.getLinearEquationRoot(5, 0));
-    });
-    
-    it.optional('getAngleBetweenVectors should return a angle (in radians) between two linear vectors', function() {
-        assert.equal(Math.PI/2, tasks.getAngleBetweenVectors(1, 0, 0, 1));
-        assert.equal(Math.PI, tasks.getAngleBetweenVectors(0, 1, 0, -1));
-        assert.equal(Math.PI/2, tasks.getAngleBetweenVectors(0, -1, 1, 0));
-        assert.equal(0, tasks.getAngleBetweenVectors(0, 1, 0, 1));
-    });
+/**
+ * Returns a distance beetween two points by cartesian coordinates.
+ *
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ *
+ * @return {number}
+ *
+ * @example:
+ *   (0,0) (0,1)    => 1
+ *   (0,0) (1,0)    => 1
+ *   (-5,0) (10,-10) => 18.027756377319946
+ */
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+    return Math.hypot((x2 - x1), (y2 - y1));
+}
 
-    it.optional('getLastDigit should return a last digit of the number', function() {
-        assert.equal(0, tasks.getLastDigit(100));
-        assert.equal(7, tasks.getLastDigit(37));
-        assert.equal(5, tasks.getLastDigit(5));
-        assert.equal(0, tasks.getLastDigit(0));
-    });
+/**
+ * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
+ *
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ *
+ * @example:
+ *   5*x - 10 = 0    => 2
+ *   x + 8 = 0       => -8
+ *   5*x = 0         => 0
+ */
+function getLinearEquationRoot(a, b) {
+    return -b / a;
+}
 
-    it.optional('parseNumberFromString should return a number from the given string representation', function() {
-        assert.equal(100, tasks.parseNumberFromString('100'));
-        assert.equal(37, tasks.parseNumberFromString('37'));
-        assert.equal(-525.5, tasks.parseNumberFromString('-525.5'));
-    });
 
-    it.optional('getParallelipidedDiagonal should return a diagonal length of the rectagular parallepiped', function() {
-        assert.equal(Math.sqrt(3), tasks.getParallelipidedDiagonal(1,1,1));
-        assert.equal(Math.sqrt(27), tasks.getParallelipidedDiagonal(3,3,3));
-        //assert.equal(Math.sqrt(14), tasks.getParallelipidedDiagonal(1,2,3));
-    });
+/**
+ * Returns an angle (in radians) between two vectors given by xi and yi, coordinates in Cartesian plane
+ * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
+ *
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @return {number}
+ *
+ * @example:
+ *   (1,0) (0,1)     => π/2
+ *   (0,1) (0,-1)    => π
+ *   (0,-1) (1,0)    => π/2
+ *   (0,1) (0,1)     => 0
+ *   (0,1) (1,2)     => 0
+ */
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+    return Math.acos(
+        (x1 * x2 + y1 * y2) / (Math.sqrt(x1 * x1 + y1 * y1) * Math.sqrt(x2 * x2 + y2 * y2))
+    );
+}
 
-    it.optional('roundToPowerOfTen should return an number rounded to specified power of 10', function() {
-        assert.equal(1234, tasks.roundToPowerOfTen(1234,0));
-        assert.equal(1230, tasks.roundToPowerOfTen(1234,1));
-        assert.equal(1200, tasks.roundToPowerOfTen(1234,2));
-        assert.equal(1000, tasks.roundToPowerOfTen(1234,3));
-        
-        assert.equal(9678, tasks.roundToPowerOfTen(9678,0));
-        assert.equal(9680, tasks.roundToPowerOfTen(9678,1));
-        assert.equal(9700, tasks.roundToPowerOfTen(9678,2));
-        assert.equal(10000, tasks.roundToPowerOfTen(9678,3));
-    });
+/**
+ * Returns a last digit of a integer number.
+ *
+ * @param {number} value
+ * @return {number}
+ *
+ * @example:
+ *   100     => 0
+ *    37     => 7
+ *     5     => 5
+ *     0     => 0
+ */
+function getLastDigit(value) {
+    return value % 10;
+}
 
-    it.optional('isPrime should return true if specified number is prime', function() {
-        assert.equal(true, tasks.isPrime(2), "2");
-        assert.equal(true, tasks.isPrime(3), "3");
-        assert.equal(false, tasks.isPrime(4), "4");
-        assert.equal(true, tasks.isPrime(5), "5");
-        assert.equal(false, tasks.isPrime(6), "6");
-        assert.equal(true, tasks.isPrime(7), "7");
-        assert.equal(false, tasks.isPrime(8), "8");
-        assert.equal(false, tasks.isPrime(9), "9");
-        assert.equal(false, tasks.isPrime(10), "10");
-        assert.equal(true, tasks.isPrime(11), "11");
-        assert.equal(false, tasks.isPrime(12), "12");
-        assert.equal(true, tasks.isPrime(13), "13");
-        assert.equal(true, tasks.isPrime(113), "113");
-        assert.equal(false, tasks.isPrime(119), "119");
-    });
 
-    it.optional('toNumber should convert any value to number or return the default', function() {
-        assert.equal(0, tasks.toNumber(null, 0));
-        assert.equal(0, tasks.toNumber('test', 0));
-        assert.equal(1, tasks.toNumber('1', 0));
-        assert.equal(42, tasks.toNumber(42, 0));
-        assert.equal(42, tasks.toNumber(new Number(42), 0));
-        assert.equal(-1, tasks.toNumber(undefined, -1));
-    });
-});
+/**
+ * Returns a number by given string representation.
+ *
+ * @param {string} value
+ * @return {number}
+ *
+ * @example:
+ *    '100'     => 100
+ *     '37'     => 37
+ * '-525.5'     => -525.5
+ */
+function parseNumberFromString(value) {
+    return Number.parseFloat(value);
+}
+
+/**
+ * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
+ *
+ * @param {number} a
+ * @param {number} b
+ * @param {number} c
+ * @return {number}
+ *
+ * @example:
+ *   1,1,1   => 1.7320508075688772
+ *   3,3,3   => 5.196152422706632
+ *   1,2,3   => 3.741657386773941
+ */
+function getParallelipidedDiagonal(a,b,c) {
+    return Math.sqrt(a * a + b * b + c * c);
+}
+
+/**
+ * Returns the number rounded to specified power of 10.
+ *
+ * @param {number} num
+ * @param {number} pow
+ * @return {number}
+ *
+ * @example:
+ *   1234, 0  => 1234
+ *   1234, 1  => 1230
+ *   1234, 2  => 1200
+ *   1234, 3  => 1000
+ *   1678, 0  => 1678
+ *   1678, 1  => 1680
+ *   1678, 2  => 1700
+ *   1678, 3  => 2000
+ */
+function roundToPowerOfTen(num, pow) {
+    return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
+}
+
+/**
+ * Returns true is the number is prime; otherwise false.
+ * See: https://en.wikipedia.org/wiki/Primality_test
+ *
+ * @param {number} n
+ * @return {bool}
+ *
+ * @example:
+ *   4 => false
+ *   5 => true
+ *   6 => false
+ *   7 => true
+ *   11 => true
+ *   12 => false
+ *   16 => false
+ *   17 => true
+ */
+function isPrime(n) {
+    if (n <= 1) {
+        return false;
+    } else if (n <= 3) {
+        return true;
+    } else if (!(n % 2) || !(n % 3)) {
+        return false;
+    }
+
+    let i = 5;
+    while (i * i <= n) {
+        if (!(n % i) || !(n % (i + 2))) {
+            return false;
+        }
+        i += 6;
+    }
+    return true;
+}
+
+/**
+ * Tries to convert value to number and returns it if conversion was successfull;
+ * otherwise returns default value passed as a second argument.
+ *
+ * @param {any} value
+ * @param {any} def
+ * @return {number}
+ *
+ * @example
+ *   toNumber(null, 0) => 0
+ *   toNumber('test', 0) => 0
+ *   toNumber('1', 0) => 1
+ *   toNumber(42, 0) => 42
+ *   toNumber(new Number(42), 0) => 42
+ */
+function toNumber(value, def) {
+    return +value ? +value : def;
+}
+
+module.exports = {
+    getRectangleArea: getRectangleArea,
+    getCicleCircumference: getCicleCircumference,
+    getAverage: getAverage,
+    getDistanceBetweenPoints: getDistanceBetweenPoints,
+    getLinearEquationRoot: getLinearEquationRoot,
+    getAngleBetweenVectors: getAngleBetweenVectors,
+    getLastDigit: getLastDigit,
+    parseNumberFromString: parseNumberFromString,
+    getParallelipidedDiagonal: getParallelipidedDiagonal,
+    roundToPowerOfTen: roundToPowerOfTen,
+    isPrime: isPrime,
+    toNumber: toNumber
+};
