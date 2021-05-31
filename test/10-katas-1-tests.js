@@ -1,269 +1,225 @@
 'use strict';
 
-/**
- * Returns the array of 32 compass points and heading.
- * See details here:
- * https://en.wikipedia.org/wiki/Points_of_the_compass#32_cardinal_points
- *
- * @return {array}
- *
- * Example of return :
- *  [
- *     { abbreviation : 'N',     azimuth : 0.00 ,
- *     { abbreviation : 'NbE',   azimuth : 11.25 },
- *     { abbreviation : 'NNE',   azimuth : 22.50 },
- *       ...
- *     { abbreviation : 'NbW',   azimuth : 348.75 }
- *  ]
- */
-function createCompassPoints() {
-    var sides = ['N', 'E', 'S', 'W'],  // use array of cardinal directions only!
-        res = [];
+var assert = require('assert');
+var tasks = require('../task/10-katas-1-tasks');
+it.optional = require('../extensions/it-optional');
 
-    function getDoubleSide(side1, side2) {
-        switch (side1) {
-            case 'E':
-                return 'SE';
-            case 'W':
-                return 'NW';
-            default:
-                return side1 + side2;
+describe('10-katas-1-tasks', function() {
+
+    it.optional('createCompassPoints should return the 32 compass points', () => {
+        var expected = [
+            { abbreviation : 'N',     azimuth :   0.00 },
+            { abbreviation : 'NbE',   azimuth :  11.25 },
+            { abbreviation : 'NNE',   azimuth :  22.50 },
+            { abbreviation : 'NEbN',  azimuth :  33.75 },
+
+            { abbreviation : 'NE',    azimuth :  45.00 },
+            { abbreviation : 'NEbE',  azimuth :  56.25 },
+            { abbreviation : 'ENE',   azimuth :  67.50 },
+            { abbreviation : 'EbN',   azimuth :  78.75 },
+
+            { abbreviation : 'E',     azimuth :  90.00 },
+            { abbreviation : 'EbS',   azimuth : 101.25 },
+            { abbreviation : 'ESE',   azimuth : 112.50 },
+            { abbreviation : 'SEbE',  azimuth : 123.75 },
+
+            { abbreviation : 'SE',    azimuth : 135.00 },
+            { abbreviation : 'SEbS',  azimuth : 146.25 },
+            { abbreviation : 'SSE',   azimuth : 157.50 },
+            { abbreviation : 'SbE',   azimuth : 168.75 },
+
+            { abbreviation : 'S',     azimuth : 180.00 },
+            { abbreviation : 'SbW',   azimuth : 191.25 },
+            { abbreviation : 'SSW',   azimuth : 202.50 },
+            { abbreviation : 'SWbS',  azimuth : 213.75 },
+
+            { abbreviation : 'SW',    azimuth : 225.00 },
+            { abbreviation : 'SWbW',  azimuth : 236.25 },
+            { abbreviation : 'WSW',   azimuth : 247.50 },
+            { abbreviation : 'WbS',   azimuth : 258.75 },
+
+            { abbreviation : 'W',     azimuth : 270.00 },
+            { abbreviation : 'WbN',   azimuth : 281.25 },
+            { abbreviation : 'WNW',   azimuth : 292.50 },
+            { abbreviation : 'NWbW',  azimuth : 303.75 },
+
+            { abbreviation : 'NW',    azimuth : 315.00 },
+            { abbreviation : 'NWbN',  azimuth : 326.25 },
+            { abbreviation : 'NNW',   azimuth : 337.50 },
+            { abbreviation : 'NbW',   azimuth : 348.75 }
+
+        ];
+
+        assert.deepEqual(
+            tasks.createCompassPoints(),
+            expected
+        );
+
+    });
+
+
+    it.optional('expandBraces should expand the braces from pattern string', () => {
+        [
+            {
+                str: '~/{Downloads,Pictures}/*.{jpg,gif,png}',
+                result : [
+                    '~/Downloads/*.gif',
+                    '~/Downloads/*.jpg',
+                    '~/Downloads/*.png',
+                    '~/Pictures/*.gif',
+                    '~/Pictures/*.jpg',
+                    '~/Pictures/*.png'
+                ]
+            }, {
+            str: 'It{{em,alic}iz,erat}e{d,}, please.',
+            result : [
+                'Italicize, please.',
+                'Italicized, please.',
+                'Itemize, please.',
+                'Itemized, please.',
+                'Iterate, please.',
+                'Iterated, please.'
+            ]
+        },{
+            str: 'thumbnail.{png,jp{e,}g}',
+            result : [
+                'thumbnail.jpeg',
+                'thumbnail.jpg',
+                'thumbnail.png'
+            ]
+        },{
+            str: 'nothing to do',
+            result : [
+                'nothing to do'
+            ]
         }
-    }
-
-    for (var i = 0, currIndex, curr, next, newObj; i < 32; i++) {
-        newObj = {};
-        currIndex = Math.trunc(i / 8);
-        curr = sides[currIndex];
-        // prev = sides[curr > 0 ? curr - 1 : sides.length - 1];
-        next = sides[currIndex < sides.length - 1 ? currIndex + 1 : 0];
-        // console.log(curr,next);
-        switch (i % 8) {
-            case 0:
-                newObj['abbreviation'] = curr;
-                break;
-            case 1:
-                newObj['abbreviation'] = `${curr}b${next}`;
-                break;
-            case 2:
-                newObj['abbreviation'] = `${curr}${getDoubleSide(curr, next)}`;
-                break;
-            case 3:
-                newObj['abbreviation'] = `${getDoubleSide(curr, next)}b${curr}`;
-                break;
-            case 4:
-                newObj['abbreviation'] = getDoubleSide(curr, next);
-                break;
-            case 5:
-                newObj['abbreviation'] = `${getDoubleSide(curr, next)}b${next}`;
-                break;
-            case 6:
-                newObj['abbreviation'] = `${next}${getDoubleSide(curr, next)}`;
-                break;
-            case 7:
-                newObj['abbreviation'] = `${next}b${curr}`;
-                break;
-        }
-        newObj['azimuth'] = 11.25 * i;
-        res.push(newObj);
-    }
-    return res;
-}
-
-/**
- * Expand the braces of the specified string.
- * See https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
- *
- * In the input string, balanced pairs of braces containing comma-separated substrings
- * represent alternations that specify multiple alternatives which are to appear at that position in the output.
- *
- * @param {string} str
- * @return {Iterable.<string>}
- *
- * NOTE: The order of output string does not matter.
- *
- * Example:
- *   '~/{Downloads,Pictures}/*.{jpg,gif,png}'  => '~/Downloads/*.jpg',
- *                                                '~/Downloads/*.gif'
- *                                                '~/Downloads/*.png',
- *                                                '~/Pictures/*.jpg',
- *                                                '~/Pictures/*.gif',
- *                                                '~/Pictures/*.png'
- *
- *   'It{{em,alic}iz,erat}e{d,}, please.'  => 'Itemized, please.',
- *                                            'Itemize, please.',
- *                                            'Italicized, please.',
- *                                            'Italicize, please.',
- *                                            'Iterated, please.',
- *                                            'Iterate, please.'
- *
- *   'thumbnail.{png,jp{e,}g}'  => 'thumbnail.png'
- *                                 'thumbnail.jpeg'
- *                                 'thumbnail.jpg'
- *
- *   'nothing to do' => 'nothing to do'
- */
-function* expandBraces(str) {
-    var search = '',
-        startIndex = -1, endIndex = -1, stack = [], tmpstr = [];
-    startIndex = str.indexOf('{');
-    function outerSplit (string, symbol) {
-        var res = [], currStart = 0, stack = [];
-        for (var i = 0; i < string.length; i++) {
-            if (string.charAt(i) == '{') {
-                stack.push(0);
-            } else {
-                if (string.charAt(i) == '}') {
-                    stack.pop();
-                } else {
-                    if (string.charAt(i) == symbol && stack.length == 0) {
-                        res.push(string.slice(currStart, i));
-                        currStart = i + 1;
-                    }
-                }
-            }
-        }
-        res.push(string.slice(currStart))
-        return res;
-    }
-    if(startIndex != -1){
-        for (endIndex = startIndex + 1; endIndex < str.length; endIndex++){
-            if (str.charAt(endIndex) === '}') {
-                if (stack.length === 0) {
-                    break;
-                } else {
-                    stack.pop();
-                }
-            }
-            if(str.charAt(endIndex) === '{') {
-                stack.push(0);
-            }
-        }
-        search = str.slice(startIndex, endIndex + 1);
-    }
-    if (search == '') {
-        yield str;
-    } else {
-        // tmpstr = search.slice(1,-1).split(',');
-        tmpstr = outerSplit(search.slice(1,-1), ',');
-        for (var i = 0; i < tmpstr.length; i++) {
-            yield * expandBraces(str.replace(search, tmpstr[i]));
-        }
-    }
-}
-
-/**
- * Returns the ZigZag matrix
- *
- * The fundamental idea in the JPEG compression algorithm is to sort coefficient of given image by zigzag path and encode it.
- * In this task you are asked to implement a simple method to create a zigzag square matrix.
- * See details at https://en.wikipedia.org/wiki/JPEG#Entropy_coding
- * and zigzag path here: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/JPEG_ZigZag.svg/220px-JPEG_ZigZag.svg.png
- *
- * @param {number} n - matrix dimension
- * @return {array}  n x n array of zigzag path
- *
- * @example
- *   1  => [[0]]
- *
- *   2  => [[ 0, 1 ],
- *          [ 2, 3 ]]
- *
- *         [[ 0, 1, 5 ],
- *   3  =>  [ 2, 4, 6 ],
- *          [ 3, 7, 8 ]]
- *
- *         [[ 0, 1, 5, 6 ],
- *   4 =>   [ 2, 4, 7,12 ],
- *          [ 3, 8,11,13 ],
- *          [ 9,10,14,15 ]]
- *
- */
-function getZigZagMatrix(n) {
-    let res = new Array(n).fill().map(()=> new Array(n).fill());
-    let i = 0, j = 0;
-    let d = -1;
-    let start = 0, end = n*n - 1;
-    do {
-        res[i][j] = start++;
-        res[n - i - 1][n - j - 1] = end--;
-        i += d;
-        j -= d;
-        if (i < 0){
-            i++;
-            d = -d;
-        } else if (j < 0){
-            j++;
-            d = -d;
-        }
-    } while (start < end);
-    if (start === end)
-        res[i][j] = start;
-    return res;
-}
+        ].forEach(data => {
+            var actual = Array.from(tasks.expandBraces(data.str));
+            actual.sort();
+            assert.deepEqual(
+                actual,
+                data.result,
+                `'${data.str}' have not expanded correctly:`
+            );
+        });
+    });
 
 
-/**
- * Returns true if specified subset of dominoes can be placed in a row accroding to the game rules.
- * Dominoes details see at: https://en.wikipedia.org/wiki/Dominoes
- *
- * Each domino tile presented as an array [x,y] of tile value.
- * For example, the subset [1, 1], [2, 2], [1, 2] can be arranged in a row (as [1, 1] followed by [1, 2] followed by [2, 2]),
- * while the subset [1, 1], [0, 3], [1, 4] can not be arranged in one row.
- * NOTE that as in usual dominoes playing any pair [i, j] can also be treated as [j, i].
- *
- * @params {array} dominoes
- * @return {bool}
- *
- * @example
- *
- * [[0,1],  [1,1]] => true
- * [[1,1], [2,2], [1,5], [5,6], [6,3]] => false
- * [[1,3], [2,3], [1,4], [2,4], [1,5], [2,5]]  => true
- * [[0,0], [0,1], [1,1], [0,2], [1,2], [2,2], [0,3], [1,3], [2,3], [3,3]] => false
- *
- */
-function canDominoesMakeRow(dominoes) {
-    return dominoes.map(x => x[0] + x[1]).reduce((prev, cur) => prev + cur) %2 != 0;
-}
+    it.optional('getZigZagMatrix should create a square matrix with zigzag path', () => {
+        [
+            [
+                [0]
+            ],[
+            [ 0, 1 ],
+            [ 2, 3 ]
+        ],[
+            [ 0, 1, 5 ],
+            [ 2, 4, 6 ],
+            [ 3, 7, 8 ]
+        ],[
+            [ 0,  1,  5,  6 ],
+            [ 2,  4,  7, 12 ],
+            [ 3,  8, 11, 13 ],
+            [ 9, 10, 14, 15 ]
+        ],[
+            [  0,  1,  5,  6, 14 ],
+            [  2,  4,  7, 13, 15 ],
+            [  3,  8, 12, 16, 21 ],
+            [  9, 11, 17, 20, 22 ],
+            [ 10, 18, 19, 23, 24 ],
+        ],[
+            [  0,  1,  5,  6, 14, 15 ],
+            [  2,  4,  7, 13, 16, 25 ],
+            [  3,  8, 12, 17, 24, 26 ],
+            [  9, 11, 18, 23, 27, 32 ],
+            [ 10, 19, 22, 28, 31, 33 ],
+            [ 20, 21, 29, 30, 34, 35 ],
+        ],[
+            [  0,  1,  5,  6, 14, 15, 27 ],
+            [  2,  4,  7, 13, 16, 26, 28 ],
+            [  3,  8, 12, 17, 25, 29, 38 ],
+            [  9, 11, 18, 24, 30, 37, 39 ],
+            [ 10, 19, 23, 31, 36, 40, 45 ],
+            [ 20, 22, 32, 35, 41, 44, 46 ],
+            [ 21, 33, 34, 42, 43, 47, 48 ],
+        ]
+        ].forEach(data => {
+            var actual = tasks.getZigZagMatrix(data.length);
+            assert.deepEqual(
+                actual,
+                data,
+                `Zigzag matrix of ${data.length} size has not been produced correctly:`
+            );
+        });
+    });
 
 
-/**
- * Returns the string expression of the specified ordered list of integers.
- *
- * A format for expressing an ordered list of integers is to use a comma separated list of either:
- *   - individual integers
- *   - or a range of integers denoted by the starting integer separated from the end integer in the range by a dash, '-'.
- *     (The range includes all integers in the interval including both endpoints)
- *     The range syntax is to be used only for, and for every range that expands to more than two values.
- *
- * @params {array} nums
- * @return {bool}
- *
- * @example
- *
- * [ 0, 1, 2, 3, 4, 5 ]   => '0-5'
- * [ 1, 4, 5 ]            => '1,4,5'
- * [ 0, 1, 2, 5, 7, 8, 9] => '0-2,5,7-9'
- * [ 1, 2, 4, 5]          => '1,2,4,5'
- */
-function extractRanges(nums) {
-    for(var i = 0; i < nums.length; i++){
-        var j = i;
-        while(nums[j] - nums[j + 1] == -1) {
-            j++;
-        }
-        if(j != i && j - i > 1) {
-            nums.splice(i, j - i + 1, nums[i] + '-' + nums[j]);
-        }
-    }
-    return nums.join();
-}
+    it.optional('canDominoesMakeRow should answer if specified subset of dominoes can be arranged in a row', () => {
+        [
+            [
+                [0,1], [1,1]
+            ],[
+            [1,3], [2,3], [1,4], [2,4], [1,5], [2,5]
+        ],[
+            [1,1], [1,2], [2,3], [2,5], [2,6], [3,6], [5,6], [6,6]
+        ]
+        ].forEach(data => {
+            var actual = tasks.canDominoesMakeRow(data);
+            assert.equal(
+                actual,
+                true,
+                `[${data.join('],[')}] can be arrangement in a row`
+            );
+        });
 
-module.exports = {
-    createCompassPoints : createCompassPoints,
-    expandBraces : expandBraces,
-    getZigZagMatrix : getZigZagMatrix,
-    canDominoesMakeRow : canDominoesMakeRow,
-    extractRanges : extractRanges
-};
+
+        [
+            [
+                [0,1], [2,3]
+            ],[
+            [1,1], [2,2], [1,5], [5,6], [6,3]
+        ],[
+            [0,0], [0,1], [0,2], [0,3], [1,1], [1,2], [1,3], [2,2], [2,3], [3,3]
+        ]
+        ].forEach(data => {
+            var actual = tasks.canDominoesMakeRow(data);
+            assert.equal(
+                actual,
+                false,
+                `[${data.join('],[')}] can't be arrangement in a row`
+            );
+        });
+
+    });
+
+
+    it.optional('extractRanges should return string expression of ordered list of integers', () => {
+        [
+            {
+                nums:   [ 0, 1, 2, 3, 4, 5 ],
+                result: '0-5'
+            },{
+            nums:   [ 1, 4, 5 ],
+            result: '1,4,5'
+        },{
+            nums:   [ 0, 1, 2, 5, 7, 8, 9],
+            result: '0-2,5,7-9'
+        },{
+            nums:   [ 1, 2, 4, 5],
+            result: '1,2,4,5'
+        },{
+            nums:   [ 0,  1,  2,  4,  6,  7,  8, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                25, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39 ],
+            result: '0-2,4,6-8,11,12,14-25,27-33,35-39'
+        },
+        ].forEach(data => {
+            var actual = tasks.extractRanges(data.nums);
+            assert.equal(
+                actual,
+                data.result,
+                `[${data.nums}] have not expanded correctly:`
+            );
+        });
+    });
+
+});
