@@ -847,7 +847,7 @@ describe('04-arrays-tasks', function() {
                 data.expected,
                 actual,
                 `The result of swaping head and tail [${data.arr}] is not correct`
-            );
+            ) ;
         });
     });
 
