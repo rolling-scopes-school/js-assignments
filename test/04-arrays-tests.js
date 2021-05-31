@@ -582,7 +582,7 @@ function group(array, keySelector, valueSelector) {
         else
             _map.set(keySelector(x), [valueSelector(x)]);
     });
-    return _map;
+    return _map ;
 }
 
 
