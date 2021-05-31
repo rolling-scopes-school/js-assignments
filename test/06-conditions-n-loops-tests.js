@@ -1,4 +1,4 @@
-'use strict';
+'use strict' ;
 
 var assert = require('assert');
 var tasks = require('../task/06-conditions-n-loops-tasks');
