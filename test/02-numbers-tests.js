@@ -205,7 +205,7 @@ function roundToPowerOfTen(num, pow) {
  */
 function isPrime(n) {
     if (n <= 1) {
-        return false;
+        return false ;
     } else if (n <= 3) {
         return true;
     } else if (!(n % 2) || !(n % 3)) {
