@@ -603,7 +603,7 @@ function selectMany(arr, childrenSelector) {
     {
         myArr.push(...childrenSelector(elem));
     });
-    return myArr;
+    return myArr ;
 }
 
 
@@ -645,9 +645,9 @@ function getElementByIndexes(arr, indexes) {
 function swapHeadAndTail(arr) {
     let len = Math.floor(arr.length / 2);
     let head = arr.splice(0, len);
-    let tail = arr.splice(arr.length-len, len);
+    let tail = arr.splice(arr.length-len, len) ;
     let array = [];
-    array.push(...tail);
+    array.push(...tail)  ;
     if(arr.length % 2) {
         let middle = arr.splice(0, 1);
         array.push(...middle)
