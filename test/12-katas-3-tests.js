@@ -1,183 +1,134 @@
 'use strict';
 
-/**
- * Returns true if word occurrs in the specified word snaking puzzle.
- * Each words can be constructed using "snake" path inside a grid with top, left, right and bottom directions.
- * Each char can be used only once ("snake" should not cross itself).
- *
- * @param {array} puzzle
- * @param {array} searchStr
- * @return {bool}
- *
- * @example
- *   var puzzle = [
- *      'ANGULAR',
- *      'REDNCAE',
- *      'RFIDTCL',
- *      'AGNEGSA',
- *      'YTIRTSP',
- *   ];
- *   'ANGULAR'   => true   (first row)
- *   'REACT'     => true   (starting from the top-right R adn follow the ↓ ← ← ↓ )
- *   'UNDEFINED' => true
- *   'RED'       => true
- *   'STRING'    => true
- *   'CLASS'     => true
- *   'ARRAY'     => true   (first column)
- *   'FUNCTION'  => false
- *   'NULL'      => false
- */
-function findStringInSnakingPuzzle(puzzle, searchStr) {
-    function dfs(current, step) {
-        let save = data[current.y][current.x];
-        data[current.y][current.x] = "";
-        if (step == search.length)
-            return true;
-        let result = false,
-            steps = [[1, 0], [-1, 0], [0, -1], [0, 1]];
-        for (let i = 0; i < 4; i++) {
-            let newX = current.x + steps[i][0],
-                newY = current.y + steps[i][1];
-            if (data[newY][newX] == search[step]) {
-                result = result || dfs({x: newX, y: newY}, step + 1);
-            }
+var assert = require('assert');
+var tasks = require('../task/12-katas-3-tasks');
+it.optional = require('../extensions/it-optional');
+
+describe('12-katas-3-tasks', function() {
+
+    it.optional('findStringInSnakingPuzzle shoud return true if word occurrs in the specified puzzle', () => {
+        var puzzle = [
+            'ANGULAR',
+            'REDNCAE',
+            'RFIDTCL',
+            'AGNEGSA',
+            'YTIRTSP',
+        ];
+        var puzzleToString = (p) => p.map(x=>'       '+x).join('\n');
+        [
+            'ANGULAR', 'REACT', 'UNDEFINED', 'RED', 'STRING', 'CLASS', 'ARRAY'
+        ].forEach(word => {
+            assert(
+                tasks.findStringInSnakingPuzzle(puzzle, word),
+                `Word "${word}" occurrs in puzzle\n${puzzleToString(puzzle)}`
+            );
+        });
+
+        [
+            'FUNCTION', 'NULL', 'EMBER', 'HOISTING', 'GIT', 'ARENA'
+        ].forEach(word => {
+            assert(
+                !tasks.findStringInSnakingPuzzle(puzzle, word),
+                `Word "${word}" does not occurr in puzzle\n${puzzleToString(puzzle)}`
+            );
+        });
+    });
+
+
+    it.optional('getPermutations should return all possible string permutations', () => {
+        [
+            {
+                chars:    'a',
+                expected: [ 'a' ]
+            },{
+            chars:    'ab',
+            expected: [ 'ab', 'ba' ]
+        },{
+            chars:    'abc',
+            expected: [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
+        },{
+            chars:    'abcd',
+            expected: [
+                'abcd', 'abdc', 'acbd', 'acdb', 'adbc', 'adcb',
+                'bacd', 'badc', 'bcad', 'bcda', 'bdac', 'bdca',
+                'cabd', 'cadb', 'cbad', 'cbda', 'cdab', 'cdba',
+                'dabc', 'dacb', 'dbac', 'dbca', 'dcab', 'dcba'
+            ]
         }
-        data[current.y][current.x] = save;
-        return result;
-    }
-    let data = Array.from(puzzle);
-    let Arrtmp = Array.from({length: data[0].length + 2}, () => '');
-    data = data.map(item => [''].concat(item.split(''), ['']));
-    data = [Arrtmp].concat(data, [Arrtmp]);
-    let search = searchStr.split(''),
-        n = data[0].length - 1,
-        m = data.length - 1;
-    for (let i = 1; i < m; i++) {
-        for (let j = 1; j < n; j++)
-            if (data[i][j] == search[0]) {
-                if (dfs({y: i, x: j}, 1))
-                    return true;
-            }
-    }
-
-    return false;
-}
+        ].forEach(data => {
+            assert.deepEqual(
+                Array.from(tasks.getPermutations(data.chars)).sort(),
+                data.expected,
+                `Incorrect permutations of "${data.chars}"`
+            );
+        });
+        assert.equal(
+            Array.from(tasks.getPermutations('12345')).length,
+            120,
+            'Number of 5 chars permutations should be 120.'
+        );
+    });
 
 
-/**
- * Returns all permutations of the specified string.
- * Assume all chars in the specified string are different.
- * The order of permutations does not matter.
- *
- * @param {string} chars
- * @return {Iterable.<string>} all posible strings constructed with the chars from the specfied string
- *
- * @example
- *    'ab'  => 'ab','ba'
- *    'abc' => 'abc','acb','bac','bca','cab','cba'
- */
-function* getPermutations(chars) {
-    function *permute(a, len){
-        if (len < 2)
-            yield a.join('');
-        else{
-            for (let i = 0; i < len; i++){
-                yield *permute(a,len - 1);
-                const toSwap = len % 2 ? 0 : i;
-                let tmp = a[len - 1];
-                a[len - 1] = a[toSwap];
-                a[toSwap] = tmp;
-            }
+    it.optional('getMostProfitFromStockQuotes should return the max profit from stock trading', () => {
+        [
+            {
+                quotes:   [ 1, 2, 3, 4, 5, 6 ],
+                expected: 15
+            },{
+            quotes:   [ 6, 5, 4, 3, 2, 1 ],
+            expected: 0
+        },{
+            quotes:   [ 1, 6, 5, 10, 8, 7 ],
+            expected: 18
+        },{
+            quotes:   [ 31, 312, 3, 35, 33, 3, 44, 123, 126, 2, 4, 1 ],
+            expected: 798
+        },{
+            quotes:   [ 1, 20, 1, 30, 1, 40, 1, 50, 1, 40, 1, 30, 1, 20, 1 ],
+            expected: 343
         }
-    }
-    yield *permute(chars.split(''), chars.length);
-}
+        ].forEach(data => {
+            var actual = tasks.getMostProfitFromStockQuotes(data.quotes);
+            assert.equal(
+                actual,
+                data.expected,
+                `Most profit for [${data.quotes}] quotes is ${data.expected} but actually ${actual}`
+            );
+        });
+    });
 
 
-/**
- * Returns the most profit from stock quotes.
- * Stock quotes are stores in an array in order of date.
- * The stock profit is the difference in prices in buying and selling stock.
- * Each day, you can either buy one unit of stock, sell any number of stock units you have already bought, or do nothing.
- * Therefore, the most profit is the maximum difference of all pairs in a sequence of stock prices.
- *
- * @param {array} quotes
- * @return {number} max profit
- *
- * @example
- *    [ 1, 2, 3, 4, 5, 6]   => 15  (buy at 1,2,3,4,5 and then sell all at 6)
- *    [ 6, 5, 4, 3, 2, 1]   => 0   (nothing to buy)
- *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
- */
-function getMostProfitFromStockQuotes(quotes) {
-    let tmpMax = quotes
-        .reduceRight((prev, curr)=>{
-            if(prev.length == 0)
-                return [curr];
-            prev.push(Math.max(prev[prev.length - 1],curr));
-            return prev;
-        }, [])
-        .reverse();
-    tmpMax.push(0);
-    return quotes.reduce((prev, curr, index)=>{
-        return prev + Math.max(0, tmpMax[index + 1] - curr);
-    }, 0);
-}
+    it.optional('urlShortener should return encoded string shorter than original url', () => {
+        [
+            'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul',
+            'https://en.wikipedia.org/wiki/Percent-encoding#Types_of_URI_characters',
+            'https://en.wikipedia.org/wiki/Binary-to-text_encoding#Encoding_plain_text'
+        ].forEach(data => {
+            var urlShortener = new tasks.UrlShortener();
+            var actual = urlShortener.encode(data);
+            assert(
+                data.length / actual.length > 1.5,
+                `urlShortener.encode for "${data}" returns "${actual}" that is only ${data.length/actual.length} times less than original url`
+            );
+        });
+    });
 
 
-/**
- * Class representing the url shorting helper.
- * Feel free to implement any algorithm, but do not store link in the key\value stores.
- * The short link can be at least 1.5 times shorter than the original url.
- *
- * @class
- *
- * @example
- *
- *     var urlShortener = new UrlShortener();
- *     var shortLink = urlShortener.encode('https://en.wikipedia.org/wiki/URL_shortening');
- *     var original  = urlShortener.decode(shortLink); // => 'https://en.wikipedia.org/wiki/URL_shortening'
- *
- */
-function UrlShortener() {
-    this.urlAllowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+
-        "abcdefghijklmnopqrstuvwxyz"+
-        "0123456789-_.~!*'();:@&=+$,/?#[]";
-}
+    it.optional('urlShortener should decode shorten link to to the original url', () => {
+        [
+            'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul',
+            'https://www.example.com/catalog.html?search=mobile+phones&price=100-200&year=2016#top_links',
+        ].forEach(data => {
+            var urlShortener = new tasks.UrlShortener();
+            var encoded = urlShortener.encode(data);
+            var actual = urlShortener.decode(encoded);
+            assert.equal(
+                data,
+                actual,
+                `urlShortener.encode for "${data}" returns "${encoded}" but decode returns "${actual}"`
+            );
+        });
+    });
 
-UrlShortener.prototype = {
-
-    encode: function(url) {
-        let res = "";
-        for (let i = 0; i < url.length; i += 2) {
-            let tmp1 = url.charCodeAt(i);
-            let tmp2 = url.charCodeAt(i + 1);
-            let code = (tmp1 << 8) |tmp2;
-            res += String.fromCharCode(code);
-        }
-        return res;
-    },
-
-    decode: function(code) {
-        let res = "";
-        for (let i = 0; i < code.length; i++) {
-            let char = parseInt(code.charCodeAt(i), 10);
-            let tmp1 = char & 255;
-            let tmp2 = (char >> 8) & 255;
-            if (tmp1 === 0) {
-                res += String.fromCharCode(tmp2)
-            } else {
-                res += String.fromCharCode(tmp2) + String.fromCharCode(tmp1);
-            }
-        }
-        return res;
-    }
-}
-
-
-module.exports = {
-    findStringInSnakingPuzzle: findStringInSnakingPuzzle,
-    getPermutations: getPermutations,
-    getMostProfitFromStockQuotes: getMostProfitFromStockQuotes,
-    UrlShortener: UrlShortener
-};
+});
