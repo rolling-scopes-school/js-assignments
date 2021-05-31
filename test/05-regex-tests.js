@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('assert');
+var assert = require('assert') ;
 var tasks = require('../task/05-regex-tasks');
 it.optional = require('../extensions/it-optional');
 
