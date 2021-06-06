@@ -40,12 +40,12 @@ describe('09-functions-n-closures-tasks', function() {
                 polynom: tasks.getPolynom(2,3,5),
                 results: [ {x: 0, y: 5},  {x: 2, y: 19}, {x: 3, y: 32} ]
             },{
-                polynom: tasks.getPolynom(1,-3),
-                results: [ {x:0, y: -3}, {x:2, y: -1}, {x:5, y:2} ]
-            },{
-                polynom: tasks.getPolynom(8),
-                results: [ {x:0, y:8},  {x:2, y:8},  {x:5, y:8} ]
-            }
+            polynom: tasks.getPolynom(1,-3),
+            results: [ {x:0, y: -3}, {x:2, y: -1}, {x:5, y:2} ]
+        },{
+            polynom: tasks.getPolynom(8),
+            results: [ {x:0, y:8},  {x:2, y:8},  {x:5, y:8} ]
+        }
         ].forEach(data => {
             data.results.forEach(test => {
                 assert(
@@ -66,9 +66,9 @@ describe('09-functions-n-closures-tasks', function() {
         var expected = memoizer();
         assert.equal(numberOfCalls, 1, 'memoize result should evaluate the specified function at first call');
         for(var i=0; i<10; i++) {
-           let actual = memoizer();
-           assert.equal(actual, expected, 'memoize result should return the cached value at second and next calls');
-           assert.equal(numberOfCalls, 1, 'memoize result should not evaluate the specified function at second and next calls');
+            let actual = memoizer();
+            assert.equal(actual, expected, 'memoize result should return the cached value at second and next calls');
+            assert.equal(numberOfCalls, 1, 'memoize result should not evaluate the specified function at second and next calls');
         }
     });
 
@@ -100,7 +100,7 @@ describe('09-functions-n-closures-tasks', function() {
         assert.equal(
             log,
             'cos(3.141592653589793) starts\n'
-           +'cos(3.141592653589793) ends\n',
+            +'cos(3.141592653589793) ends\n',
             'logger function shoud log the start and end of the specified function');
     });
 
@@ -129,7 +129,7 @@ describe('09-functions-n-closures-tasks', function() {
         assert.equal(
             log,
             'testLogger(["expected","test",1],0) starts\n'
-           +'testLogger(["expected","test",1],0) ends\n',
+            +'testLogger(["expected","test",1],0) ends\n',
             'logger function shoud log the end of specified function after calling');
     });
 

@@ -36,7 +36,7 @@ describe('02-numbers-tasks', function() {
         assert.equal(-8, tasks.getLinearEquationRoot(1, 8));
         assert.equal(0, tasks.getLinearEquationRoot(5, 0));
     });
-    
+
     it.optional('getAngleBetweenVectors should return a angle (in radians) between two linear vectors', function() {
         assert.equal(Math.PI/2, tasks.getAngleBetweenVectors(1, 0, 0, 1));
         assert.equal(Math.PI, tasks.getAngleBetweenVectors(0, 1, 0, -1));
@@ -68,7 +68,7 @@ describe('02-numbers-tasks', function() {
         assert.equal(1230, tasks.roundToPowerOfTen(1234,1));
         assert.equal(1200, tasks.roundToPowerOfTen(1234,2));
         assert.equal(1000, tasks.roundToPowerOfTen(1234,3));
-        
+
         assert.equal(9678, tasks.roundToPowerOfTen(9678,0));
         assert.equal(9680, tasks.roundToPowerOfTen(9678,1));
         assert.equal(9700, tasks.roundToPowerOfTen(9678,2));

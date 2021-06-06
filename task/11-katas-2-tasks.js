@@ -34,7 +34,44 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+    let Arrtmp = bankAccount.split('\n');
+    let accNum = 0;
+    let numIfDig = 9;
+    for (let i = 0; i < numIfDig; i++){
+        let tmpd;
+        let k = i*3;
+        if (Arrtmp[2][k+2] === ' '){
+            tmpd = 2;
+        } else if (Arrtmp[1][k+2] === ' '){
+            if (Arrtmp[2][k] === ' '){
+                tmpd = 5;
+            } else {
+                tmpd = 6;
+            }
+        } else if (Arrtmp[2][k] === '|'){
+            if (Arrtmp[1][k+1] === ' '){
+                tmpd = 0;
+            } else {
+                tmpd = 8;
+            }
+        } else if (Arrtmp[0][k+1] === ' '){
+            if (Arrtmp[1][k+1] === ' '){
+                tmpd = 1;
+            } else {
+                tmpd = 4;
+            }
+        } else if (Arrtmp[1][k+1] === '_'){
+            if (Arrtmp[1][k] === '|'){
+                tmpd = 9;
+            } else {
+                tmpd = 3;
+            }
+        } else{
+            tmpd = 7;
+        }
+        accNum += tmpd * Math.pow(10, numIfDig - i - 1);
+    }
+    return accNum;
 }
 
 
@@ -63,7 +100,18 @@ function parseBankAccount(bankAccount) {
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-    throw new Error('Not implemented');
+    var words = text.split(' '), curr = '';
+    for (var i = 0; i < words.length; i++) {
+        if (curr.length + words[i].length <= columns) {
+            curr += words[i] + " ";
+        } else {
+            yield curr.trim();
+            curr = words[i] + " ";
+        }
+    }
+    if (curr != '') {
+        yield curr.trim();
+    }
 }
 
 
@@ -100,20 +148,38 @@ const PokerRank = {
 }
 
 function getPokerHandRank(hand) {
-    throw new Error('Not implemented');
+    const suites = '♥♠♦♣',
+        numbers = 'A234567891JQK';
+    let suitArr = Array.from(suites, () => 0),
+        numArr = Array.from(numbers, () => 0);
+    for (let card of hand) {
+        suitArr[suites.indexOf(card.slice(-1))]++;
+        numArr[numbers.indexOf(card[0])]++;
+    }
+    numArr.push(numArr[0]); // Ace card
+    let suitStr = suitArr.join(''),
+        numStr = numArr.join('');
+    return (numStr.indexOf('11111') !== -1) &&
+    (suitStr.indexOf('5') !== -1) ? PokerRank.StraightFlush :
+        (numStr.indexOf('4') !== -1) ? PokerRank.FourOfKind :
+            (numStr.indexOf('2') !== -1) && (numStr.indexOf('3') !== -1) ? PokerRank.FullHouse :
+                (suitStr.indexOf('5') !== -1) ? PokerRank.Flush :
+                    (numStr.indexOf('11111') !== -1) ? PokerRank.Straight :
+                        (numStr.indexOf('3') !== -1) ? PokerRank.ThreeOfKind :
+                            (numStr.match(/2.*2.+/)) ? PokerRank.TwoPairs :
+                                (numStr.indexOf('2') !== -1) ? PokerRank.OnePair :
+                                    PokerRank.HighCard;
 }
-
-
 /**
  * Returns the rectangles sequence of specified figure.
  * The figure is ASCII multiline string comprised of minus signs -, plus signs +, vertical bars | and whitespaces.
  * The task is to break the figure in the rectangles it is made of.
  *
  * NOTE: The order of rectanles does not matter.
- * 
+ *
  * @param {string} figure
  * @return {Iterable.<string>} decomposition to basic parts
- * 
+ *
  * @example
  *
  *    '+------------+\n'+
@@ -135,7 +201,96 @@ function getPokerHandRank(hand) {
  *    '+-------------+\n'
  */
 function* getFigureRectangles(figure) {
-   throw new Error('Not implemented');
+    const Arrtmp = figure.split('\n');
+    const pluses = [];
+    const horizontalLines = [];
+    const rectangles = [];
+
+    for (let i = 0; i < Arrtmp.length; i++)
+        for (let j = 0; j < Arrtmp[0].length; j++)
+            if (Arrtmp[i][j] === '+') {
+                pluses.push({x: j, y: i});
+            }
+
+    for (let i = 0; i < pluses.length; i++)
+        for (let j = i + 1; j < pluses.length; j++)
+            if (pluses[i].y === pluses[j].y) {
+                if (checkHorizontalLine(Arrtmp, pluses[i], pluses[j]))
+                    horizontalLines.push([pluses[i], pluses[j]]);
+            }
+
+    for (let i = 0; i < horizontalLines.length; i++)
+        for (let j = i + 1; j < horizontalLines.length; j++)
+            if (checkRectangle(Arrtmp, horizontalLines[i], horizontalLines[j])) {
+                rectangles.push([horizontalLines[i], horizontalLines[j]]);
+            }
+
+    for (let i = 0; i < rectangles.length; i++) {
+        let rectangle = drawRectangle(rectangles[i]);
+
+        yield rectangle;
+    }
+}
+
+function checkHorizontalLine(Arrtmp, s, f) {
+    for (let i = s.x; i <= f.y; i++)
+        if (Arrtmp[s.y][i] !== '-' && Arrtmp[s.y][i] !== '+')
+            return false;
+
+    return true;
+}
+
+function checkRectangle(Arrtmp, top, bottom) {
+    if (top[0].x !== bottom[0].x)
+        return false;
+
+    if (top[1].x !== bottom[1].x)
+        return false;
+
+    const leftX = top[0].x,
+        rightX = top[1].x,
+        topY = top[0].y,
+        bottomY = bottom[0].y;
+
+    for (let j = leftX + 1; j < rightX; j++)
+        if (Arrtmp[topY][j] === '+' && Arrtmp[bottomY][j] === '+') {
+            let hasWhiteSpace = false;
+
+            for (let i = topY + 1; i < bottomY; i++)
+                if (Arrtmp[i][j] === ' ')
+                    hasWhiteSpace = true;
+
+
+            if (!hasWhiteSpace)
+                return false;
+        }
+
+    for (let i = topY + 1; i < bottomY; i++) {
+        if (Arrtmp[i][leftX] !== '|' && Arrtmp[i][leftX] !== '+')
+            return false;
+
+        if (Arrtmp[i][rightX] !== '|' && Arrtmp[i][rightX] !== '+')
+            return false;
+
+        for (let j = leftX + 1; j < rightX; j++)
+            if (Arrtmp[i][j] !== ' ')
+                return false;
+    }
+
+    return true;
+}
+
+function drawRectangle(item) {
+    let width = item[0][1].x - item[0][0].x + 1,
+        height = item[1][0].y - item[0][0].y + 1,
+        result = '',
+        topLine = '+' + ('-').repeat(width - 2) + '+' + '\n';
+
+    result += topLine;
+    result += ( '|' + (' ').repeat(width - 2) + '|' + '\n' ).repeat(height - 2);
+    result += topLine;
+
+    return result;
 }
 
 

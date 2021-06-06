@@ -68,22 +68,22 @@ describe('03-date-tasks', function() {
                 endDate:   new Date(2000,1,1,11,0,0),
                 expected:  '01:00:00.000'
             }, {
-                startDate: new Date(2000,1,1,10,0,0),
-                endDate:   new Date(2000,1,1,10,30,0),
-                expected:  '00:30:00.000'
-            }, {
-                startDate: new Date(2000,1,1,10,0,0),
-                endDate:   new Date(2000,1,1,10,0,20),
-                expected:  '00:00:20.000'
-            }, {
-                startDate: new Date(2000,1,1,10,0,0),
-                endDate:   new Date(2000,1,1,10,0,0,250),
-                expected:  '00:00:00.250'
-            }, {
-                startDate: new Date(2000,1,1,10,0,0),
-                endDate:   new Date(2000,1,1,15,20,10,453),
-                expected:  '05:20:10.453'
-            }
+            startDate: new Date(2000,1,1,10,0,0),
+            endDate:   new Date(2000,1,1,10,30,0),
+            expected:  '00:30:00.000'
+        }, {
+            startDate: new Date(2000,1,1,10,0,0),
+            endDate:   new Date(2000,1,1,10,0,20),
+            expected:  '00:00:20.000'
+        }, {
+            startDate: new Date(2000,1,1,10,0,0),
+            endDate:   new Date(2000,1,1,10,0,0,250),
+            expected:  '00:00:00.250'
+        }, {
+            startDate: new Date(2000,1,1,10,0,0),
+            endDate:   new Date(2000,1,1,15,20,10,453),
+            expected:  '05:20:10.453'
+        }
         ].forEach(data => {
             assert.equal(
                 data.expected,
@@ -92,43 +92,43 @@ describe('03-date-tasks', function() {
         });
 
     });
-    
-    
+
+
     it.optional('angleBetweenClockHands should returns the angle bettween clock hands for specified Greenwich datetime', function () {
         [
             {
                 date:     Date.UTC(2016,3,5, 0, 0),
                 expected: 0
             }, {
-                date:     Date.UTC(2016,3,5, 3, 0),
-                expected: Math.PI/2
-            }, {
-                date:     Date.UTC(2016,3,5,15, 0),
-                expected: Math.PI/2
-            }, {
-                date:     Date.UTC(2016,3,5, 6, 0),
-                expected: Math.PI
-            }, {
-                date:     Date.UTC(2016,3,5,18, 0),
-                expected: Math.PI
-            }, {
-                date:     Date.UTC(2016,3,5, 9, 0),
-                expected: Math.PI/2
-            }, {
-                date:     Date.UTC(2016,3,5,21, 0),
-                expected: Math.PI/2
-            }, {
-                date:     Date.UTC(2016,3,5,14,20),
-                expected: 0.8726646259971648
-            }, {
-                date:     Date.UTC(2016,3,5,23,55),
-                expected: 0.4799655442984406
-            }
+            date:     Date.UTC(2016,3,5, 3, 0),
+            expected: Math.PI/2
+        }, {
+            date:     Date.UTC(2016,3,5,15, 0),
+            expected: Math.PI/2
+        }, {
+            date:     Date.UTC(2016,3,5, 6, 0),
+            expected: Math.PI
+        }, {
+            date:     Date.UTC(2016,3,5,18, 0),
+            expected: Math.PI
+        }, {
+            date:     Date.UTC(2016,3,5, 9, 0),
+            expected: Math.PI/2
+        }, {
+            date:     Date.UTC(2016,3,5,21, 0),
+            expected: Math.PI/2
+        }, {
+            date:     Date.UTC(2016,3,5,14,20),
+            expected: 0.8726646259971648
+        }, {
+            date:     Date.UTC(2016,3,5,23,55),
+            expected: 0.4799655442984406
+        }
         ].forEach(data => {
             assert.equal(
                 tasks.angleBetweenClockHands(new Date(data.date)),
                 data.expected,
-                `Incorrect result for angleBetweenClockHands(${new Date(data.date).toUTCString()}):`   
+                `Incorrect result for angleBetweenClockHands(${new Date(data.date).toUTCString()}):`
             );
         });
     });

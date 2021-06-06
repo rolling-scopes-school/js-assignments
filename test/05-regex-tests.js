@@ -28,10 +28,10 @@ describe('05-regex-tasks', function() {
             '0c74f13f-fa83-4c48-9b33-68921dd72463',
             'The roof, the roof, the roof is on fire'
         ].forEach((str) => {
-             assert(
-                 result.test(str) == false,
+            assert(
+                result.test(str) == false,
                 `regex matches '${str}'`
-             );
+            );
         });
 
     });
@@ -154,8 +154,8 @@ describe('05-regex-tasks', function() {
         });
 
         assert(
-           !'abcdABCD1234'.match(tasks.getPasswordValidator(20)),
-           'Password validator do not validate minLength restriction'
+            !'abcdABCD1234'.match(tasks.getPasswordValidator(20)),
+            'Password validator do not validate minLength restriction'
         );
     });
 });
