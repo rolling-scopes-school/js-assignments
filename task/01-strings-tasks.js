@@ -100,7 +100,7 @@ function getFirstChar(value) {
  */
 function removeLeadingAndTrailingWhitespaces(value) {
     return value.trim();
-
+}
 /**
  * Returns a string that repeated the specified number of times.
  *
@@ -113,7 +113,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    return value.repeat(count)
+    return value.repeat(count);
 }
 
 /**
