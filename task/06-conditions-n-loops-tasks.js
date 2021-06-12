@@ -24,6 +24,64 @@
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
+function getFizzBuzz(num) {
+    if((num % 3 === 0) && (num % 5 === 0)) {
+        return 'FizzBuzz'
+    } else if(num % 5 === 0) {
+        return'Buzz'
+    } else if (num % 3 === 0) {
+        return 'Fizz'
+    }
+    return num
+}
+
+function getFactorial(n) {
+    if (n < 0)
+        return -1;
+    else if (n === 0)
+        return 1;
+    else {
+        return (n * getFactorial(n - 1));
+    }
+}
+
+function getSumBetweenNumbers(n1, n2) {
+    let count = 0;
+    for(let i = n1; i <=n2; i++ ) {
+        count +=i
+    }
+    return count;
+}
+
+function doRectanglesOverlap(rect1, rect2) {
+    return !(
+        rect1.left + rect1.width < rect2.left ||
+        rect2.left + rect2.width < rect1.left ||
+        rect1.top + rect1.height < rect2.top ||
+        rect2.top + rect2.height < rect1.top
+    );
+}
+
+function findFirstSingleChar(str) {
+    for (let i = 0; i < str.length; i++) {
+        if (str.indexOf(str[i]) == str.lastIndexOf(str[i])) {
+            return str[i];
+        }
+    }
+
+    return null;
+}
+
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+    let res = "";
+    res += (isStartIncluded && res.length === 0) ? "[" : "(";
+    res += a <= b ? `${a}, ${b}` : `${b}, ${a}`;
+    res += isEndIncluded ? "]" : ")";
+    return res;
+}
+
+
+
 function isTriangle(a,b,c) {
     return a < b + c && b < a + c && c < a + b;
 }
@@ -60,6 +118,8 @@ function isInsideCircle(circle, point) {
     let dy = point.y - circle.center.y;
     return (dx*dx + dy*dy) < (circle.radius * circle.radius);
 }
+
+
 
 
 /**
@@ -121,6 +181,70 @@ function toNaryString(num, n) {
     return num.toString(n);
 }
 
+function isCreditCardNumber(ccn) {
+    ccn = [...String(ccn)].reverse();
+    ccn = ccn.reduce(function(sum, val, ind)
+    {
+        let dig = Number(val);
+        if(ind % 2)
+            dig *= 2;
+        sum += Math.floor(dig / 10);
+        sum += dig % 10;
+        return sum;
+    }, 0);
+    return (ccn * 3) % 10 == 0;
+}
+
+function getDigitalRoot(num) {
+    do{
+        let sum = 0;
+        while(num > 0){
+            sum += num % 10;
+            num = Math.floor(num / 10);
+        }
+        num = sum;
+    }while(num > 9);
+    return num;
+}
+
+function isBracketsBalanced(str) {
+    let pair = {
+        '>': '<',
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    }
+    let res = [...str].reduce(function(acc, x, ind)
+    {
+        if (['(', '{', '[', '<'].indexOf(x) != -1)
+            acc.push(x);
+        else
+        {
+            if (acc.length > 0 && acc[acc.length - 1] == pair[x])
+                acc.pop();
+            else
+                acc.push(x);
+        }
+        return acc;
+    }, []);
+    return res.length == 0;
+}
+
+function timespanToHumanString(startDate, endDate) {
+    throw new Error('Not implemented');
+}
+
+function getCommonDirectoryPath(pathes) {
+    throw new Error('Not implemented');
+}
+
+function getMatrixProduct(m1, m2) {
+    throw new Error('Not implemented');
+}
+
+function evaluateTicTacToePosition(position) {
+    throw new Error('Not implemented');
+}
 
 module.exports = {
     getFizzBuzz: getFizzBuzz,
@@ -136,7 +260,7 @@ module.exports = {
     isCreditCardNumber: isCreditCardNumber,
     getDigitalRoot: getDigitalRoot,
     isBracketsBalanced: isBracketsBalanced,
-    timespanToHumanString : timespanToHumanString,
+    ToHumanString : timespanToHumanString,
     toNaryString: toNaryString,
     getCommonDirectoryPath: getCommonDirectoryPath,
     getMatrixProduct: getMatrixProduct,
