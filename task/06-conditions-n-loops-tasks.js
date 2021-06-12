@@ -230,7 +230,7 @@ function isBracketsBalanced(str) {
     return res.length == 0;
 }
 
-function timespanToHumanString(startDate, endDate) {
+function ToHumanString(startDate, endDate) {
     throw new Error('Not implemented');
 }
 
