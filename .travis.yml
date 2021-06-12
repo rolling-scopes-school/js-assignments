@@ -1,6 +1,3 @@
-install:
-  - bundle install --path vendor/bundle
-  - npm install
 language: node_js
 node_js:
   - "14.17.0"
