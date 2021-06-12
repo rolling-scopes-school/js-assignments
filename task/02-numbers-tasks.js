@@ -91,7 +91,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    return -b / a;
+    return -1 * b/a;
 }
 
 
@@ -113,11 +113,7 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    var angle = Math.atan2(y2, x2) - Math.atan2(y1, x1)
-    if (angle < 0) {
-        angle += 2 * Math.PI;
-    }
-    return angle
+    return Math.hypot((Math.abs(x1 - x2)), (Math.abs(y1 - y2)));
 }
 
 /**
@@ -133,7 +129,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    return value % 10;
+    return Math.abs(value) % 10;
 }
 
 
@@ -166,7 +162,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a,b,c) {
-    return Math.sqrt(a * a + b * b + c * c);
+    return Math.sqrt(a*a + b*b + c*c);
 }
 
 /**
@@ -187,7 +183,9 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
+    let a = Math.pow(10, pow);
+
+	return (a === 0) ? num : Math.round(num / a) * a;
 }
 
 /**
