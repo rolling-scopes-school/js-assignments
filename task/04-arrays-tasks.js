@@ -161,6 +161,9 @@ function getHead(arr, n) {
    return arr.slice(0, n);
 }
 
+function sortDigitNamesByNumericOrder(arr) {
+   throw new Error('Not implemented');
+}
 
 /**
  * Returns the n last items of the specified array
@@ -556,6 +559,9 @@ function getElementByIndexes(arr, indexes) {
    return arr.join().split(',')[indexes.reduce((accumulator, value) => accumulator + value)];
 }
 
+function swapHeadAndTail(arr) {
+    throw new Error('Not implemented');
+}
 
 module.exports = {
     findElement: findElement,
