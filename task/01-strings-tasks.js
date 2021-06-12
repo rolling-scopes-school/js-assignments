@@ -22,7 +22,7 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    return value1.concat(value2)
+    return value1.concat(value2);
 }
 
 
@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    return "Hello, " +firstName+ ' '+lastName+'!';
+    return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -69,7 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    return value.slice(7, -1);
+    return new RegExp("Hello, (.+)!").exec(value)[1];
 }
 
 
@@ -101,6 +101,7 @@ function getFirstChar(value) {
 function removeLeadingAndTrailingWhitespaces(value) {
     return value.trim();
 }
+
 /**
  * Returns a string that repeated the specified number of times.
  *
@@ -144,7 +145,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    return str.slice(1, str.length-1);
+    return str.replace('<', '').replace('>', '');
 }
 
 
@@ -200,14 +201,10 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    var horizontal = '─';
-    var vertical = '│';
-    var breakline = '\n';
-    var space = ' ';
-    
-    return '┌' + horizontal.repeat(width - 2) + '┐' + breakline +
-        (vertical + space.repeat(width - 2) + vertical + breakline).repeat(height - 2) +
-        '└' + horizontal.repeat(width - 2) + '┘' + breakline;
+    const top = `┌${'─'.repeat(width - 2)}┐\n`;
+	const mid = `│${' '.repeat(width - 2)}│\n`;
+	const bottom = `└${'─'.repeat(width - 2)}┘\n`;
+	return top + mid.repeat(height - 2) + bottom;
 }
 
 
@@ -227,25 +224,10 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    var amount = 13
-    var output = ""
-
-    for (var i = 0; i < str.length; i++) {
-        var c = str[i]
-        if (c.match(/[a-z]/i)) {
-            var code = str.charCodeAt(i)
-
-            if (code >= 65 && code <= 90) {
-                c = String.fromCharCode(((code - 65 + amount) % 26) + 65)
-            }
-            else if (code >= 97 && code <= 122) {
-                c = String.fromCharCode(((code - 97 + amount) % 26) + 97)
-            }
-        }
-        output += c
-    }
-
-    return output
+    const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+    const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'.split('');
+    const lookup = input.reduce((m, k, i) => Object.assign(m, { [k]: output[i] }), {});
+    return str.split('').map((x) => lookup[x] || x).join('');
 }
 
 /**
@@ -262,7 +244,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return typeof value === 'string' || value instanceof String;
+    return Object.prototype.toString.call(value) === "[object String]";
 }
 
 
@@ -292,12 +274,13 @@ function isString(value) {
  */
 function getCardId(value) {
     const cards = [
-        'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
-        'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
-        'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
-        'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'
-    ];
-        return cards.indexOf(value);
+		'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+		'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+		'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+		'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
+	  ];
+	
+	  return cards.indexOf(value);
 }
 
 

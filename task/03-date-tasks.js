@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-    return Date.parse(value)
+   return Date.parse(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-    return Date.parse(value)
+   return Date.parse(value);
 }
 
 
@@ -56,10 +56,8 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-    var year = date.getFullYear()
-    if (year % 400 === 0) return true
-    if (year % 100 === 0) return false
-    return year % 4 === 0
+   const year = date.getFullYear();
+	return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 }
 
 
@@ -79,14 +77,14 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-    return (new Date(endDate - startDate)).toISOString().slice(11, -1);
+   return (new Date(endDate - startDate)).toISOString().slice(11, -1);
 }
 
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
  * If you have problem with solution please read: https://en.wikipedia.org/wiki/Clock_angle_problem
- *
+ * 
  * @param {date} date
  * @return {number}
  *
@@ -97,18 +95,13 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    let hour = date.getUTCHours();
-    if (hour > 12) {
-        hour -= 12;
-    }
-    let minutes = date.getUTCMinutes();
-    let hours = 0.5 * (60 * hour + minutes);
-    minutes *= 6;
-    let diff = hours - minutes;
-    if (diff > 180) {
-        diff -= 180;
-    }
-    return Math.PI * Math.abs(diff) / 180;
+   const hoursArrow = 0.5 * (60 * (date.getUTCHours() % 12) + date.getUTCMinutes());
+   const minutesArrow = 6 * date.getUTCMinutes();
+   let angle = Math.abs(hoursArrow - minutesArrow);
+   if (angle > 180) {
+       angle = 360 - angle;
+   }
+   return (angle * Math.PI / 180);
 }
 
 

@@ -17,18 +17,8 @@
  *  ]
  */
 function createCompassPoints() {
+    throw new Error('Not implemented');
     var sides = ['N','E','S','W'];  // use array of cardinal directions only!
-        res = [];
-
-    function getDoubleSide(side1, side2) {
-        switch (side1) {
-            case 'E':
-                return 'SE';
-            case 'W':
-                return 'NW';
-            default:
-                return side1 + side2;
-        }
 }
 
 
