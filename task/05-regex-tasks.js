@@ -96,7 +96,7 @@ function getRegexForSSN() {
 }
 
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+    return new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{'+minLength+',}');
 }
 
 module.exports = {
