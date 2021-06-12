@@ -230,9 +230,6 @@ function isBracketsBalanced(str) {
     return res.length == 0;
 }
 
-function ToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
-}
 
 function getCommonDirectoryPath(pathes) {
     throw new Error('Not implemented');
@@ -260,7 +257,6 @@ module.exports = {
     isCreditCardNumber: isCreditCardNumber,
     getDigitalRoot: getDigitalRoot,
     isBracketsBalanced: isBracketsBalanced,
-    ToHumanString : timespanToHumanString,
     toNaryString: toNaryString,
     getCommonDirectoryPath: getCommonDirectoryPath,
     getMatrixProduct: getMatrixProduct,
