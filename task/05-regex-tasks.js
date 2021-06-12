@@ -95,7 +95,9 @@ function getRegexForSSN() {
    return /\d{2}[1-9]-\d{1}[1-9]-\d{3}[1-9]/;
 }
 
-
+function getPasswordValidator(minLength) {
+   throw new Error('Not implemented');
+}
 
 module.exports = {
     getRegexForGuid: getRegexForGuid,
