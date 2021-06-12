@@ -38,6 +38,11 @@ function findElement(arr, value) {
  *    [0, 1, 2, 3, 4, 5] => [0, 1, 2, 3, 4, 5,   0, 1, 2, 3, 4, 5]
  *    [] => [] 
  */
+
+function generateOdds(len) {
+   throw new Error('Not implemented');
+}
+
 function doubleArray(arr) {
    arr.map(elem =>
     {
