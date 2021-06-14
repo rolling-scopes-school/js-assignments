@@ -40,7 +40,12 @@ function findElement(arr, value) {
  */
 
 function generateOdds(len) {
-   throw new Error('Not implemented');
+    let arr = new Array(len);
+    arr.fill(1);
+    return arr.map((elem, index) =>
+    {
+        return index*2 + 1;
+    });
 }
 
 function doubleArray(arr) {
@@ -162,7 +167,11 @@ function getHead(arr, n) {
 }
 
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+    let alph = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    return arr.sort((a, b) =>
+    {
+        return alph.indexOf(a)-alph.indexOf(b);
+    });
 }
 
 /**
@@ -560,7 +569,11 @@ function getElementByIndexes(arr, indexes) {
 }
 
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    let hlen = Math.floor(arr.length/2);
+    let headArr = arr.slice(0, hlen);
+    let middleArr = arr.slice(hlen, hlen + (arr.length & 1));
+    let tailArr = arr.slice(arr.length - hlen, arr.length);
+    return tailArr.concat(middleArr).concat(headArr);
 }
 
 module.exports = {
