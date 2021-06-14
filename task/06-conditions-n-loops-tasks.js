@@ -232,15 +232,63 @@ function isBracketsBalanced(str) {
 
 
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    let answer = '';
+    pathes = pathes.map(path => path.split('/'));
+  
+    while(pathes.length != 0) {
+      let tmp = pathes[0].shift();
+      for (let i = 1; i < pathes.length; i++) {
+        if(pathes[i].shift() != tmp) {
+            return answer;
+        }
+      }
+      answer += tmp + '/';
+    }
+    return answer;
 }
 
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let n = m1.length, m = m2[0].length;
+    let answer = new Array(n);
+    for (let i=0; i < n; i++)
+    {
+        answer[i]=new Array(m);
+    }
+    for (let i = 0; i < m; i++)
+        for (let j = 0; j < n; j++)
+            answer[i][j]=0;
+
+    for(let i = 0; i < n; i++)
+        for(let j = 0; j < m; j++)
+            for(let k = 0; k < m1[0].length; k++)
+                answer[i][j] += m1[i][k] * m2[k][j];
+    return answer;
 }
 
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    for (let i = 0; i < position.length; i++)
+    {
+        if ((position[i][0] === position[i][1]) && (position[i][0] === position[i][2]) && (typeof position[i][0] != 'undefined'))
+            return position[i][0];
+    }
+    let fl1 = true, fl2 = true;
+    for (let x = 1; x < position.length; x++)
+    {
+        if (position[x][x] !== position[0][0])
+            fl1 = false;
+        if (position[x][position.length - 1 - x] !== position[0][2])
+            fl2 = false;
+    }
+    if (fl1 && typeof position[0][0] != undefined)
+        return position[0][0];
+    if (fl2 && typeof position[0][2] != undefined)
+        return position[0][2];
+
+    for (let i = 0; i < position.length; i++) {
+        if ((position[0][i] === position[1][i]) && (position[0][i] === position[2][i]) && (typeof position[0][i] !== 'undefined'))
+            return position[0][i];
+    }
+    return undefined;
 }
 
 module.exports = {
