@@ -33,7 +33,19 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    let count = 99;
+    while (count >= 3) {
+        yield count + ' bottles of beer on the wall, ' + count + ' bottles of beer.';
+        yield 'Take one down and pass it around, ' + --count + ' bottles of beer on the wall.';
+    }
+    if (count = 2) {
+        yield  count + ' bottles of beer on the wall, ' + count + ' bottles of beer.';
+        yield  'Take one down and pass it around, ' + --count + ' bottle of beer on the wall.';
+    }
+    yield '1 bottle of beer on the wall, 1 bottle of beer.';
+    yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+    yield  'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
 }
 
 
@@ -127,7 +139,15 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let nodes = [root];
+    for (let i = 0; i < nodes.length; i++) {
+        yield nodes[i];
+        if ('children' in nodes[i]) {
+            for (let j = 0; j < nodes[i].children.length; j++) {
+                nodes.push(nodes[i].children[j]);
+            }
+        }
+    }
 }
 
 
@@ -145,7 +165,25 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    let src1 = source1();
+    let src2 = source2();
+    let i = src1.next().value;
+    let j = src2.next().value;
+    while (true) {
+        if ((i == undefined) && (j != undefined)) {
+            yield j;
+            j = src2.next().value;
+        } else if ((j == undefined) && (i != undefined)) {
+            yield i;
+            i = src1.next().value;
+        } else if ((i < j) && (i != undefined) && (j != undefined)) {
+            yield i;
+            i = src1.next().value;
+        } else if ((i >= j) && (i != undefined) && (j != undefined)) {
+            yield j;
+            j = src2.next().value;
+        }
+    }
 }
 
 
