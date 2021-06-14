@@ -31,7 +31,8 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
+   let reg = '[0-9a-f]';
+    return new RegExp('^{'+reg+'{8}-'+reg+'{4}-'+reg+'{4}-'+reg+'{4}-'+reg+'{12}}$', 'i');
 }
 
 
@@ -53,7 +54,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+   return new RegExp(/.*p.t.*/);
 }
 
 
@@ -72,7 +73,7 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   throw new Error('Not implemented');
+   return /^(([0-2][0-9]{2}|[0-9]{1,2})\.){3}([0-2][0-9]{2}|[0-9]{1,2})$/;
 }
 
 
@@ -91,34 +92,12 @@ function getRegexForIPv4() {
  * @return {RegExp}
  */
 function getRegexForSSN() {
-   throw new Error('Not implemented');
+   return /\d{2}[1-9]-\d{1}[1-9]-\d{3}[1-9]/;
 }
 
-
-/**
- * Returns the password validator regex.
- * Regex will validate a password to make sure it meets the follwing criteria:
- *  - At least specified characters long (argument minLength)
- *  - Contains a lowercase letter
- *  - Contains an uppercase letter
- *  - Contains a number
- *  - Valid passwords will only be alphanumeric characters.
- *
- * @param {number} minLength
- * @return {Regex}
- *
- * @example
- *   let validator = getPasswordValidator(6);
- *   'password'.match(validator)  => false
- *   'Pa55Word'.match(validator)  => true
- *   'PASSw0rd'.match(validator)  => true
- *   'PASSW0RD'.match(validator)  => false
- *   'Pa55'.match(validator) => false
- */
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+    return new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{'+minLength+',}');
 }
-
 
 module.exports = {
     getRegexForGuid: getRegexForGuid,
