@@ -1,13 +1,12 @@
-'use strict';
+/* eslint-disable no-unused-vars */
 
-/**************************************************************************************************
+/** ************************************************************************************************
  *                                                                                                *
  * Plese read the following tutorial before implementing tasks:                                   *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object        *
  *                                                                                                *
- **************************************************************************************************/
-
+ ************************************************************************************************* */
 
 /**
  * Returns the rectagle object with width and height parameters and getArea() method
@@ -23,9 +22,8 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the JSON representation of specified object
@@ -38,9 +36,8 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the object of specified type from JSON representation
@@ -54,9 +51,8 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Css selectors builder
@@ -107,40 +103,38 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
+	element (value) {
+		throw new Error('Not implemented');
+	},
 
-    element: function(value) {
-        throw new Error('Not implemented');
-    },
+	id (value) {
+		throw new Error('Not implemented');
+	},
 
-    id: function(value) {
-        throw new Error('Not implemented');
-    },
+	class (value) {
+		throw new Error('Not implemented');
+	},
 
-    class: function(value) {
-        throw new Error('Not implemented');
-    },
+	attr (value) {
+		throw new Error('Not implemented');
+	},
 
-    attr: function(value) {
-        throw new Error('Not implemented');
-    },
+	pseudoClass (value) {
+		throw new Error('Not implemented');
+	},
 
-    pseudoClass: function(value) {
-        throw new Error('Not implemented');
-    },
+	pseudoElement (value) {
+		throw new Error('Not implemented');
+	},
 
-    pseudoElement: function(value) {
-        throw new Error('Not implemented');
-    },
-
-    combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
-    },
+	combine (selector1, combinator, selector2) {
+		throw new Error('Not implemented');
+	},
 };
 
-
 module.exports = {
-    Rectangle: Rectangle,
-    getJSON: getJSON,
-    fromJSON: fromJSON,
-    cssSelectorBuilder: cssSelectorBuilder
+	Rectangle,
+	getJSON,
+	fromJSON,
+	cssSelectorBuilder,
 };

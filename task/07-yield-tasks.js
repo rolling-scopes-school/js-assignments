@@ -1,13 +1,12 @@
-'use strict';
-
-/********************************************************************************************
+/* eslint-disable no-unused-vars */
+/* eslint-disable require-yield */
+/** ******************************************************************************************
  *                                                                                          *
  * Plese read the following tutorial before implementing tasks:                             *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators   *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield        *
  *                                                                                          *
- ********************************************************************************************/
-
+ ******************************************************************************************* */
 
 /**
  * Returns the lines sequence of "99 Bottles of Beer" song:
@@ -33,9 +32,8 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the Fibonacci sequence:
@@ -47,9 +45,8 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Traverses a tree using the depth-first strategy
@@ -82,9 +79,8 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Traverses a tree using the breadth-first strategy
@@ -108,9 +104,8 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Merges two yield-style sorted sequences into the one sorted sequence.
@@ -126,14 +121,13 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
 
-
 module.exports = {
-    get99BottlesOfBeer: get99BottlesOfBeer,
-    getFibonacciSequence: getFibonacciSequence,
-    depthTraversalTree: depthTraversalTree,
-    breadthTraversalTree: breadthTraversalTree,
-    mergeSortedSequences: mergeSortedSequences
+	get99BottlesOfBeer,
+	getFibonacciSequence,
+	depthTraversalTree,
+	breadthTraversalTree,
+	mergeSortedSequences,
 };

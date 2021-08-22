@@ -4,12 +4,21 @@
   "description": "JS training tasks",
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "test-debug": "./node_modules/.bin/mocha --debug-brk"
+    "test-debug": "./node_modules/.bin/mocha --debug-brk",
+    "lint": "eslint .",
+		"format": "prettier -w ."
   },
-  "author": "aorgish",
+  "author": "GLEB",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "eslint": "^7.32.0",
+		"eslint-config-airbnb-base": "^14.2.1",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-import": "^2.24.1",
+		"eslint-plugin-prettier": "^3.4.0",
+		"husky": "^7.0.1",
+		"prettier": "^2.3.2"
   },
   "repository" : {
     "type" : "git",

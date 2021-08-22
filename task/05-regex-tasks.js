@@ -1,12 +1,10 @@
-'use strict';
-
-/********************************************************************************************
+/* eslint-disable no-unused-vars */
+/** ******************************************************************************************
  *                                                                                          *
  * Plese read the following tutorial before implementing tasks:                             *
  * https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions           *
  *                                                                                          *
- ********************************************************************************************/
-
+ ******************************************************************************************* */
 
 /**
  * Returns the regexp that matches a GUID string representation
@@ -31,9 +29,8 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the regexp that matches all the strings from first column
@@ -53,9 +50,8 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the regexp that matches all IPv4 strings in
@@ -72,9 +68,8 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the regexp that matches all SSN (Social Security Number) codes in
@@ -91,9 +86,8 @@ function getRegexForIPv4() {
  * @return {RegExp}
  */
 function getRegexForSSN() {
-   throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the password validator regex.
@@ -116,14 +110,13 @@ function getRegexForSSN() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
 
-
 module.exports = {
-    getRegexForGuid: getRegexForGuid,
-    getRegexForPitSpot: getRegexForPitSpot,
-    getRegexForIPv4: getRegexForIPv4,
-    getRegexForSSN: getRegexForSSN,
-    getPasswordValidator: getPasswordValidator
+	getRegexForGuid,
+	getRegexForPitSpot,
+	getRegexForIPv4,
+	getRegexForSSN,
+	getPasswordValidator,
 };
