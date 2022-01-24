@@ -199,11 +199,10 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
   const createStrTemplate = (startSym, centerSym = '─') => {
-    let closingSym;
+    let closingSym = '│';
 
     if (startSym === '┌') closingSym = '┐';
-    else if (startSym === '└') closingSym = '┘';
-    else closingSym = '│';
+    if (startSym === '└') closingSym = '┘';
 
     return startSym + centerSym.repeat(width - 2) + closingSym + '\n';
   };
