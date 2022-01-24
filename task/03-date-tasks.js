@@ -21,7 +21,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-  return Date.parse(value);
+  return new Date(value);
 }
 
 /**
@@ -36,7 +36,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-  return Date.parse(value);
+  return new Date(value);
 }
 
 /**
@@ -55,9 +55,10 @@ function parseDataFromIso8601(value) {
  */
 function isLeapYear(date) {
   if (date.getFullYear() % 4 !== 0) return false;
-  else if (date.getFullYear() % 100 !== 0) return true;
-  else if (date.getFullYear() % 400 !== 0) return false;
-  else return true;
+  if (date.getFullYear() % 100 !== 0) return true;
+  if (date.getFullYear() % 400 !== 0) return false;
+
+  return true;
 }
 
 /**
@@ -79,7 +80,7 @@ function timeSpanToString(startDate, endDate) {
   const dif = endDate - startDate;
 
   const formatNum = (num, length = 2) => {
-    const strNum = '' + num;
+    const strNum = num.toString();
 
     return strNum.length < length
       ? '0'.repeat(length - strNum.length) + strNum
