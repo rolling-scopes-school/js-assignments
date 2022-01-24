@@ -52,7 +52,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2;
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -71,7 +71,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt((x1 - x2) ** 2 * (y1 - y2) ** 2);
+  return Math.hypot(x2 - x1, y2 - y1);
 }
 
 /**
@@ -127,7 +127,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  return +('' + value).slice(-1);
+  return value % 10;
 }
 
 /**
@@ -159,7 +159,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
+  return Math.hypot(a, b, c);
 }
 
 /**
@@ -180,7 +180,7 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  return Math.round(num / 10 ** pow) * 10 ** pow;
+  return !pow ? num : Math.round(num / 10 ** pow) * 10 ** pow;
 }
 
 /**
@@ -201,7 +201,7 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  for (let i = 2; i < n / 2; i++) {
+  for (let i = 2, s = Math.sqrt(n); i <= s; i++) {
     if (n % i === 0) return false;
   }
 
