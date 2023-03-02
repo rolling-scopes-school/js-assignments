@@ -33,7 +33,18 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    let index=99;
+    while(index>2){
+        yield `${index} bottles of beer on the wall, ${index} bottles of beer.`
+        yield `Take one down and pass it around, ${--index} bottles of beer on the wall.`
+    }
+    yield '2 bottles of beer on the wall, 2 bottles of beer.'
+    yield 'Take one down and pass it around, 1 bottle of beer on the wall.'
+    yield '1 bottle of beer on the wall, 1 bottle of beer.'
+    yield 'Take one down and pass it around, no more bottles of beer on the wall.'
+    yield 'No more bottles of beer on the wall, no more bottles of beer.'
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.'
 }
 
 
@@ -47,7 +58,14 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    let num1=0,num2=1,res;
+    while(1){
+        res=num1;
+        num1=num2;
+        num2=res+num2;
+        yield res;
+    }
 }
 
 
@@ -82,7 +100,16 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    let s=[root];
+    while(s.length>0){
+        let v=s.pop();
+        yield v;
+        if(!v.children) continue;
+        for(let edge of v.children.reverse()){
+            s.push(edge);
+        }
+    }
 }
 
 
@@ -109,6 +136,15 @@ function* depthTraversalTree(root) {
  */
 function* breadthTraversalTree(root) {
     throw new Error('Not implemented');
+    // var s=[root];
+    // while(s.length>0){
+    //     var v = s.shift();
+    //     yield v;
+    //     if(!v.children) continue;
+    //     for(let edge of v.children){
+    //         s.push(edge);
+    //     }
+    // }
 }
 
 
@@ -127,6 +163,13 @@ function* breadthTraversalTree(root) {
  */
 function* mergeSortedSequences(source1, source2) {
     throw new Error('Not implemented');
+    // let iterator1=source1();
+    // let iterator2=source2();
+    // let arr=[];
+    // arr.push(iterator1.next().value);
+    // arr.push(iterator2.next().value);
+    // arr.sort((a,b)=>a-b);
+    // yield* arr;
 }
 
 
