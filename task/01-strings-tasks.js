@@ -22,7 +22,9 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
+    let concat = value1 + value2;
     throw new Error('Not implemented');
+    return concat;
 }
 
 
@@ -38,7 +40,9 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
+    let leng = value.length;
     throw new Error('Not implemented');
+    return leng;
 }
 
 /**
@@ -56,6 +60,7 @@ function getStringLength(value) {
  */
 function getStringFromTemplate(firstName, lastName) {
     throw new Error('Not implemented');
+    return "Hello, " + firstName + " "+ lastName+ "!"
 }
 
 /**
