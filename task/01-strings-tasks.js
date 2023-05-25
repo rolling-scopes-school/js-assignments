@@ -196,27 +196,13 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    let str = '';
-
-    str += '┌';
-
-    for (let i = 0; i < width - 2; i++) str += '─';
-
-    str += '┐\n';
+    let str = '┌' + '─'.repeat(width - 2) + '┐\n';
 
     for (let i = 0; i < height - 2; i++) {
-        str += '│';
-
-        for (let j = 0; j < width - 2; j++) str += ' ';
-
-        str += '│\n';
+        str += '│' + ' '.repeat(width - 2) + '│\n';
     }
 
-    str += '└';
-
-    for (let i = 0; i < width - 2; i++) str += '─';
-
-    str += '┘\n';
+    str += '└' + '─'.repeat(width - 2) + '┘\n';
 
     return str;
 }
@@ -237,8 +223,8 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    let input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    let output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+    const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
 
     return str
         .split('')
