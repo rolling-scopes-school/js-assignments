@@ -3,16 +3,16 @@
   "version": "0.9.1",
   "description": "JS training tasks",
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
+    "test": "mocha",
     "test-debug": "./node_modules/.bin/mocha --debug-brk"
   },
   "author": "aorgish",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^2.3.4"
+    "mocha": "^10.2.0"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/rolling-scopes-school/js-assignments.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolliMur/js-assignments.git"
   }
 }
