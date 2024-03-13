@@ -6,7 +6,7 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates          *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number  *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math    *
- *                                                                                          *
+ *       npm test ./test/02-numbers-tests.js                                                                                   *
  ********************************************************************************************/
 
 
@@ -22,7 +22,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-    throw new Error('Not implemented');
+    return width*height;
 }
 
 
@@ -38,7 +38,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
-    throw new Error('Not implemented');
+    return 2 * Math.PI * radius;
 }
 
 /**
@@ -54,7 +54,11 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    throw new Error('Not implemented');
+    /*let a=Number(value1);
+    let b=Number(value2);
+    let res = (a+b)/2;
+    return res;*/
+    return value1/2 + value2/2;
 }
 
 /**
@@ -73,7 +77,8 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    let sum = Math.pow(x1-x2, 2)+Math.pow(y1-y2, 2);
+    return Math.pow(sum, 0.5);
 }
 
 /**
@@ -89,7 +94,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    throw new Error('Not implemented');
+    let x= (0-b)/a;
+    return x;
 }
 
 
@@ -111,7 +117,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    var angle = Math.atan2(y2, x2) - Math.atan2(y1, x1)
+    if (angle < 0) {
+        angle += 2 * Math.PI;
+    }
+    return angle
 }
 
 /**
@@ -127,7 +137,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    throw new Error('Not implemented');
+    return value%10;
 }
 
 
@@ -143,7 +153,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    throw new Error('Not implemented');
+    return Number(value);
 }
 
 /**
@@ -160,7 +170,9 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a,b,c) {
-    throw new Error('Not implemented');
+    let sum = Math.pow(a,2)+Math.pow(b,2)+Math.pow(c,2);
+    let result=Math.pow(sum,0.5);
+    return result;
 }
 
 /**
@@ -181,7 +193,10 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+    let a = Math.pow(10,pow);
+    let b = num/a;
+    let c = Math.round(b);
+    return c*a;
 }
 
 /**
@@ -202,7 +217,12 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    throw new Error('Not implemented');
+    for(let i=2; i<n/2+1; i++){
+        if(n%i==0){
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
@@ -221,7 +241,12 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    const num = Number(value);
+    if(isNaN(num)){
+        return def;
+    }else{
+        return num;
+    }
 }
 
 module.exports = {
