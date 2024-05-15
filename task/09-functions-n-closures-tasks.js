@@ -26,7 +26,9 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+	return function (x) {
+		return f(g(x));
+    }
 }
 
 
@@ -47,7 +49,9 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+	return function (number) {
+		return Math.pow(number, exponent);
+    }
 }
 
 
@@ -65,7 +69,10 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-    throw new Error('Not implemented');
+	let tmp = Array.from(arguments).reverse();
+    return (x) => {
+        return tmp.reduce((prev, curr, index) => prev+curr*Math.pow(x,index),0);
+    };
 }
 
 
@@ -84,7 +91,10 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+	let cashed = func();
+    return function() {
+        return cashed
+    }
 }
 
 
@@ -104,15 +114,25 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-    throw new Error('Not implemented');
+	return()=>{
+		for (var i = 0; i < attempts;)
+		{
+			try{
+                return func();
+            }
+			catch(err){
+                i += 1;
+            }
+        }
+        return i;
+    };
 }
-
 
 /**
  * Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
  * Logger has to log the arguments of invoked function.
- * The fromat of output log is:
+ * The format of output log is:
  * <function name>(<arg1>, <arg2>,...,<argN>) starts
  * <function name>(<arg1>, <arg2>,...,<argN>) ends
  *
@@ -124,7 +144,7 @@ function retry(func, attempts) {
  * @example
  *
  * var cosLogger = logger(Math.cos, console.log);
- * var result = cosLogger(Math.PI));     // -1
+ * var result = cosLogger(Math.PI);     // -1
  *
  * log from console.log:
  * cos(3.141592653589793) starts
@@ -132,7 +152,13 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
+	return function(...props) {
+        const str = `${func.name}(${JSON.stringify(Array.from(props)).slice(1, -1)}) `;
+        logFunc(str + 'starts');
+        const result = func.apply(null, props);
+        logFunc(str + 'ends');
+        return result;
+     };
 }
 
 
@@ -150,7 +176,10 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+	let arg = Array.from(arguments).slice(1);
+    return function () {
+        return fn.apply(null, arg.concat(Array.from(arguments)));
+    }
 }
 
 
@@ -162,7 +191,7 @@ function partialUsingArguments(fn) {
  *
  * @example
  *   var getId4 = getIdGenerator(4);
- *   var getId10 = gerIdGenerator(10);
+ *   var getId10 = getIdGenerator(10);
  *   getId4() => 4
  *   getId10() => 10
  *   getId4() => 5
@@ -171,7 +200,12 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+	let scope = startFrom;
+    return () => {
+		const toReturn = scope;
+		scope += 1;
+		return toReturn;
+    };
 }
 
 
