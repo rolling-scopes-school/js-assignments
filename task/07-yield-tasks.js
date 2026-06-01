@@ -33,7 +33,17 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+	let word1='bottles';
+	let word2=word1;
+    for (let i=99;i>0;i--) {
+		if (i==2) word2='bottle';
+		if (i==1) word1='bottle';
+		yield i+' '+word1+' of beer on the wall, '+i+' '+word1+' of beer.';
+		if (i>1) yield 'Take one down and pass it around, '+(i-1)+' '+word2+' of beer on the wall.';
+	}
+	yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+    yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
 }
 
 
@@ -47,7 +57,14 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    yield 0; yield 1;
+	let prev1=0; let prev2=1; let current;
+	while (1) {
+		current=prev1+prev2;
+		yield current;
+		prev1=prev2;
+		prev2=current;
+	}
 }
 
 
@@ -81,9 +98,24 @@ function* getFibonacciSequence() {
  *  depthTraversalTree(node1) => node1, node2, node3, node4, node5, node6, node7, node8
  *
  */
+/**
+ * Traverses a tree using the depth-first strategy
+ *
+ * @param {object} root the tree root
+ * @return {Iterable.<object>} the sequence of all tree nodes in depth-first order
+ */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let stack=[root];
+    while (stack.length>0) {
+        let node=stack.pop();
+        yield node;
+		if (node.children)
+            for (let i=node.children.length-1;i>=0;i--)
+                stack.push(node.children[i]);
+    }
 }
+
+
 
 
 /**
@@ -108,7 +140,15 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let mas=[root];
+	let index=0;
+    while (index!=mas.length) {
+        let node=mas[index++];
+        yield node;
+		if (node.children)
+            for (let i=0;i<node.children.length;i++)
+                mas[mas.length]=node.children[i];
+    }
 }
 
 
@@ -125,9 +165,49 @@ function* breadthTraversalTree(root) {
  *   [ 0 ], [ 2, 4, 6, ... ]  => [ 0, 2, 4, 6, ... ]
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
+/**
+ * Merges two yield-style sorted sequences into the one sorted sequence.
+ * The result sequence consists of sorted items from source iterators.
+ *
+ * @param {Iterable.<number>} source1
+ * @param {Iterable.<number>} source2
+ * @return {Iterable.<number>} the merged sorted sequence
+ */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    let getIterator=(source)=>{
+        if (typeof source === 'function') {
+            return source();
+        }
+        if (source && typeof source[Symbol.iterator] === 'function') {
+            return source[Symbol.iterator]();
+        }
+        return source;
+    };
+	let mas1 = getIterator(source1);
+    let mas2 = getIterator(source2);
+    let cur1 = mas1.next();
+    let cur2 = mas2.next();
+    while (!cur1.done && !cur2.done) {
+        if (cur1.value <= cur2.value) {
+            yield cur1.value;
+            cur1 = mas1.next();
+        } else {
+            yield cur2.value;
+            cur2 = mas2.next();
+        }
+    }
+    while (!cur1.done) {
+        yield cur1.value;
+        cur1 = mas1.next();
+    }
+    while (!cur2.done) {
+        yield cur2.value;
+        cur2 = mas2.next();
+    }
 }
+
+
+
 
 
 module.exports = {

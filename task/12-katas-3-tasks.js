@@ -28,7 +28,28 @@
  *   'NULL'      => false 
  */
 function findStringInSnakingPuzzle(puzzle, searchStr) {
-    throw new Error('Not implemented');
+    function find(puz,row,col,sym) {
+		if (row<0||col<0||row>=puzzle.length||col>=puzzle[0].length) return false;
+		if (puz[row][col]==sym[0]) {
+			let res_1=false;
+			puz[row]=puz[row].slice(0,col)+' '+puz[row].slice(col+1);
+			let ish_puz=Array.from(puz);
+			if (sym.length==1) return true;
+			sym=sym.slice(1);
+			res_1=find(Array.from(ish_puz),row-1,col,sym); if (res_1) return true;
+			res_1=find(Array.from(ish_puz),row+1,col,sym); if (res_1) return true;
+			res_1=find(Array.from(ish_puz),row,col-1,sym); if (res_1) return true;
+			res_1=find(Array.from(ish_puz),row,col+1,sym); if (res_1) return true;
+			return false;
+		} else return false;
+	}
+	let result=[]; let ish=Array.from(puzzle);
+	for (let i=0;i<puzzle.length;i++)
+		for (let i2=0;i2<puzzle[i].length;i2++) {
+			result=find(Array.from(ish),i,i2,searchStr);
+			if (result) return true;
+		}
+	return false;
 }
 
 
@@ -45,7 +66,15 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
  *    'abc' => 'abc','acb','bac','bca','cab','cba'
  */
 function* getPermutations(chars) {
-    throw new Error('Not implemented');
+	if (chars.length<=1) {
+		yield chars;
+		return;
+	}
+	for (let i=0;i<chars.length;i++) {
+		let cur=chars[i];
+		let remain=chars.slice(0,i)+chars.slice(i+1);
+		for (let item of getPermutations(remain)) yield cur+item;
+	}
 }
 
 
@@ -65,7 +94,11 @@ function* getPermutations(chars) {
  *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
  */
 function getMostProfitFromStockQuotes(quotes) {
-    throw new Error('Not implemented');
+    let max=0,cur=0;
+	for (let i=quotes.length-1;i>=0;i--)
+		if (quotes[i]>cur) cur=quotes[i];
+		else max+=cur-quotes[i];
+    return max;
 }
 
 

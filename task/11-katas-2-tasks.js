@@ -34,7 +34,14 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+	let result=0;
+    let mas_dig=[' _ | ||_|','     |  |',' _  _||_ ',' _  _| _|','   |_|  |',' _ |_  _|',' _ |_ |_|',' _   |  |',' _ |_||_|',' _ |_| _|'];
+	for (let i=1;i<bankAccount.length/9;i++) {
+		let str=bankAccount.substr((i-1)*3,3)+bankAccount.substr((i-1)*3+bankAccount.length/3,3)+bankAccount.substr((i-1)*3+bankAccount.length/3*2,3);
+		let index=mas_dig.indexOf(str);
+		if (index>=0) result=result*10+index;
+	}
+	return result;
 }
 
 
@@ -63,7 +70,13 @@ function parseBankAccount(bankAccount) {
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-    throw new Error('Not implemented');
+    if (text.length<=columns) {
+		yield text;
+		return;
+	}
+	let index=text.lastIndexOf(' ',columns);
+	yield text.slice(0,index);
+	yield* wrapText(text.slice(index+1),columns);
 }
 
 
@@ -100,7 +113,60 @@ const PokerRank = {
 }
 
 function getPokerHandRank(hand) {
-    throw new Error('Not implemented');
+    // 1. Маппинг достоинств карт в числовые значения
+    const rankValues = {
+        '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
+        'J': 11, 'Q': 12, 'K': 13, 'A': 14
+    };
+
+    // 2. Парсим карты на достоинства и масти
+    const ranks = [];
+    const suits = [];
+
+    for (let card of hand) {
+        // Так как '10' состоит из 2-х символов, берем всё, кроме последнего символа масти
+        const rankStr = card.slice(0, -1);
+        const suitStr = card.slice(-1);
+
+        ranks.push(rankValues[rankStr]);
+        suits.push(suitStr);
+    }
+
+    // Сортируем достоинства по возрастанию
+    ranks.sort((a, b) => a - b);
+
+    // 3. Считаем частоту повторений достоинств карт (для пар, сетов, каре)
+    const counts = {};
+    for (let r of ranks) {
+        counts[r] = (counts[r] || 0) + 1;
+    }
+    const frequencies = Object.values(counts).sort((a, b) => b - a);
+
+    // 4. Проверяем флаги комбинаций
+    // Флеш: все 5 карт одной масти
+    const isFlush = suits.every(s => s === suits[0]);
+
+    // Стрейт: проверяем классическую последовательность
+    let isStraight = false;
+    if (ranks[4] - ranks[0] === 4 && new Set(ranks).size === 5) {
+        isStraight = true;
+    }
+    // Особый случай стрейта: колесо (A, 2, 3, 4, 5) -> в отсортированном виде: [2, 3, 4, 5, 14]
+    if (ranks[0] === 2 && ranks[1] === 3 && ranks[2] === 4 && ranks[3] === 5 && ranks[4] === 14) {
+        isStraight = true;
+    }
+
+    // 5. Вычисляем итоговый ранг на основе флагов и частот повторений
+    if (isStraight && isFlush) return PokerRank.StraightFlush;
+    if (frequencies[0] === 4) return PokerRank.FourOfKind;
+    if (frequencies[0] === 3 && frequencies[1] === 2) return PokerRank.FullHouse;
+    if (isFlush) return PokerRank.Flush;
+    if (isStraight) return PokerRank.Straight;
+    if (frequencies[0] === 3) return PokerRank.ThreeOfKind;
+    if (frequencies[0] === 2 && frequencies[1] === 2) return PokerRank.TwoPairs;
+    if (frequencies[0] === 2) return PokerRank.OnePair;
+
+    return PokerRank.HighCard;
 }
 
 
@@ -135,7 +201,35 @@ function getPokerHandRank(hand) {
  *    '+-------------+\n'
  */
 function* getFigureRectangles(figure) {
-   throw new Error('Not implemented');
+   let mas=figure.split('\n');
+   let result=[],kol=0,find=0;
+   for (let i=0;i<mas.length;i++) {
+	   for (let i2=0;i2<mas[i].length;i2++) {
+		   if (mas[i][i2]=='+'&&(mas[i][i2+1]=='-'||mas[i][i2+1]=='+')&&(mas[i+1][i2]=='|'||mas[i+1][i2]=='+')) {
+			   let width=1,height=1;find=1;
+			   while (1) {
+				   if (mas[i][i2+width]!='+') width++;
+				   else if (mas[i+1][i2+width]=='|'||mas[i+1][i2+width]=='+') break; else width++;
+				   if (i2+width>mas[i].length) {find=0;break;}
+			   }
+			   while (find) {
+				   if (mas[i+height][i2]!='+') height++;
+				   else if (mas[i+height][i2+1]=='-'||mas[i+height][i2+1]=='+') break; else height++;
+			   }
+			   if (find) {
+					result[kol]='+';
+					for (let i3=1;i3<width;i3++) result[kol]+='-'; result[kol]+='+\n';
+					for (let i3=1;i3<height;i3++) {
+						result[kol]+='|';
+						for (let i4=1;i4<width;i4++) result[kol]+=' ';
+						result[kol]+='|\n';
+					}
+					result[kol]+='+'; for (let i3=1;i3<width;i3++) result[kol]+='-'; result[kol++]+='+\n';
+			   }			   
+		   }
+	   }
+   }
+   for (let i=kol-1;i>=0;i--) yield result[i];   
 }
 
 
